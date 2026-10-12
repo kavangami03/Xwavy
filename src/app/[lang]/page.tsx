@@ -1,0 +1,50 @@
+import { getDictionary, getLocale } from "@/i18n/get-dictionary";
+import { localeHref, portalHref } from "@/lib/href";
+import { Access } from "@/sections/home/Access";
+import { Consent } from "@/sections/home/Consent";
+import { Faq } from "@/sections/home/Faq";
+import { FinalCta } from "@/sections/home/FinalCta";
+import { Hero } from "@/sections/home/Hero";
+import { PricingBand } from "@/sections/home/PricingBand";
+import { Process } from "@/sections/home/Process";
+import { Roles } from "@/sections/home/Roles";
+import { Trust } from "@/sections/home/Trust";
+
+/**
+ * Home, told as one story through the same two people: meet both sides, follow
+ * an idea from draft to introduction, see the double opt-in open, then the
+ * conversation it leads to. Sections follow the Scope of Work (§3.3).
+ *
+ * Not yet included, by design: live counters and featured ideas. Both need
+ * real platform data; the launch database starts empty (clarifications §6).
+ */
+export default async function HomePage() {
+  const locale = await getLocale();
+  const dict = await getDictionary();
+  const { home } = dict;
+  const pricingHref = localeHref(locale, "/pricing");
+
+  return (
+    <>
+      <Hero locale={locale} dict={dict} />
+      <Roles
+        t={home.roles}
+        alts={home.images}
+        innovatorHref={localeHref(locale, "/for-innovators")}
+        investorHref={localeHref(locale, "/for-investors")}
+      />
+      <Process t={home.process} alts={home.images} />
+      <Consent t={home.consent} alt={home.images.together} />
+      <Access t={home.access} card={home.hero.mockup} alt={home.images.unlock} pricingHref={pricingHref} />
+      <Trust t={home.trust} alt={home.images.team} />
+      <PricingBand t={home.pricing} pricingHref={pricingHref} />
+      <Faq t={home.faq} />
+      <FinalCta
+        t={home.finalCta}
+        alt={home.images.meeting}
+        innovatorHref={portalHref(locale, "signUpInnovator")}
+        investorHref={portalHref(locale, "browseIdeas")}
+      />
+    </>
+  );
+}

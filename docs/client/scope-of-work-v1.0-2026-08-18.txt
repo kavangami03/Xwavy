@@ -1,0 +1,753 @@
+XWAVY
+Scope of Work, Site Map and Flowcharts
+What we are building, every page in it, and how the two sides move through it
+Xwavy is a two-sided marketplace connecting innovators with investors. Innovators post ideas free. Investors subscribe to unlock full detail, advanced filters and the ability to ask for an introduction. Contact is exchanged only when both sides agree. The platform introduces people and never touches investment money or equity.
+Document
+Scope of work, site map and flowcharts
+Product
+Xwavy — innovator / investor marketplace (xwavy.com)
+Contents
+Scope of work, complete site map, fifteen flowcharts
+Technical stack
+Next.js 15 App Router · PostgreSQL · Auth.js · Stripe Billing · S3-compatible storage
+Audience
+Product, engineering, design, moderation
+Version / date
+v1.0 · 18 August 2026
+Contents
+1. The product in one page3
+1.1 How the platform earns   3
+1.2 Double opt-in — how contact is exchanged3
+1.3 Facilitator posture3
+2. Scope of work5
+2.1 Module 1 — Public website5
+2.2 Module 2 — Innovator portal5
+2.3 Module 3 — Investor portal6
+2.4 Module 4 — Subscription and payments
+2.5 Module 5 — Admin panel7
+2.6 Platform and cross-cutting work7
+2.7 Not in this build8
+2.8 Build sequence8
+3. Site map10
+3.1 The public site and the portal10
+3.2 Access levels10
+3.3 Marketing and legal — 14 pages11
+3.4 Discovery — 4 pages11
+3.5 Registration and onboarding — 11 pages12
+3.6 Innovator portal — 11 pages12
+3.7 Investor portal — 12 pages13
+3.8 Shared portal account — 8 pages14
+3.9 Admin — 8 pages14
+3.10 Server endpoints — 2215
+3.11 Page count16
+4. Flowcharts17
+4.1 How to read the diagrams17
+4.2 The innovator journey17
+4.3 The investor journey24
+4.4 The subscription and payment flow29
+4.5 The idea lifecycle34
+5. Assumptions and open decisions36
+6. Pricing & Timeline36
+## 1. The product in one page
+Xwavy connects two groups who currently find each other through luck and warm introductions. Innovators publish what they are building. Investors search that pool, and when they find something worth a conversation they ask for an introduction. The product's entire job is to make that first contact happen, and to make it happen on terms both sides agreed to.
+## 1.1 How the platform earns
+Innovators pay nothing, ever. Charging the supply side of a marketplace before it has reached critical mass starves it. Innovators get free posting, free basic stats on their idea, and free control over who reaches them.
+Investors pay a subscription. What they buy is not access to the site — the site is browsable free — but the three things that turn browsing into deal flow:
+▪  Full idea detail — the financial picture, traction, the complete narrative, and the innovator's identity.
+▪  Advanced filters — traction, revenue band, raise size and activity recency, plus sorting and CSV export.
+▪  The ability to ask — sending an intro request is a paid action. Free investors can look; they cannot knock on the door.
+This split is what makes the free tier safe to offer. An investor who never subscribes still sees enough to know whether the pool is worth paying for, and never enough to route around the subscription.
+## 1.2 Double opt-in — how contact is exchanged
+Two consents are required before a single contact detail moves.
+1.  The investor opts in by sending an intro request. This costs them a subscription and a slot from their monthly quota, so it carries a real cost and cannot be sprayed at everyone.
+2.  The innovator opts in by accepting. They see who is asking, what the firm invests in and what they wrote, and they may decline with no explanation and no penalty.
+Only after the second consent does the server unseal contact details — and it unseals them for both sides at once. The investor gets the innovator's details and the innovator gets the investor's. A decline releases nothing, in either direction, permanently.
+NOTE
+This is why the platform is worth subscribing to twice over. Innovators publish without fear of being harvested, which keeps supply healthy; investors get warm introductions rather than a cold list, which is what they are actually paying for.
+## 1.3 Facilitator posture
+Xwavy introduces people. It does not take money for investments, hold funds in escrow, issue or transfer equity, produce term sheets, or advise either party on whether a deal is a good one. Everything after the introduction happens between the two parties, off the platform.
+This is a design constraint as well as a legal position: there is no route, no table, no state and no notification anywhere in this build that represents a transaction between an innovator and an investor. The only money in the system is the investor's subscription payment to Xwavy.
+[IMAGE]
+Diagram 1 — The whole product on one page: the public website, the portal both sides sign in to, and the single path that runs through them.
+## 2. Scope of work
+The build is organised as five modules: the public website, the innovator portal, the investor portal, the subscription that funds it, and the admin panel. Each is independently testable, and they are listed in the order they should be built.
+## 2.1 Module 1 — Public website
+Everything a visitor can reach before they have an account. This module carries the whole acquisition load, so it is fully public and fully indexable.
+Included
+Detail
+Marketing pages
+Home with a role-split call to action and live counters, a pitch page for each side, a how-it-works explainer, pricing with a feature comparison, about, and a routed contact form.
+Legal pages
+Terms, privacy, cookies, acceptable use, and an explicit facilitator disclaimer stating that Xwavy holds no funds, brokers no securities and gives no advice. Acceptable use must be published before the first idea is moderated, because it is the document review decisions are made against.
+Public idea directory
+A grid of published ideas with basic filters — sector, stage, region, keyword — and six sector index pages. Real volume, not a teaser wall.
+Public idea detail
+Summary, sector, stage, problem statement and a redacted ask band, visible to anyone. The substance is locked behind the subscription.
+Public innovator profiles
+Bio, sector focus and their published ideas. Contact details are never shown here at any tier.
+Search infrastructure
+Generated sitemap covering marketing pages and published ideas, plus crawl rules that keep the signed-in portal and every gated payload out of the index.
+## 2.2 Module 2 — Innovator portal
+The supply side, free forever. Built around two objects: their ideas, and their inbox of intro requests. An innovator never browses investors — the request always originates from the paying side.
+Included
+Detail
+Registration and verification
+Role chosen at registration. One gate: email verification, with a proper holding screen and a cooldown-limited resend.
+Profile onboarding
+Display name, unique handle, startup name, bio, sector and stage — the public face. Then, separately and clearly labelled, the private contact block: email, phone, LinkedIn and calendar link, stored sealed from the moment they are entered.
+The Add Idea form
+Five steps, autosaved after each one: Basics · Problem and Solution · Traction · The Ask · Media. Every field is marked as public-layer or paid-layer as it is filled in, and a live preview shows exactly what a visitor and a subscriber each see.
+Idea management
+A dashboard that surfaces one next action, a list of all ideas grouped by state, an overview page per idea with basic stats and moderation history, an edit flow, and pause, resume and archive controls.
+Moderation feedback
+A dedicated thread per idea showing every review pass, the outcome and the written feedback, with a single edit-and-resubmit action.
+Intro request inbox
+Pending, accepted, declined and expired tabs, and a decision screen per request showing the firm, its mandate and the note — but not the investor's contact details.
+Connections
+Accepted connections with the investor's contact details revealed and copyable, plus private notes.
+## 2.3 Module 3 — Investor portal
+The demand side, and the side that pays. The mirror of the innovator surface: browse, shortlist, ask.
+Included
+Detail
+Registration and verification
+Same single email gate. If the visitor arrived from a locked idea, the server records which idea so they can be returned to it after they pay.
+Mandate onboarding
+Firm, investor type, sector focus, stage focus, cheque band, geography and a short thesis. This is not profile decoration — it is exactly what an innovator is shown when a request lands.
+Deal feed
+The signed-in idea grid. Basic filters are free. The advanced filter panel, sort-by-traction, sort-by-raise and CSV export are paid, and every locked control routes to the paywall carrying a pointer back to what was blocked.
+Gated idea detail
+Free investors see the public summary plus locked placeholder panels. Subscribers see the full narrative, financials, traction, team, deck, exact raise and the innovator's identity — and the Request intro button.
+Shortlist
+Saving and private notes, deliberately free. Saving builds the working habit that makes a subscription worth buying, and a shortlist survives cancellation.
+Intro requests
+A composer with a personal note, a visible monthly quota, a list of everything sent with live status, and the innovator's contact block revealed on acceptance.
+Connections
+A directory of accepted introductions with contact details and private notes.
+## 2.4 Module 4 — Subscription and payments
+Stripe-hosted throughout. Card details never touch Xwavy's servers.
+Included
+Detail
+Plans and pricing page
+Monthly and annual options, each carrying a monthly intro-request quota. Plan configuration lives on the server, not hard-coded in the page.
+Checkout
+Stripe hosted Checkout. The pointer to whatever the investor was blocked on is written into the session metadata so it survives the round trip.
+Entitlement
+Granted by the signed Stripe webhook and by nothing else. The post-checkout screen polls a read-only endpoint and displays the answer; it never grants.
+Webhook handler
+Signature-verified and idempotent, keyed on the Stripe event id. Every event is recorded before it is acted on, so operations can inspect and replay.
+Dunning
+A failed renewal moves the subscription to past due and starts Stripe Smart Retries plus email and a banner inside the portal. Access continues during the retry window, because a failed card is usually an expired card, not a customer leaving.
+Billing management
+A billing page with plan, renewal date and invoice history, and a button into Stripe Billing Portal for card updates, plan changes and self-service cancellation.
+Revocation
+On cancellation the investor drops to the free tier. New requests and advanced filters re-lock; accepted connections, saved items and request history stay readable.
+## 2.5 Module 5 — Admin panel
+A separate surface with its own navigation, serving the one human review loop the product depends on plus the operational queues that make billing defensible.
+Included
+Detail
+Ops dashboard
+Moderation queue depth and oldest item, failed webhook count, signups by role, published ideas, request volume and accept rate, MRR.
+Moderation queue and review screen
+Every idea awaiting review, oldest first. The review screen renders the idea exactly as it will appear at each tier, with the acceptable-use checklist inline and three outcomes: approve, request changes with written feedback, or reject with a reason.
+All ideas
+Every idea in every state, with force-archive, takedown and restore.
+User management
+Search across both roles; suspend, ban, restore and resend verification on a single account, with an abnormal-activity marker for investors sending high volume at a low accept rate.
+Subscription reconciliation
+Local entitlement state per investor against Stripe, with mismatches sorted to the top.
+Webhook queue
+Every event received, its processing state, the error on failure, and a manual replay control. Because entitlement is granted only by webhook, a silent failure is a customer who paid and cannot see what they bought — that has to be visible and fixable by a human.
+Audit trail
+Every admin action writes an immutable log entry with actor, reason and previous state.
+## 2.6 Platform and cross-cutting work
+Area
+Detail
+Authentication
+Auth.js with credentials and OAuth, role-first registration, password reset, session management and device revocation.
+Access control
+Seven access levels enforced server-side, listed in section 3.2. Crossing into the other role's sub-tree returns a not-found rather than a forbidden, so neither role can enumerate the other's surface.
+Payload gating
+Partially gated routes decide what to include before responding. Gated fields are absent from the payload, not hidden in the browser, and paid filter parameters are rejected server-side.
+Notifications
+Transactional email and a notification centre inside the portal. Anything that requires a decision, or reports the outcome of one, cannot be switched off; everything else is a preference.
+File handling
+Signed short-lived upload URLs for pitch decks, logos, covers and avatars, with type and size validation.
+Scheduled jobs
+A daily sweep that expires intro requests left unanswered past the response window and credits the investor's quota back.
+Hardening
+Rate limiting on signup, resend, contact and request endpoints; account-enumeration protection on password reset; deduplicated view counting.
+## 2.7 Not in this build
+Named here so the boundary is explicit rather than assumed. Each of these is a straightforward addition later, and none of them requires reworking anything specified in this document.
+▪  Messaging inside the portal. An accepted request reveals both sides' contact details, so the conversation moves to email or a call. Message threads are a convenience layer that can be added on top of the accepted-request record.
+▪  Human verification of investors. A queue where an admin reviews evidence that an investor is a genuine investing party, before they are allowed to subscribe. The investor record carries a verification status field so this can be switched on without a data migration.
+▪  Automatic staleness handling. Warning and archiving ideas that have gone quiet, on a schedule. Activity is recorded from day one, so the sweep will have real history to run against when it is added.
+▪  Editorial and content surfaces. Blog, curated collections, cross-entity search, and stage and region index pages.
+▪  Deep admin analytics. Screens over the connection audit, the abuse report queue and the moderation log. The underlying records are written from launch; only the reporting UI is later.
+## 2.8 Build sequence
+The order below is chosen so that each stage is testable on its own, and so that the riskiest work — payload gating and entitlement — happens early enough to be corrected cheaply.
+1.  Foundations. Auth with role-first signup, the email gate, the two profile records, and the shared portal shell with role routing.
+2.  The innovator loop. The five-step form with autosave, the idea state machine, and the innovator dashboard. At the end of this stage an idea can reach draft and submitted.
+3.  Admin moderation. The queue and the three-outcome review screen. At the end of this stage an idea can be published — the first stage with something to demonstrate.
+4.  Public discovery, with gating built in. The idea directory, idea detail and sector indexes, with the two response shapes in place from the first line of code.
+5.  The investor free tier. Signup with the return pointer, mandate onboarding, the deal feed and the shortlist. Everything except the paid layer.
+6.  Stripe and entitlement. Checkout, the signed idempotent webhook, the polling screen, the Stripe Billing Portal, dunning, and the admin webhook queue.
+7.  The intro request and the reveal. Quota enforcement at write time, the innovator decision screen, the bilateral reveal, both connections views, and the expiry job.
+8.  Marketing, legal and launch hardening. Public content pages, sitemap and crawl rules, notification preferences, rate limits and the settings sub-tree.
+WATCH OUT
+Two sequencing mistakes are worth naming, because both are common and both are expensive to undo. Do not build discovery before gating — if the full payload ships first, the gate becomes a browser-side filter and stays one. Do not build the intro request before entitlement — if the request endpoint is written without the entitlement and quota checks, those checks end up at the render layer, where they are not enforcement.
+## 3. Site map
+Every page in the build, grouped by the part of the business it serves. Read the access column as a condition the server checks before it returns anything, not as a hint for the interface.
+## 3.1 The public site and the portal
+The build is one website with two halves. Everything a visitor can reach without an account — marketing, legal and the public idea directory — is the public site. Everything that happens after sign-in lives under /portal, and that is where both sides manage their work.
+The portal is a single signed-in area, not two separate products. The role on the account decides which navigation renders and which sub-tree is reachable, but the shell, the session, the settings and the notification centre are shared. /portal itself is a router: it reads the role and forwards to the right dashboard.
+▪  /portal/innovator/* is reachable only by innovators — their ideas, moderation feedback, intro requests and connections.
+▪  /portal/investor/* is reachable only by investors — the deal feed, shortlist, intro requests, connections and the upgrade flow.
+▪  /portal/settings/* and /portal/notifications are shared, with the billing pages visible only to investors because innovators are never charged.
+▪  Crossing into the other role's area returns a not-found rather than a forbidden, so neither role can enumerate the other's surface.
+The alternative — two separate signed-in products — duplicates the shared surface and creates two places for a permission bug to hide. One portal with role-scoped areas keeps the access rules in a single layer.
+## 3.2 Access levels
+Level
+Condition the server checks
+public
+No session needed. Crawlable, shareable, indexable.
+signed-in
+Any authenticated user, either role.
+innovator
+Session where the role is innovator.
+investor
+Session where the role is investor.
+paid
+An investor with a live subscription. Being signed in is not enough — only an active subscription counts.
+admin
+Staff role. Separate surface, separate navigation.
+PARTIAL
+The page renders for everyone but withholds a layer. The public part and the paid part are two different responses from the same address, chosen on the server.
+RULE
+On a partially gated page the server decides what to include before it responds. Withheld fields are absent from the response, not hidden in the browser. The locked panel an unpaid investor sees is a placeholder with nothing behind it. Sending the whole idea and covering the private parts with a blur can be read in two seconds with developer tools, and the subscription stops meaning anything.
+## 3.3 Marketing and legal — 14 pages
+Path
+Access
+What is on it
+/
+public
+Hero, the dual value proposition, live counters, featured published ideas, and a call to action that splits by role.
+/for-innovators
+public
+Supply-side pitch — post free, stay in control of who reaches you, decline without explanation.
+/for-investors
+public
+Demand-side pitch — curated deal flow, advanced filters, and an honest free-against-paid comparison.
+/how-it-works
+public
+Three-step explainer for both sides, with the double opt-in shown visually.
+/pricing
+public
+Investor tiers, feature comparison, billing FAQ, and a permanent "innovators are always free" band.
+/about
+public
+Company story, team, mission.
+/contact
+public
+Contact form with a category selector that routes to the right inbox.
+/legal/terms
+public
+Terms of service, including the intro-request and quota rules.
+/legal/privacy
+public
+Privacy policy, data handling, and the consent language covering the contact reveal.
+/legal/cookies
+public
+Cookie policy and preference link.
+/legal/acceptable-use
+public
+Prohibited ideas, solicitation limits, anti-spam rules. The standard moderation decisions are made against.
+/legal/no-advice-disclaimer
+public
+The facilitator statement: holds no funds, brokers no securities, gives no advice.
+/sitemap.xml
+public
+Generated sitemap covering marketing pages, sector indexes and every published idea.
+/robots.txt
+public
+Crawl rules. The signed-in portal, the admin surface and every API path are disallowed.
+## 3.4 Discovery — 4 pages
+The commercial heart of the site map. Public because public ideas are how Xwavy gets found; gated because the detail is what investors pay for. The pattern is consistent: the summary is public, the substance is paid, and contact is never public at all.
+Path
+Access
+What is on it
+/ideas
+PARTIAL — list public, advanced filters paid
+Grid of published ideas: title, one-line pitch, sector, stage, region, redacted ask band. Basic filters and the result count are public; the advanced panel, sorting and export are paid.
+/ideas/[slug]
+PARTIAL — summary public, detail paid
+Public: summary, sector, stage, problem statement, redacted metrics. Paid: full narrative, financials, traction, team, deck, exact raise, innovator identity, and the Request intro button.
+/ideas/category/[category]
+PARTIAL
+Sector-scoped index with a short editorial intro. Six categories at launch: Technology, Health and Biotech, Finance, Sustainability, Education, Consumer.
+/innovators/[handle]
+PARTIAL — profile public, contact never public
+Innovator bio, sector focus and their published ideas. Email, phone, socials and calendar links are never rendered here at any tier.
+## 3.5 Registration and onboarding — 11 pages
+Path
+Access
+What is on it
+/signup
+public
+Role chooser — "I have an idea" against "I invest".
+/signup/innovator
+public
+Innovator registration. Minimum fields; profile detail comes after verification.
+/signup/investor
+public
+Investor registration. Records which idea sent them here, if any.
+/signin
+public
+Credential and OAuth sign-in.
+/signout
+signed-in
+Session termination.
+/verify-email
+public
+Consumes the verification token. This is the gate.
+/verify-email/sent
+signed-in
+Holding screen with a resend control and a sixty-second cooldown.
+/forgot-password
+public
+Requests a reset link. The response is identical whether or not the address exists.
+/reset-password
+public
+Token-scoped new password form. Invalidates all other sessions.
+/onboarding/innovator
+innovator
+Public profile, then the private contact block, stored sealed.
+/onboarding/investor
+investor
+Firm, investor type, sector focus, cheque band, thesis, and the private contact block.
+## 3.6 Innovator portal — 11 pages
+Path
+Access
+What is on it
+/portal
+signed-in
+Role router. Reads the role and forwards to the correct dashboard.
+/portal/innovator
+innovator
+Dashboard: one computed next action, idea states, stats, and pending requests.
+/portal/innovator/ideas
+innovator
+All own ideas grouped by state, each with a state badge.
+/portal/innovator/ideas/new
+innovator
+The five-step composer, autosaving after each step.
+/portal/innovator/ideas/[id]
+innovator
+Idea overview — state, public preview link, basic stats, moderation history.
+/portal/innovator/ideas/[id]/edit
+innovator
+Edit form. A material edit to a published idea returns it to review; the live version stays live until the revision is approved.
+/portal/innovator/ideas/[id]/moderation
+innovator
+The admin feedback thread, with a single edit-and-resubmit action.
+/portal/innovator/requests
+innovator
+Intro request inbox — pending, accepted, declined and expired tabs.
+/portal/innovator/requests/[id]
+innovator
+The decision screen: firm, type, mandate, cheque band and the note, with accept and decline given equal weight.
+/portal/innovator/connections
+innovator
+Accepted connections with investor contact details revealed and copyable.
+/portal/innovator/profile
+innovator
+Public profile editor, and the sealed contact block in a separate, clearly labelled section.
+## 3.7 Investor portal — 12 pages
+Two things are worth noting. Signing in unlocks nothing — a free investor sees exactly what an anonymous visitor sees, plus the ability to save. And the upgrade sub-tree has four landing states, not two, because the browser can arrive back from Stripe before the payment webhook has been handled, and that gap needs a screen of its own.
+Path
+Access
+What is on it
+/portal/investor
+investor
+Dashboard: new ideas matching the stated mandate, request statuses, saved ideas, and quota remaining.
+/portal/investor/discover
+PARTIAL — filters paid
+The deal feed inside the portal, with saving. Basic filters are free; the advanced panel, sorting and export are paid.
+/portal/investor/ideas/[id]
+PARTIAL — summary free, detail paid
+The same idea detail inside the portal, plus the Request intro composer and the quota indicator.
+/portal/investor/saved
+investor
+Shortlist with private notes. Free, and it survives cancellation.
+/portal/investor/requests
+paid
+Everything sent, with live status: pending, accepted, declined, expired.
+/portal/investor/requests/[id]
+paid
+A single request and, once accepted, the innovator's contact block.
+/portal/investor/connections
+paid
+Directory of accepted introductions with contact details.
+/portal/investor/profile
+investor
+Firm and mandate, with a preview of what an innovator sees when a request arrives.
+/portal/upgrade
+investor
+The paywall. Plan selection, with a contextual header naming what was blocked.
+/portal/upgrade/processing
+investor
+Post-checkout landing that polls entitlement. Displays only — grants nothing.
+/portal/upgrade/success
+paid
+Confirmation once entitlement is live, deep-linking back to the blocked item.
+/portal/upgrade/cancelled
+investor
+Checkout abandoned. Offers to resume with the same context intact.
+## 3.8 Shared portal account — 8 pages
+Path
+Access
+What is on it
+/portal/notifications
+signed-in
+Notification centre: moderation outcomes, incoming requests, accepts, billing events.
+/portal/settings
+signed-in
+Settings index. The billing entry is visible only to investors.
+/portal/settings/account
+signed-in
+Name, avatar, timezone, and email change with re-verification.
+/portal/settings/contact
+signed-in
+The sealed contact block, with the release rule stated and a list of who currently holds it.
+/portal/settings/security
+signed-in
+Password, active sessions, connected sign-in providers.
+/portal/settings/notifications
+signed-in
+Email and portal notification preferences. Decision-related mail cannot be switched off.
+/portal/settings/billing
+investor
+Plan, renewal date, invoice history, dunning banner, and the Stripe Billing Portal link.
+/portal/settings/danger
+signed-in
+Deactivate or delete, with the consequences enumerated before the button.
+## 3.9 Admin — 8 pages
+Path
+Access
+What is on it
+/admin
+admin
+Ops dashboard — queue depths, failed webhooks, signups, published ideas, MRR.
+/admin/moderation
+admin
+Idea review queue, sorted oldest-first so nothing starves.
+/admin/moderation/[ideaId]
+admin
+Review screen: the idea as it appears at each tier, the acceptable-use checklist, and the three outcomes.
+/admin/ideas
+admin
+Every idea in every state, including archived and removed.
+/admin/users
+admin
+User search across both roles, with role, state and activity flags.
+/admin/users/[id]
+admin
+Single user — suspend, ban, restore, resend verification.
+/admin/subscriptions
+admin
+Entitlement state per investor, reconciled against Stripe.
+/admin/webhooks
+admin
+Received events, processing state, and manual replay.
+## 3.10 Server endpoints — 22
+Gating is enforced here, so this column is the authoritative one. Three endpoints carry most of the risk: /api/ideas/[id] is the partially gated payload, /api/connection-requests is the only way an intro request comes into existence, and /api/webhooks/stripe is the only writer of entitlement in the entire system.
+Path
+Access
+What it does
+/api/auth/[...nextauth]
+public
+Sign-in, callback, session, sign-out.
+/api/auth/verify-email/resend
+signed-in
+Reissues the verification email. Rate limited.
+/api/ideas
+mixed
+GET returns published ideas with basic filters; advanced filter parameters require a subscription. POST creates a draft, innovator only.
+/api/ideas/[id]
+PARTIAL
+GET returns the public summary to anyone and the full payload only to subscribers. PATCH and DELETE are restricted to the owning innovator.
+/api/ideas/[id]/submit
+innovator
+Moves an idea into review.
+/api/ideas/[id]/pause
+innovator
+Toggles published and paused. No re-review — the content has not changed.
+/api/ideas/[id]/archive
+innovator
+Innovator-initiated archive.
+/api/ideas/[id]/view
+public
+Records an impression. Deduplicated and rate limited.
+/api/saved-items
+investor
+Save, unsave and list. Free.
+/api/connection-requests
+paid
+Creates an intro request. Enforces subscription, quota and the repeat-request rule before writing.
+/api/connection-requests/[id]/accept
+innovator
+Triggers the bilateral contact reveal.
+/api/connection-requests/[id]/decline
+innovator
+Releases nothing.
+/api/notifications
+signed-in
+Fetch and mark-read.
+/api/uploads/signed-url
+signed-in
+Short-lived upload URL for decks, logos and avatars.
+/api/stripe/checkout
+investor
+Creates a Checkout Session and stores the return pointer in its metadata.
+/api/stripe/portal
+investor
+Creates a Stripe Billing Portal session.
+/api/stripe/entitlement
+investor
+Read-only entitlement poll used by the processing screen.
+/api/webhooks/stripe
+public, signature-verified
+The only writer of entitlement. Idempotent consumer of Stripe events.
+/api/admin/moderation/[ideaId]
+admin
+Approve, reject or request changes. Writes an audit entry.
+/api/admin/users/[id]
+admin
+Suspend, ban, restore, resend verification.
+/api/admin/webhooks/[id]/replay
+admin
+Replays a failed webhook event.
+/api/cron/request-expiry
+cron secret
+Daily sweep. Expires unanswered intro requests and credits the quota back.
+## 3.11 Page count
+Group
+Pages
+Marketing and legal
+14
+Discovery
+4
+Registration and onboarding
+11
+Innovator area of the portal
+11
+Investor area of the portal
+12
+Shared portal account pages
+8
+Admin
+8
+Total interface pages
+68
+Server endpoints
+22
+## 4. Flowcharts
+Fifteen diagrams covering the three journeys: the innovator posting an idea, the investor finding one and paying to ask about it, and the subscription that funds the whole thing. A short list of steps follows each one.
+## 4.1 How to read the diagrams
+Colour
+Meaning
+Green
+An innovator step — the supply side, always free.
+Blue
+An investor step — the demand side, the side that pays.
+Grey
+Something the server does on its own: writing a record, sending a notification, redirecting a browser.
+Red
+A gate or a paywall. Nothing past a red node happens until the condition is satisfied.
+Amber
+A human staff decision — approving an idea, requesting changes, taking content down.
+Purple
+A Stripe or billing step. Only in the subscription diagrams.
+Slate
+A named state the record is now in — DRAFT, IN REVIEW, PUBLISHED, ACCEPTED. These are the join points between diagrams.
+## 4.2 The innovator journey
+The supply side end to end. One property is worth stating before the diagrams: the innovator is never asked for money and never has to respond to anyone. Every branch that could pressure them has a no-cost exit.
+## Step 1 — signup and the single gate
+[IMAGE]
+Diagram 2 — From anonymous visitor to a verified innovator account.
+▪  Arrives from search, a referral, or a shared idea link, and clicks "Post your idea — free". The word *free* is doing real work: a paywall anywhere on the site invites the assumption that it applies to everybody.
+▪  Signs up as an innovator. The role is chosen at registration, not after, because the two sides collect different information.
+▪  Gate — email verification. The only gate between an innovator and a draft. An unverified address means moderation has no reliable way to reach them about their idea.
+▪  Not verified leads to a real holding page with a resend and a cooldown, not a dead end. Friction on the free side of a marketplace is what kills supply, so there is exactly one gate and no more.
+## Step 2 — profile, sealed contact, and the first draft
+[IMAGE]
+Diagram 3 — Onboarding, the sealed contact block, and the five-step form.
+▪  Onboarding is deliberately short — display name, handle, bio, sector, stage. The idea itself is where the real content goes.
+▪  The sealed contact block is captured here, long before it is needed, so that an acceptance can reveal it instantly. Asking for it at the moment of acceptance would put a form between the innovator and the yes.
+▪  The five-step composer autosaves after every step, so an abandoned session does not cost the draft.
+▪  The idea is saved as DRAFT: private, unindexed, freely editable, and it never enters a human queue until it is submitted.
+## Step 3 — the moderation decision
+[IMAGE]
+Diagram 4 — Submission and the three-way admin decision.
+▪  On submit the idea becomes IN REVIEW and editing locks. A reviewer has to be reading a document that cannot change underneath them.
+▪  The queue is sorted oldest-first so nothing starves.
+▪  Three outcomes, not two. A binary approve-or-reject queue forces reviewers into a bad choice: reject a fixable idea, or approve something below standard. Request-changes is the release valve, and in practice it becomes the most-used outcome — most ideas are not policy breaches, they are just thin.
+▪  Every outcome writes an audit entry with actor, reason and previous state, and notifies the innovator in the portal and by email.
+## Step 4 — the changes loop
+[IMAGE]
+Diagram 5 — The two recovery paths, and the one dead end.
+▪  Feedback lives on its own page as a thread, not as a line in an email the innovator has to hunt for.
+▪  Reopening to draft takes the idea off the queue while the work happens; resubmitting puts it back. The cycle can repeat as often as needed, and every pass is logged.
+▪  A rejection is not automatically terminal — the innovator can rewrite and resubmit.
+▪  The record is retained rather than deleted, so a repeat submission of the same rejected content is visible to whoever reviews it next.
+## Step 5 — the intro request arrives
+[IMAGE]
+Diagram 6 — From a published idea to the innovator's accept-or-decline decision.
+▪  Published means the public summary is live and indexed while the contact stays sealed. The summary is what makes the idea findable; the seal is what makes publishing safe.
+▪  The request can only come from a subscribed investor. It arrives with a personal note, and the innovator gets a portal alert and an email — email matters, because innovators do not live in the dashboard.
+▪  The innovator sees the firm, its type, its mandate, the cheque band and the note. They do not see the investor's contact details, because consent has not been exchanged in either direction yet.
+▪  No default, no countdown in the interface, no penalty attached to either answer.
+## Step 6 — the three endings
+[IMAGE]
+Diagram 7 — Decline releases nothing; expiry releases nothing; accept reveals both sides at once.
+RULE
+Accepting reveals the innovator's contact to the investor and the investor's contact to the innovator, in the same operation. It is not a one-way unlock the investor purchased; it is a mutual introduction. A decline releases nothing, permanently, and no reason is required — so declining costs the innovator nothing socially. Silence expires the request, credits the investor's quota back, and releases nothing either.
+## 4.3 The investor journey
+The demand side. One theme runs through the whole flow: the return pointer. An investor who hits a wall is, at that moment, looking at the one idea they care about most. Losing that context and dropping them on a dashboard after they pay wastes the intent they just demonstrated, so the pointer is captured at the first block and carried through signup, verification, Checkout and the payment webhook, all the way back to the same idea.
+## Step 1 — free browsing and the first block
+[IMAGE]
+Diagram 8 — Anonymous browsing through to signup, with the return pointer captured.
+▪  Browsing is genuinely free. An investor cannot judge a deal-flow product from a pricing page — they need to see the actual pool, at real volume, before a subscription is a rational purchase.
+▪  The public layer of an idea is the title, pitch, sector, stage, region and a redacted ask band.
+▪  What is locked is the substance, not the existence of the idea — the full narrative, financials, traction, innovator identity and the Request intro button.
+▪  Carrying on browsing is a perfectly good outcome; it builds the habit that makes a subscription worth buying later. The lock sits at the point of intent, not at the front door.
+## Step 2 — verification and the free tier
+[IMAGE]
+Diagram 9 — The gate, mandate onboarding, and what the free tier contains.
+▪  The return pointer is stored server-side rather than in the browser, so it survives a closed tab or a different device.
+▪  Same single email gate as the innovator side.
+▪  Mandate onboarding captures firm, investor type, sector focus, cheque band and thesis. This is not profile decoration — it is exactly what an innovator is shown when the request lands, and it is what the dashboard matching runs against.
+▪  Signing in unlocks nothing. A verified free investor sees exactly what an anonymous visitor sees, plus the ability to save and shortlist.
+## Step 3 — the paywall and Checkout
+[IMAGE]
+Diagram 10 — Returning to the blocked idea, hitting the paywall, and entering Checkout.
+▪  The product reopens the idea they were blocked on, rather than making them find it again.
+▪  They meet the same wall as before, but now with an account behind them — which is a far more likely conversion.
+▪  The return pointer is written into the Stripe Checkout Session metadata, so it survives the round trip through Stripe.
+▪  Payment happens on Stripe hosted Checkout. Card details never touch Xwavy.
+## Step 4 — the paid tier and the request
+[IMAGE]
+Diagram 11 — What unlocks, and the checks that run when a request is sent.
+▪  Everything unlocks at once: full narrative, financials, traction, team, deck, exact raise, innovator identity, advanced filters, sorting and export. This is the whole product they bought.
+▪  The personal note is not decoration — it is what the innovator reads when deciding.
+▪  Subscription and quota are re-checked when the request is written, not when the page was rendered. A page can sit open for hours; a subscription can lapse and a quota can be spent in another tab during that time. The button being visible is not authority to act.
+▪  Quota is checked before the record is created, so a refused request never consumes a slot. A lapsed session lands on the upgrade page with the context preserved — a product surface, not an error page.
+▪  The request then sits pending with the innovator. Control has passed to the other side, and there is no way for the investor to hurry it.
+NOTE
+There are three things an investor cannot do at any price: see an innovator's contact details without an acceptance, contact an innovator who has not accepted, or re-request their way past a decline.
+## 4.4 The subscription and payment flow
+RULE
+One rule governs this whole section: access is granted by the payment webhook, never by the success redirect. The entitlement field has exactly one writer in the system — the signed webhook handler. The post-checkout screen reads that field and displays what it finds. If those two responsibilities ever merge, the product has a hole in it.
+## Checkout, and the two paths back
+[IMAGE]
+Diagram 12 — One payment, two independent consequences: the branch the customer sees, and the branch that changes their access.
+▪  The upper branch is the browser redirect to a processing screen. It polls a read-only endpoint and displays the answer.
+▪  The lower branch is the signed webhook Stripe sends to the server, out of band. This is the branch that grants entitlement.
+▪  Once entitlement is live, paid pages and paid payloads unlock, and the investor is deep-linked back to the idea that blocked them.
+Three cases this design has to survive. *The browser never comes back* — the customer pays and closes the tab; the webhook still arrives and access is still granted. *The redirect is replayed* — someone bookmarks or shares the success URL; nothing happens, because the URL grants nothing. *The webhook is slow* — the polling screen holds the customer with honest copy for the second or two involved, rather than showing an unentitled dashboard and letting them conclude the payment failed.
+The webhook handler itself is signature-verified and idempotent. Every event is recorded, keyed on its Stripe event id, before it is acted on — which is what makes duplicate detection possible and what gives operations a queue they can inspect and replay. Stripe guarantees at-least-once delivery, so duplicates are normal rather than exceptional.
+Stripe event
+Effect
+checkout.session.completed
+Links the Stripe customer to the user account and reads the return pointer out of the session metadata. Establishes the billing relationship; does not by itself prove money moved.
+customer.subscription.created / .updated
+Upserts the subscription record — status, price, period end, cancel-at-period-end flag, and the monthly request quota that comes with the plan.
+invoice.paid
+The grant. Entitlement is granted on first payment and renewed on every subsequent one. The quota counter resets here.
+invoice.payment_failed
+Moves the subscription to past due and starts dunning. Access is not cut immediately.
+customer.subscription.deleted
+Revokes entitlement and drops the investor to the free tier.
+## Failed payment and dunning
+[IMAGE]
+Diagram 13 — Retries, reminders, recovery or expiry.
+▪  A failed renewal moves the subscription to past due and starts dunning, but entitlement continues. A failed card is usually an expired card, not a customer leaving, and cutting access on the first failure converts a billing hiccup into a churn event.
+▪  Stripe Smart Retries run across the retry window, alongside dunning emails and a billing banner inside the portal — both channels, because email alone is unreliable and a banner alone is invisible to someone who is not signing in.
+▪  If payment recovers, the subscription returns to active and the investor may never have noticed. If it does not, the grace period expires and the subscription cancels.
+▪  The grace window is a configurable setting, not a constant, so it can be tuned against observed recovery rates.
+## Cancellation and revocation
+[IMAGE]
+Diagram 14 — Voluntary cancellation, involuntary cancellation, and what revocation actually takes away.
+RULE
+Ending a subscription takes away the ability to make new connections. It does not retroactively unmake connections an innovator already agreed to. Deleting a relationship the innovator consented to would be a worse outcome for the innovator than for the investor, and the innovator is not the one who stopped paying.
+On revocation
+What happens
+Accepted connections and revealed contacts
+Retained and fully readable, on both sides, permanently.
+Saved items and private notes
+Retained. A shortlist is the investor's own work, not a rented feature.
+Sent request history
+Retained, read-only.
+New intro requests
+Blocked — the endpoint requires an active subscription.
+Advanced filters, sorting, export
+Re-locked. The API returns the public payload shape again.
+Full idea detail and innovator identity
+Re-locked. The fields drop out of the response.
+The account itself
+Untouched. They remain a free-tier investor and can still browse and save.
+## 4.5 The idea lifecycle
+[IMAGE]
+Diagram 15 — The eight states an idea can occupy, and every transition between them.
+State
+What it means
+Who can move it
+DRAFT
+Private, autosaved, never indexed, freely editable.
+Innovator
+IN REVIEW
+Submitted and locked from editing while a reviewer reads it.
+Admin
+CHANGES REQUESTED
+Reviewed, not approved, with written feedback attached. Recoverable.
+Innovator
+REJECTED
+Breaches policy. Never indexed. Recoverable by rewriting.
+Innovator
+PUBLISHED
+Public summary live and indexed. Contact still sealed.
+Innovator or admin
+PAUSED
+Hidden from discovery, accepts no new requests. Reversible at will.
+Innovator
+ARCHIVED
+Read-only and delisted, but recoverable by relisting.
+Innovator or admin
+REMOVED
+Admin takedown following a report. Terminal, retained for audit only.
+Admin
+▪  A material edit to a published idea re-enters review. Approved content cannot be swapped for unapproved content after the fact; the live version stays live until the revision is approved.
+▪  Pause and resume need no re-review, because the content has not changed.
+▪  Relisting an archived idea re-enters review. Content that sat untouched deserves a second look.
+▪  Nothing is destroyed. Abandon, give up and accept-outcome all lead to archived, and removed is the only genuinely terminal state.
+## 5. Assumptions and open decisions
+Four things in this document are stated as defaults and should be confirmed before the build starts. None of them change the structure; each changes a number or a screen.
+Decision
+Assumed here
+Why it matters
+Plan tiers and pricing
+A monthly and an annual option, each carrying a monthly intro-request quota. Figures not fixed.
+The quota number drives the request endpoint, the dashboard indicator and the upgrade page copy.
+Intro request expiry window
+Fourteen days
+Longer favours the innovator; shorter recycles investor quota faster. Built as a configurable setting rather than a constant.
+Free trial
+None assumed
+A trial makes the trialing state a live entitlement from day one rather than a later addition. The subscription model already handles it.
+Moderation turnaround
+Not fixed. The queue is oldest-first and the review screen shows waiting time.
+The number shown to an innovator after they submit should be one the team can actually hold.
+Two further items need content rather than a decision: the six sector categories carried over from the live site should be confirmed, and the acceptable-use policy needs to be written before the first idea is reviewed, because it is the standard moderation decisions are made against.
+## 6. Pricing and timeline
+The figures below cover the complete build described in this document: the public website, the innovator and investor portals, the subscription and payment flow, and the admin panel.
+Total project fee
+Timeline

@@ -1,0 +1,177 @@
+
+######## ideas.html | title=Browse Ideas — Xwavy | desc=Explore hundreds of innovative ideas across technology, health, finance, sustainability, education and more. Find your next investment on Xwavy.
+IMAGES: [('/airo-assets/images/logo/horizontal', 'Xwavy'), ('/airo-assets/images/pages/ideas/hero', ''), ('/airo-assets/images/logo/horizontal', 'Xwavy')]
+Ideas
+Investors
+How It Works
+About
+Submit Idea
+Login
+Ideas Marketplace
+Discover Bold Ideas
+Browse hundreds of innovative ideas across 12 categories. Find the one that matches your investment thesis.
+All
+Technology
+Health & Biotech
+Finance
+Sustainability
+Education
+Consumer
+Trending
+Newest
+Featured
+Showing
+9
+ideas
+Technology
+Trending
+Featured
+AI-Powered Legal Document Analyzer
+An AI platform that reads, summarizes, and flags risks in legal contracts in seconds — saving businesses thousands in legal fees.
+AI/ML
+LegalTech
+SaaS
+Rania Al-Farsi
+·
+Dubai, UAE
+Pre-seed
+·
+Seeking
+$150K
+2 days ago
+Health & Biotech
+Trending
+Wearable Mental Health Monitor
+A discreet wristband that tracks biometric stress markers and provides real-time mental wellness insights via a companion app.
+HealthTech
+Wearables
+Mental Health
+James Okafor
+·
+London, UK
+Seed
+·
+Seeking
+$400K
+5 days ago
+Education
+Trending
+Adaptive Learning Platform for Dyslexia
+An AI-driven reading and learning tool specifically designed for students with dyslexia, adapting in real-time to each learner.
+EdTech
+AI
+Accessibility
+Marcus Chen
+·
+Singapore
+Pre-seed
+·
+Seeking
+$80K
+3 days ago
+Finance
+Trending
+Carbon Credit Trading App
+A mobile-first platform making it easy for SMEs to buy, sell, and track verified carbon credits to meet ESG commitments.
+FinTech
+ESG
+Climate
+Tom Eriksson
+·
+Stockholm, Sweden
+Pre-seed
+·
+Seeking
+$120K
+4 days ago
+Finance
+Featured
+Decentralized Micro-Investment Platform
+Enabling everyday people to invest in fractional shares of private startups with as little as $10, powered by blockchain.
+FinTech
+Blockchain
+DeFi
+Sofia Mendes
+·
+Lisbon, Portugal
+Pre-seed
+·
+Seeking
+$200K
+1 week ago
+Sustainability
+Urban Vertical Farming Network
+A network of modular vertical farms installed in unused urban spaces, supplying fresh produce to local restaurants and markets.
+AgriTech
+Sustainability
+Urban
+Lena Kovač
+·
+Berlin, Germany
+Seed
+·
+Seeking
+$600K
+1 week ago
+Consumer
+Sustainable Packaging Marketplace
+A B2B marketplace connecting brands with certified sustainable packaging suppliers, with carbon footprint tracking built in.
+Sustainability
+B2B
+Marketplace
+Amara Osei
+·
+Accra, Ghana
+Seed
+·
+Seeking
+$300K
+2 weeks ago
+Technology
+Real-Time Supply Chain Visibility Tool
+IoT-powered dashboard giving manufacturers end-to-end visibility into their supply chain with predictive disruption alerts.
+IoT
+Supply Chain
+SaaS
+Priya Nair
+·
+Mumbai, India
+Series A
+·
+Seeking
+$1.2M
+3 weeks ago
+Health & Biotech
+Telehealth for Rural Communities
+Low-bandwidth video consultation platform designed for rural and underserved communities with offline-first capabilities.
+HealthTech
+Telehealth
+Impact
+Fatima Al-Rashid
+·
+Riyadh, KSA
+Seed
+·
+Seeking
+$250K
+1 week ago
+Load More Ideas
+Have an idea of your own?
+Join hundreds of innovators already listed on Xwavy. It's free to submit.
+Submit Your Idea
+Where Ideas Meet Investment. Connecting bold innovators with visionary investors to shape the future.
+info@xwavy.com
+Platform
+Browse Ideas
+Investor Board
+Submit an Idea
+How It Works
+Company
+About Xwavy
+Contact Us
+Privacy Policy
+Terms of Service
+©
+2026
+Xwavy. All rights reserved.
+Where Ideas Meet Investment

@@ -1,0 +1,81 @@
+
+######## submit-idea.html | title=Submit Your Idea — Xwavy | desc=Submit your innovative idea to Xwavy and get discovered by investors. Free to list. Takes 5 minutes.
+IMAGES: [('/airo-assets/images/logo/horizontal', 'Xwavy'), ('/airo-assets/images/logo/horizontal', 'Xwavy')]
+Ideas
+Investors
+How It Works
+About
+Submit Idea
+Login
+Submit Your Idea
+Share Your Vision
+It takes 5 minutes. Your idea could be the next big thing — let investors discover it.
+01
+Describe Your Idea
+Tell us what you're building and the problem it solves.
+02
+Set Your Details
+Category, stage, and how much funding you're seeking.
+03
+Get Discovered
+Your idea goes live and investors start reaching out.
+Your Idea
+Idea Title
+*
+Category
+*
+Select category
+Technology
+Health & Biotech
+Finance
+Sustainability
+Education
+Consumer
+Other
+Current Stage
+*
+Select stage
+Idea Stage
+Pre-seed
+Seed
+Series A
+Series B+
+Brief Description
+*
+The Problem You're Solving
+*
+Your Solution
+Funding Needs
+How much are you seeking?
+*
+Under $50K
+$50K – $150K
+$150K – $500K
+$500K – $1M
+$1M – $5M
+$5M+
+About You
+Full Name
+*
+Email Address
+*
+Location
+Website / LinkedIn
+By submitting, you agree to our terms. Your contact info is only shared with interested investors.
+Submit My Idea
+Where Ideas Meet Investment. Connecting bold innovators with visionary investors to shape the future.
+info@xwavy.com
+Platform
+Browse Ideas
+Investor Board
+Submit an Idea
+How It Works
+Company
+About Xwavy
+Contact Us
+Privacy Policy
+Terms of Service
+©
+2026
+Xwavy. All rights reserved.
+Where Ideas Meet Investment

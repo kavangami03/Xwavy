@@ -1,0 +1,400 @@
+/**
+ * English copy. Source of truth for every string on the public site.
+ *
+ * Written from the client's documents (copies in docs/client/), not from the
+ * old xwavy.com site, whose content Wavy Solutions confirmed is dummy data:
+ *   - "Xwavy Scope of Work, Site Map and Flowcharts" v1.0, 18 Aug 2026
+ *   - "Response to Clarifications for the Revised Scope of Work", 16 Sep 2026
+ *
+ * Rules: no invented figures, users, testimonials or prices. Plan prices,
+ * the twelve category names and live counters arrive from Wavy Solutions or
+ * the database. The Arabic file (ar.ts) must mirror this shape exactly.
+ */
+type Step<Visual> = { name: string; title: string; body: string; visual: Visual };
+
+/** The five platform steps. A tuple, because each step has its own visual. */
+export type ProcessSteps = [
+  Step<{ heading: string; items: string[]; saved: string; previewPublic: string; previewPaid: string }>,
+  Step<{ heading: string; outcomes: string[]; feedbackLabel: string; feedback: string }>,
+  Step<{ heading: string; filters: string[]; results: string }>,
+  Step<{ heading: string; firm: string; mandate: string; cheque: string; note: string }>,
+  Step<{ heading: string; accept: string; decline: string; revealed: string }>,
+];
+
+const processSteps: ProcessSteps = [
+  {
+    name: "Post",
+    title: "Write it up in five short steps.",
+    body: "Basics, problem and solution, traction, the ask, and media. Every step saves as you go, and a live preview shows exactly what visitors and subscribers will see.",
+    visual: {
+      heading: "Add your idea",
+      items: ["Basics", "Problem & solution", "Traction", "The ask", "Media"],
+      saved: "Saved",
+      previewPublic: "Visitor view",
+      previewPaid: "Subscriber view",
+    },
+  },
+  {
+    name: "Review",
+    title: "A person reads every idea.",
+    body: "Each submission is checked against our acceptable-use policy. The outcome is always clear: approved, changes requested with written feedback, or not accepted, and you can revise and resubmit.",
+    visual: {
+      heading: "Review outcome",
+      outcomes: ["Approve", "Request changes", "Reject"],
+      feedbackLabel: "Reviewer feedback",
+      feedback: "Strong problem statement. Add one line on current traction and resubmit.",
+    },
+  },
+  {
+    name: "Discover",
+    title: "Investors find you.",
+    body: "Your summary goes live and becomes searchable. Investors browse by sector, stage and region. Subscribers see the full picture; nobody sees how to reach you.",
+    visual: {
+      heading: "Browse ideas",
+      filters: ["Sector", "Stage", "Region", "Keyword"],
+      results: "Published ideas",
+    },
+  },
+  {
+    name: "Request",
+    title: "An investor asks to meet.",
+    body: "A subscribed investor sends an introduction request with a personal note. You see their firm, mandate and cheque size. Not their contact details, and never a cold email.",
+    visual: {
+      heading: "New introduction request",
+      firm: "Investor firm",
+      mandate: "Mandate: early-stage B2B software",
+      cheque: "Cheque size: $100K–$500K",
+      note: "We back founders automating back-office work. We'd like to learn more about your pilot customers.",
+    },
+  },
+  {
+    name: "Connect",
+    title: "Say yes, and you’re introduced.",
+    body: "Accept, and both sides’ contact details are revealed at the same moment. Decline, and nothing is shared, ever. Unanswered requests simply expire.",
+    visual: {
+      heading: "Connection made",
+      accept: "Accept",
+      decline: "Decline",
+      revealed: "Contact details shared with both sides",
+    },
+  },
+];
+
+const en = {
+  meta: {
+    title: "Xwavy: where ideas meet investment",
+    titleTemplate: "%s | Xwavy",
+    description:
+      "Xwavy is the marketplace where innovators publish ideas free and investors subscribe to see the full picture and request introductions. Contact is shared only when both sides agree.",
+  },
+
+  common: {
+    skipToContent: "Skip to content",
+    nav: {
+      label: "Main",
+      forInnovators: "For innovators",
+      forInvestors: "For investors",
+      howItWorks: "How it works",
+      pricing: "Pricing",
+      about: "About",
+    },
+    signIn: "Sign in",
+    postIdea: "Post your idea",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    language: "Language",
+    example: "Example",
+    locked: "Subscribers only",
+  },
+
+  footer: {
+    summary:
+      "The marketplace where innovators and investors meet on equal terms. Introductions happen only when both sides say yes.",
+    columns: [
+      {
+        title: "Platform",
+        links: [
+          { label: "Browse ideas", href: "/ideas" },
+          { label: "For innovators", href: "/for-innovators" },
+          { label: "For investors", href: "/for-investors" },
+          { label: "How it works", href: "/how-it-works" },
+          { label: "Pricing", href: "/pricing" },
+        ],
+      },
+      {
+        title: "Company",
+        links: [
+          { label: "About Xwavy", href: "/about" },
+          { label: "Contact", href: "/contact" },
+        ],
+      },
+      {
+        title: "Legal",
+        links: [
+          { label: "Terms of service", href: "/legal/terms" },
+          { label: "Privacy policy", href: "/legal/privacy" },
+          { label: "Cookie policy", href: "/legal/cookies" },
+          { label: "Acceptable use", href: "/legal/acceptable-use" },
+          { label: "No-advice disclaimer", href: "/legal/no-advice-disclaimer" },
+        ],
+      },
+    ],
+    disclaimer:
+      "Xwavy introduces people. It holds no funds, brokers no securities and gives no investment advice.",
+    contactLabel: "Questions?",
+    rights: "All rights reserved.",
+    poweredBy: "Powered by Wavy Solutions",
+  },
+
+  home: {
+    /** Alt text for the story photographs (public/images/story). */
+    images: {
+      innovatorPortrait: "A founder at her desk in the evening, laptop open, city lights behind her",
+      investorPortrait: "An investor standing by his office window at dusk, tablet in hand",
+      step1: "The founder filling in a step-by-step form on her laptop at night",
+      step2: "A reviewer reading a submission carefully at her desk, notes beside her",
+      step3: "The investor browsing a grid of ideas on his tablet",
+      step4: "The investor about to send an introduction request from his tablet",
+      step5: "The founder smiling at an accepted request on her phone",
+      together: "The founder and the investor talking across a table after their introduction",
+      unlock: "A tablet showing an idea in full detail: figures, team and documents",
+      team: "Three people reviewing ideas together around a table",
+      meeting: "The founder and the investor in conversation on a terrace at golden hour",
+    },
+    hero: {
+      eyebrow: "The innovator and investor marketplace",
+      /** Line two wraps the film between its words: "meet ◖film◗ investment." */
+      title: { line1: "Where ideas", before: "meet", after: "investment." },
+      scrollCue: "Scroll to watch it work",
+      body: "Innovators publish what they’re building, free. Investors subscribe to see the full picture and ask for an introduction. Contact details move only when both sides say yes.",
+      primaryCta: "Post your idea, free",
+      secondaryCta: "I invest",
+      points: [
+        "Free for innovators, always",
+        "Every idea reviewed by a person",
+        "Contact shared only on mutual consent",
+      ],
+      video: {
+        label:
+          "A founder publishes her idea; an investor finds it and requests an introduction; she accepts on her phone, and both are connected at the same moment.",
+        play: "Play video",
+        pause: "Pause video",
+      },
+      /** Cards that narrate the video, in sync with it (double opt-in). */
+      story: [
+        { title: "Idea published", detail: "Reviewed, live, contact sealed" },
+        { title: "Introduction requested", detail: "By a subscribed investor" },
+        { title: "Request accepted", detail: "The innovator said yes" },
+        { title: "Connected", detail: "Contact shared with both sides, at once" },
+      ],
+      mockup: {
+        status: "Published",
+        sector: "Technology",
+        stage: "Pre-seed",
+        region: "GCC",
+        title: "Contract review assistant for small businesses",
+        pitch: "Reads commercial contracts, summarises the obligations and flags risky clauses before signing.",
+        askLabel: "Raising",
+        askBand: "$100K–$250K",
+        lockedTitle: "Unlocked with a subscription",
+        lockedItems: ["Full narrative", "Financials", "Traction", "Founder identity"],
+        requestIntro: "Request intro",
+      },
+    },
+
+    roles: {
+      eyebrow: "Two sides, one platform",
+      titleLead: "Built for both sides",
+      titleAccent: "of the table.",
+      innovators: {
+        label: "For innovators",
+        title: "Publish free. Stay in control.",
+        points: [
+          "Post your idea free. No listing fees, no commission",
+          "Your contact details stay sealed until you accept",
+          "Decline any request without giving a reason",
+          "See basic stats for every idea you publish",
+        ],
+        cta: "How it works for innovators",
+      },
+      investors: {
+        label: "For investors",
+        title: "Curated deal flow. Warm introductions.",
+        points: [
+          "Browse every published idea before you pay",
+          "Unlock financials, traction, team and the deck",
+          "Advanced filters, sorting and CSV export",
+          "Request introductions from a monthly quota",
+        ],
+        cta: "How it works for investors",
+      },
+    },
+
+    process: {
+      eyebrow: "How it works",
+      titleLead: "From first draft to",
+      titleAccent: "first conversation.",
+      stepLabel: "Step",
+      of: "of",
+      steps: processSteps,
+    },
+
+    consent: {
+      eyebrow: "Double opt-in",
+      titleLead: "Two yeses before a single",
+      titleAccent: "contact detail moves.",
+      body: "An investor opts in by spending a request from their monthly quota. The innovator opts in by accepting. Only then are contact details released, to both sides, at the same time.",
+      stages: [
+        { label: "The investor asks", detail: "Firm, mandate and a personal note. It costs a request from their quota." },
+        { label: "The innovator decides", detail: "Accept or decline. No countdown, no pressure, no penalty." },
+        { label: "Both are introduced", detail: "Email, phone and links are revealed both ways, at once." },
+      ],
+      rules: [
+        "A decline releases nothing, permanently.",
+        "Unanswered requests expire and the investor’s request is credited back.",
+        "Nobody can re-request their way past a decline.",
+      ],
+      sealed: "Sealed",
+      revealed: "Revealed",
+    },
+
+    access: {
+      eyebrow: "For investors",
+      titleLead: "See the pool",
+      titleAccent: "before you pay for it.",
+      body: "Browsing is genuinely free, at real volume. A subscription unlocks the substance, and the ability to ask.",
+      free: {
+        label: "Free",
+        items: [
+          "Every published idea",
+          "Title, pitch, sector, stage and region",
+          "Problem statement and ask band",
+          "Filter by sector, stage, region and keyword",
+          "Save ideas and keep private notes",
+        ],
+      },
+      paid: {
+        label: "Subscriber",
+        items: [
+          "Full narrative and financials",
+          "Traction, team and pitch deck",
+          "Exact raise and founder identity",
+          "Advanced filters, sorting and CSV export",
+          "Introduction requests from a monthly quota",
+        ],
+      },
+      note: "Cancel any time. Connections you’ve made and ideas you’ve saved stay with you.",
+      cta: "See investor plans",
+      toggleLabel: "Compare access",
+      dragHint: "Drag to compare",
+      unlockedTitle: "Full picture unlocked",
+    },
+
+    trust: {
+      eyebrow: "Trust and safety",
+      titleLead: "Designed to be trusted",
+      titleAccent: "by both sides.",
+      items: [
+        {
+          title: "Human moderation",
+          body: "Every idea is reviewed before it’s published, against a published acceptable-use policy.",
+        },
+        {
+          title: "Sealed contact details",
+          body: "Contact information is stored sealed and released only on mutual acceptance. It never appears on a public profile.",
+        },
+        {
+          title: "Verified investors",
+          body: "Our team verifies investors using company and identity documents. Reviews normally take two business days.",
+        },
+        {
+          title: "Secure payments",
+          body: "Subscriptions are processed by a global card payment provider. Card details never touch Xwavy.",
+        },
+        {
+          title: "Arabic and English",
+          body: "The whole platform in both languages, with full right-to-left support. Post in whichever you prefer.",
+        },
+        {
+          title: "A facilitator, not a broker",
+          body: "Xwavy introduces people. We hold no funds, broker no securities and give no investment advice.",
+        },
+      ],
+    },
+
+    pricing: {
+      eyebrow: "Pricing",
+      title: "Innovators are always free.",
+      body: "No listing fees, no commission, no paywall on your side of the marketplace.",
+      investorsTitle: "Investors choose a plan.",
+      investorsBody: "Monthly or annual, each with a monthly quota of introduction requests. Cancel any time from your billing page.",
+      cta: "View pricing",
+      /** Facts from the Scope of Work, shown as a scroll-driven band. */
+      facts: [
+        "Free to post",
+        "No listing fees",
+        "No commission",
+        "Decline without a reason",
+        "Your contact stays sealed",
+      ],
+    },
+
+    faq: {
+      eyebrow: "Questions",
+      titleLead: "Good to",
+      titleAccent: "know.",
+      items: [
+        {
+          q: "Is Xwavy really free for innovators?",
+          a: "Yes. Posting ideas, receiving introduction requests and accepting them costs innovators nothing.",
+        },
+        {
+          q: "Who can see my contact details?",
+          a: "Nobody, until you accept an introduction request. They are then shared with that one investor, and you receive theirs at the same time.",
+        },
+        {
+          q: "What does an investor subscription include?",
+          a: "Full idea detail (financials, traction, team, deck, exact raise and founder identity), advanced filters, sorting and CSV export, and a monthly quota of introduction requests.",
+        },
+        {
+          q: "What happens if I decline a request?",
+          a: "Nothing is shared in either direction, and you don’t need to give a reason. The investor can’t send another request for the same idea.",
+        },
+        {
+          q: "What if I don’t respond to a request?",
+          a: "It expires at the end of the response window. Nothing is shared, and the request is credited back to the investor’s quota.",
+        },
+        {
+          q: "How are ideas reviewed?",
+          a: "A member of our team reviews every submission. It is approved, sent back with written feedback, or declined with a reason, and you can always revise and resubmit.",
+        },
+        {
+          q: "Does Xwavy invest, take equity or handle funds?",
+          a: "No. Xwavy only makes introductions. Any discussion or agreement about investment happens directly between the two parties, off the platform.",
+        },
+        {
+          q: "Which languages can I use?",
+          a: "Arabic and English. The platform is fully available in both, and you can post in either.",
+        },
+      ],
+    },
+
+    finalCta: {
+      titleLead: "Your next conversation",
+      titleAccent: "starts here.",
+      innovator: {
+        label: "Have an idea?",
+        body: "Publish it free and let the right investors come to you.",
+        cta: "Post your idea",
+      },
+      investor: {
+        label: "Looking for deal flow?",
+        body: "Browse published ideas free, and subscribe when one is worth a conversation.",
+        cta: "Browse ideas",
+      },
+    },
+  },
+};
+
+export type Dictionary = typeof en;
+export default en;

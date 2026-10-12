@@ -1,0 +1,318 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* ==========================================================================
+   Xwavy design system — "Deep Current" (Tailwind v4, CSS-first)
+
+   Everything in @theme becomes both a CSS variable and a utility class,
+   e.g. --color-navy → bg-navy / text-navy, --text-h2 → text-h2,
+   --spacing-section → py-section, --container-site → max-w-site.
+
+   Story: cyan is the wave (ideas in motion, matched to the logo), gold is
+   capital (investment), deep ocean navy carries the drama.
+
+   House style (shared with the SuperMIA / Kavion sites): a soft tinted page,
+   dark sections as inset rounded panels, eyebrows with a leading rule, and
+   two-tone headlines whose accent is typographic (serif italic), never a
+   gradient. Colours are always solid.
+   ========================================================================== */
+
+@theme {
+  /* --- Colors -----------------------------------------------------------
+     Default Tailwind palette is removed so only brand colors are available.
+     Contrast ratios are against the surface each token is meant for. */
+  --color-*: initial;
+
+  /* Dark surfaces */
+  --color-abyss: #050a17; /* deepest: hero, footer */
+  --color-navy: #0b1428; /* dark feature sections */
+  --color-navy-raised: #121e38; /* cards on navy */
+  --color-navy-line: #22304d; /* hairlines on navy (decorative only) */
+  --color-mist: #9aa8c1; /* secondary text on dark (7.6:1 on navy) */
+
+  /* Accents */
+  --color-cyan: #00e1ea; /* the wave: fills with abyss text (12.2:1), text on dark */
+  --color-cyan-ink: #00737b; /* cyan text, icons and focus on light (5.6:1 on white) */
+  --color-gold: #ffb547; /* capital: fills with abyss text (11.3:1), text on dark */
+  --color-gold-ink: #8a5300; /* gold text on light (6.3:1 on white) */
+  --color-blue: #1f5bef; /* fills with white text (5.5:1), links on light */
+
+  /* Light surfaces and text */
+  --color-white: #ffffff;
+  --color-surface: #f4f7fb; /* alternate light sections */
+  --color-frost: #e9eff7; /* tinted panels, chips */
+  --color-line: #e3e9f2; /* hairlines and card borders (decorative) */
+  --color-field: #7a869c; /* form control borders (3.7:1, meets 1.4.11) */
+  --color-ink: #0b1220; /* headings (18.7:1) */
+  --color-body: #3a4560; /* body text (9.6:1) */
+  --color-muted: #5f6b84; /* secondary text (5.4:1 on white, 5:1 on surface) */
+
+  /* --- Typography -------------------------------------------------------
+     Bricolage Grotesque: expressive display face with optical sizing.
+     Instrument Serif italic: the accent word in two-tone headlines.
+     Geist: crisp, neutral text and UI face. Geist Mono: figures and labels.
+     Arabic glyphs fall through to Alexandria (headings) and IBM Plex Sans
+     Arabic (text); browsers pick them per character, so no locale switch. */
+  --font-heading: var(--font-bricolage), var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), var(--font-plex-arabic), ui-monospace, "SFMono-Regular", monospace;
+  /* Accent words in headlines (italic). Latin only; Arabic keeps the heading face. */
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+
+  /* Fluid type: minimum at 320px, maximum from ~1280px upward. */
+  --text-display: clamp(2.375rem, 1.3rem + 4.2vw, 4.5rem); /* 38 → 72px */
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 700;
+
+  /* Hero headline only: one size above display. */
+  --text-hero: clamp(2.75rem, 1.6rem + 5vw, 6rem); /* 44 → 96px */
+  --text-hero--line-height: 0.98;
+  --text-hero--letter-spacing: -0.045em;
+  --text-hero--font-weight: 700;
+
+  --text-h2: clamp(1.875rem, 1.3rem + 2.2vw, 3rem); /* 30 → 48px */
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.032em;
+  --text-h2--font-weight: 650;
+
+  --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem); /* 20 → 26px */
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1.125rem; /* 18px */
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 600;
+
+  --text-stat: clamp(2.25rem, 1.8rem + 1.8vw, 3.5rem); /* 36 → 56px */
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.04em;
+  --text-stat--font-weight: 700;
+
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem); /* 17 → 20px */
+  --text-lead--line-height: 1.6;
+
+  /* Mono labels: eyebrows, step numbers, ticket sizes. */
+  --text-eyebrow: 0.75rem; /* 12px */
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--font-weight: 500;
+
+  /* --- Spacing ----------------------------------------------------------
+     Tailwind's 0.25rem scale stays; these add named fluid steps. */
+  --spacing-gutter: clamp(1rem, 0.5rem + 2.5vw, 4rem); /* 16px @320 → 64px */
+  --spacing-section: clamp(4.5rem, 3rem + 6vw, 8.5rem); /* 72 → 136px */
+  --spacing-section-sm: clamp(3rem, 2.25rem + 3vw, 5rem); /* 48 → 80px */
+  --spacing-header: 4.5rem; /* 72px fixed navigation */
+
+  /* --- Containers ------------------------------------------------------- */
+  --container-site: 120rem; /* 1920px: every section's content limit */
+  /* Reading width: use Tailwind's built-in max-w-prose (65ch). */
+
+  /* --- Radii ------------------------------------------------------------
+     Buttons and chips are pills (rounded-full); these cover everything else. */
+  --radius-sm: 0.5rem; /* 8px  — tags, small controls */
+  --radius-md: 0.75rem; /* 12px — inputs, small cards */
+  --radius-lg: 1rem; /* 16px — cards */
+  --radius-xl: 1.5rem; /* 24px — feature panels, media */
+
+  /* --- Shadows (ocean-tinted, never pure black) ------------------------- */
+  --shadow-xs: 0 1px 2px rgb(11 20 40 / 0.06);
+  --shadow-card: 0 1px 2px rgb(11 20 40 / 0.04), 0 8px 24px -8px rgb(11 20 40 / 0.1);
+  --shadow-card-hover: 0 2px 4px rgb(11 20 40 / 0.05), 0 24px 48px -16px rgb(11 20 40 / 0.2);
+  --shadow-elevated: 0 32px 80px -24px rgb(11 20 40 / 0.35);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  /* Inset panels: gap to the viewport edge and corner radius. */
+  --panel-inset: clamp(0.5rem, 0.25rem + 0.8vw, 1rem);
+  --panel-radius: clamp(1.25rem, 0.9rem + 1.4vw, 2.25rem);
+
+  /* Durations for hand-written CSS transitions (JS mirror: src/lib/motion.ts). */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+
+  /* Z-index scale. Use the z-* utilities below rather than raw numbers. */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 30;
+  --z-header: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+  --z-skip-link: 100;
+
+  /* Focus ring for light surfaces; dark surface utilities swap it to cyan. */
+  --focus-ring: var(--color-cyan-ink);
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility z-base {
+  z-index: var(--z-base);
+}
+@utility z-raised {
+  z-index: var(--z-raised);
+}
+@utility z-dropdown {
+  z-index: var(--z-dropdown);
+}
+@utility z-header {
+  z-index: var(--z-header);
+}
+@utility z-overlay {
+  z-index: var(--z-overlay);
+}
+@utility z-modal {
+  z-index: var(--z-modal);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
+}
+@utility z-skip-link {
+  z-index: var(--z-skip-link);
+}
+
+/* Dark surfaces. They set the background, default text and focus ring; text
+   colors inside are applied explicitly by components via their `tone` prop. */
+@utility surface-navy {
+  --focus-ring: var(--color-cyan);
+  background-color: var(--color-navy);
+  color: var(--color-mist);
+}
+@utility surface-abyss {
+  --focus-ring: var(--color-cyan);
+  background-color: var(--color-abyss);
+  color: var(--color-mist);
+}
+
+/* Inset rounded panel for dark feature sections (house style). Use on the
+   section element; the content inside still uses Container. */
+@utility panel {
+  margin-inline: var(--panel-inset);
+  border-radius: var(--panel-radius);
+  overflow: clip;
+}
+
+/* Accent word in a two-tone headline: serif italic, solid colour. */
+@utility accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    /* Fixed header clearance for anchor links (honored natively and by Lenis). */
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-surface);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Guards against accidental horizontal scroll without breaking sticky. */
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-ink);
+    font-family: var(--font-heading);
+    font-optical-sizing: auto;
+    text-wrap: balance;
+    /* Safety net: never let one long word overflow a narrow viewport. */
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Figures line up in stats, prices and tables. */
+  .font-mono,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: rgb(0 225 234 / 0.3);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* Programmatic focus targets (e.g. <main tabindex="-1"> via skip link). */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+/* Arabic. Unlayered so it wins over utilities: Arabic script must not be
+   tracked, and the Latin serif italic accent has no Arabic glyphs (browsers
+   would fake an oblique), so the accent keeps the heading face. */
+:lang(ar) :is(h1, h2, h3, h4, p, span, li, a, button, dt, dd) {
+  letter-spacing: 0;
+}
+:lang(ar) .accent {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+}
+
+/* Load reveal without a flash: elements marked [data-intro] start hidden
+   only when JavaScript runs (html.js, set inline in <head>) and motion is
+   allowed; GSAP reveals them. If GSAP never runs, a CSS fallback shows them
+   after 2.5s, so content can never stay hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-intro] {
+    visibility: hidden;
+    animation: intro-fallback 0s 2.5s forwards;
+  }
+}
+@keyframes intro-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Motion off: stop CSS animation and transitions globally. GSAP and Framer
+   Motion check the same media query in JS (see src/lib/motion.ts). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
