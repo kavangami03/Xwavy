@@ -95,6 +95,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description: dict.meta.description,
     },
     twitter: { card: "summary", title: dict.meta.title, description: dict.meta.description },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
   };
 }
 
