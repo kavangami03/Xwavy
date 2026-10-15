@@ -1,4 +1,4 @@
-import { portalIsExternal, portalLinks } from "@/config/site";
+import { portalLinks } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 
 /** Prefixes an in-app path with the locale: ("ar", "/pricing") → "/ar/pricing". */
@@ -8,10 +8,10 @@ export function localeHref(locale: Locale, path: string): string {
 }
 
 /**
- * Link into the portal (sign in, sign up, idea directory). The portal is a
- * separate product; when PORTAL_URL is set the language is passed as ?lang=.
+ * Link into the portal (sign in, sign up, idea directory). Absolute portal
+ * URLs are used as they are; a relative path is treated as part of this site.
  */
 export function portalHref(locale: Locale, key: keyof typeof portalLinks): string {
-  const target = portalLinks[key];
-  return portalIsExternal ? `${target}?lang=${locale}` : localeHref(locale, target);
+  const target: string = portalLinks[key];
+  return /^https?:\/\//.test(target) ? target : localeHref(locale, target);
 }

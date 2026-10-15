@@ -15,11 +15,13 @@ type SiteHeaderProps = { locale: Locale; dict: Dictionary };
 export function navItems(locale: Locale, dict: Dictionary) {
   const nav = dict.common.nav;
   return [
+    { label: nav.browseIdeas, href: localeHref(locale, "/ideas") },
     { label: nav.forInnovators, href: localeHref(locale, "/for-innovators") },
     { label: nav.forInvestors, href: localeHref(locale, "/for-investors") },
     { label: nav.howItWorks, href: localeHref(locale, "/how-it-works") },
     { label: nav.pricing, href: localeHref(locale, "/pricing") },
     { label: nav.about, href: localeHref(locale, "/about") },
+    { label: nav.contact, href: localeHref(locale, "/contact") },
   ];
 }
 
@@ -34,7 +36,7 @@ export function SiteHeader({ locale, dict }: SiteHeaderProps) {
   return (
     <header className="z-header fixed inset-x-0 top-0 pt-[calc(var(--panel-inset)+0.5rem)]">
       <Container>
-        <div className="relative flex h-16 items-center justify-between gap-4 rounded-full border border-white/10 bg-abyss/95 ps-5 pe-2 shadow-elevated backdrop-blur-md sm:ps-6">
+        <div className="relative flex h-16 items-center justify-between gap-3 rounded-full border border-white/10 bg-abyss/95 ps-5 pe-2 shadow-elevated backdrop-blur-md sm:ps-6">
           <Link href={localeHref(locale, "/")} className="shrink-0 rounded-full" aria-label={siteConfig.name}>
             <Image
               src={siteConfig.logo.src}
@@ -46,13 +48,13 @@ export function SiteHeader({ locale, dict }: SiteHeaderProps) {
             />
           </Link>
 
-          <nav aria-label={dict.common.nav.label} className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+          <nav aria-label={dict.common.nav.label} className="hidden xl:block">
+            <ul className="flex items-center gap-0.5">
               {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="inline-flex min-h-10 items-center rounded-full px-4 text-sm text-mist transition-colors hover:bg-white/5 hover:text-white"
+                    className="inline-flex min-h-10 items-center rounded-full px-3 text-xs xl:text-sm text-mist transition-colors hover:bg-white/5 hover:text-white"
                   >
                     {item.label}
                   </Link>

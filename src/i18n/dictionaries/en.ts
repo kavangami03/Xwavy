@@ -10,73 +10,34 @@
  * the twelve category names and live counters arrive from Wavy Solutions or
  * the database. The Arabic file (ar.ts) must mirror this shape exactly.
  */
-type Step<Visual> = { name: string; title: string; body: string; visual: Visual };
-
-/** The five platform steps. A tuple, because each step has its own visual. */
-export type ProcessSteps = [
-  Step<{ heading: string; items: string[]; saved: string; previewPublic: string; previewPaid: string }>,
-  Step<{ heading: string; outcomes: string[]; feedbackLabel: string; feedback: string }>,
-  Step<{ heading: string; filters: string[]; results: string }>,
-  Step<{ heading: string; firm: string; mandate: string; cheque: string; note: string }>,
-  Step<{ heading: string; accept: string; decline: string; revealed: string }>,
-];
+/** The five platform steps, in order (post, review, discover, request, connect). */
+type ProcessSteps = { name: string; title: string; body: string }[];
 
 const processSteps: ProcessSteps = [
   {
     name: "Post",
     title: "Write it up in five short steps.",
     body: "Basics, problem and solution, traction, the ask, and media. Every step saves as you go, and a live preview shows exactly what visitors and subscribers will see.",
-    visual: {
-      heading: "Add your idea",
-      items: ["Basics", "Problem & solution", "Traction", "The ask", "Media"],
-      saved: "Saved",
-      previewPublic: "Visitor view",
-      previewPaid: "Subscriber view",
-    },
   },
   {
     name: "Review",
     title: "A person reads every idea.",
     body: "Each submission is checked against our acceptable-use policy. The outcome is always clear: approved, changes requested with written feedback, or not accepted, and you can revise and resubmit.",
-    visual: {
-      heading: "Review outcome",
-      outcomes: ["Approve", "Request changes", "Reject"],
-      feedbackLabel: "Reviewer feedback",
-      feedback: "Strong problem statement. Add one line on current traction and resubmit.",
-    },
   },
   {
     name: "Discover",
     title: "Investors find you.",
     body: "Your summary goes live and becomes searchable. Investors browse by sector, stage and region. Subscribers see the full picture; nobody sees how to reach you.",
-    visual: {
-      heading: "Browse ideas",
-      filters: ["Sector", "Stage", "Region", "Keyword"],
-      results: "Published ideas",
-    },
   },
   {
     name: "Request",
     title: "An investor asks to meet.",
     body: "A subscribed investor sends an introduction request with a personal note. You see their firm, mandate and cheque size. Not their contact details, and never a cold email.",
-    visual: {
-      heading: "New introduction request",
-      firm: "Investor firm",
-      mandate: "Mandate: early-stage B2B software",
-      cheque: "Cheque size: $100K–$500K",
-      note: "We back founders automating back-office work. We'd like to learn more about your pilot customers.",
-    },
   },
   {
     name: "Connect",
     title: "Say yes, and you’re introduced.",
     body: "Accept, and both sides’ contact details are revealed at the same moment. Decline, and nothing is shared, ever. Unanswered requests simply expire.",
-    visual: {
-      heading: "Connection made",
-      accept: "Accept",
-      decline: "Decline",
-      revealed: "Contact details shared with both sides",
-    },
   },
 ];
 
@@ -92,19 +53,19 @@ const en = {
     skipToContent: "Skip to content",
     nav: {
       label: "Main",
+      browseIdeas: "Browse ideas",
       forInnovators: "For innovators",
       forInvestors: "For investors",
       howItWorks: "How it works",
       pricing: "Pricing",
       about: "About",
+      contact: "Contact",
     },
     signIn: "Sign in",
     postIdea: "Post your idea",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     language: "Language",
-    example: "Example",
-    locked: "Subscribers only",
   },
 
   footer: {
@@ -147,25 +108,25 @@ const en = {
   },
 
   home: {
-    /** Alt text for the story photographs (public/images/story). */
+    /** Alt text for the story photographs (public/images/people). */
     images: {
-      innovatorPortrait: "A founder at her desk in the evening, laptop open, city lights behind her",
-      investorPortrait: "An investor standing by his office window at dusk, tablet in hand",
-      step1: "The founder filling in a step-by-step form on her laptop at night",
-      step2: "A reviewer reading a submission carefully at her desk, notes beside her",
+      innovatorPortrait: "A founder at his desk in the evening, laptop open, city lights behind him",
+      investorPortrait: "An investor in a white kandura and ghutra standing by his office window at dusk, tablet in hand",
+      investorDesk: "An investor in a white kandura and ghutra at his desk by the window, pen in hand",
+      step1: "The founder filling in a step-by-step form on his laptop at night",
+      step2: "A reviewer at his desk reading a submission on screen, pen in hand",
       step3: "The investor browsing a grid of ideas on his tablet",
       step4: "The investor about to send an introduction request from his tablet",
-      step5: "The founder smiling at an accepted request on her phone",
+      step5: "The founder smiling at an accepted request on his phone",
       together: "The founder and the investor talking across a table after their introduction",
       unlock: "A tablet showing an idea in full detail: figures, team and documents",
-      team: "Three people reviewing ideas together around a table",
+      team: "Three colleagues reviewing an idea together around a table",
       meeting: "The founder and the investor in conversation on a terrace at golden hour",
     },
     hero: {
       eyebrow: "The innovator and investor marketplace",
-      /** Line two wraps the film between its words: "meet ◖film◗ investment." */
+      /** Rendered as one headline; "after" is the serif accent. */
       title: { line1: "Where ideas", before: "meet", after: "investment." },
-      scrollCue: "Scroll to watch it work",
       body: "Innovators publish what they’re building, free. Investors subscribe to see the full picture and ask for an introduction. Contact details move only when both sides say yes.",
       primaryCta: "Post your idea, free",
       secondaryCta: "I invest",
@@ -174,32 +135,13 @@ const en = {
         "Every idea reviewed by a person",
         "Contact shared only on mutual consent",
       ],
-      video: {
-        label:
-          "A founder publishes her idea; an investor finds it and requests an introduction; she accepts on her phone, and both are connected at the same moment.",
-        play: "Play video",
-        pause: "Pause video",
-      },
-      /** Cards that narrate the video, in sync with it (double opt-in). */
+      /** The double opt-in in four moments; the hero shows "requested" and "connected". */
       story: [
         { title: "Idea published", detail: "Reviewed, live, contact sealed" },
         { title: "Introduction requested", detail: "By a subscribed investor" },
         { title: "Request accepted", detail: "The innovator said yes" },
         { title: "Connected", detail: "Contact shared with both sides, at once" },
       ],
-      mockup: {
-        status: "Published",
-        sector: "Technology",
-        stage: "Pre-seed",
-        region: "GCC",
-        title: "Contract review assistant for small businesses",
-        pitch: "Reads commercial contracts, summarises the obligations and flags risky clauses before signing.",
-        askLabel: "Raising",
-        askBand: "$100K–$250K",
-        lockedTitle: "Unlocked with a subscription",
-        lockedItems: ["Full narrative", "Financials", "Traction", "Founder identity"],
-        requestIntro: "Request intro",
-      },
     },
 
     roles: {
@@ -254,8 +196,6 @@ const en = {
         "Unanswered requests expire and the investor’s request is credited back.",
         "Nobody can re-request their way past a decline.",
       ],
-      sealed: "Sealed",
-      revealed: "Revealed",
     },
 
     access: {
@@ -285,9 +225,6 @@ const en = {
       },
       note: "Cancel any time. Connections you’ve made and ideas you’ve saved stay with you.",
       cta: "See investor plans",
-      toggleLabel: "Compare access",
-      dragHint: "Drag to compare",
-      unlockedTitle: "Full picture unlocked",
     },
 
     trust: {
@@ -304,8 +241,8 @@ const en = {
           body: "Contact information is stored sealed and released only on mutual acceptance. It never appears on a public profile.",
         },
         {
-          title: "Verified investors",
-          body: "Our team verifies investors using company and identity documents. Reviews normally take two business days.",
+          title: "Optional investor verification",
+          body: "Investors can submit company and identity documents for a verified badge. Our team reviews them by hand, normally within two business days.",
         },
         {
           title: "Secure payments",
@@ -324,6 +261,8 @@ const en = {
 
     pricing: {
       eyebrow: "Pricing",
+      headingLead: "Free to post.",
+      headingAccent: "Subscribe to ask.",
       title: "Innovators are always free.",
       body: "No listing fees, no commission, no paywall on your side of the marketplace.",
       investorsTitle: "Investors choose a plan.",
@@ -398,3 +337,5 @@ const en = {
 
 export type Dictionary = typeof en;
 export default en;
+
+

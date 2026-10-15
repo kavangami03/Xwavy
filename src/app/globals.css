@@ -35,12 +35,10 @@
   --color-cyan-ink: #00737b; /* cyan text, icons and focus on light (5.6:1 on white) */
   --color-gold: #ffb547; /* capital: fills with abyss text (11.3:1), text on dark */
   --color-gold-ink: #8a5300; /* gold text on light (6.3:1 on white) */
-  --color-blue: #1f5bef; /* fills with white text (5.5:1), links on light */
 
   /* Light surfaces and text */
   --color-white: #ffffff;
   --color-surface: #f4f7fb; /* alternate light sections */
-  --color-frost: #e9eff7; /* tinted panels, chips */
   --color-line: #e3e9f2; /* hairlines and card borders (decorative) */
   --color-field: #7a869c; /* form control borders (3.7:1, meets 1.4.11) */
   --color-ink: #0b1220; /* headings (18.7:1) */
@@ -103,8 +101,8 @@
   /* --- Spacing ----------------------------------------------------------
      Tailwind's 0.25rem scale stays; these add named fluid steps. */
   --spacing-gutter: clamp(1rem, 0.5rem + 2.5vw, 4rem); /* 16px @320 → 64px */
-  --spacing-section: clamp(4.5rem, 3rem + 6vw, 8.5rem); /* 72 → 136px */
-  --spacing-section-sm: clamp(3rem, 2.25rem + 3vw, 5rem); /* 48 → 80px */
+  --spacing-section: clamp(3.5rem, 2.75rem + 3.5vw, 6rem); /* 56 → 96px */
+  --spacing-section-sm: clamp(2.5rem, 2rem + 2vw, 4rem); /* 40 → 64px */
   --spacing-header: 4.5rem; /* 72px fixed navigation */
 
   /* --- Containers ------------------------------------------------------- */
@@ -113,15 +111,11 @@
 
   /* --- Radii ------------------------------------------------------------
      Buttons and chips are pills (rounded-full); these cover everything else. */
-  --radius-sm: 0.5rem; /* 8px  — tags, small controls */
   --radius-md: 0.75rem; /* 12px — inputs, small cards */
-  --radius-lg: 1rem; /* 16px — cards */
   --radius-xl: 1.5rem; /* 24px — feature panels, media */
 
   /* --- Shadows (ocean-tinted, never pure black) ------------------------- */
-  --shadow-xs: 0 1px 2px rgb(11 20 40 / 0.06);
   --shadow-card: 0 1px 2px rgb(11 20 40 / 0.04), 0 8px 24px -8px rgb(11 20 40 / 0.1);
-  --shadow-card-hover: 0 2px 4px rgb(11 20 40 / 0.05), 0 24px 48px -16px rgb(11 20 40 / 0.2);
   --shadow-elevated: 0 32px 80px -24px rgb(11 20 40 / 0.35);
 
   /* --- Motion ----------------------------------------------------------- */
@@ -139,13 +133,7 @@
   --duration-slow: 450ms;
 
   /* Z-index scale. Use the z-* utilities below rather than raw numbers. */
-  --z-base: 0;
-  --z-raised: 10;
-  --z-dropdown: 30;
   --z-header: 40;
-  --z-overlay: 50;
-  --z-modal: 60;
-  --z-toast: 70;
   --z-skip-link: 100;
 
   /* Focus ring for light surfaces; dark surface utilities swap it to cyan. */
@@ -158,26 +146,8 @@
    Utilities
    ========================================================================== */
 
-@utility z-base {
-  z-index: var(--z-base);
-}
-@utility z-raised {
-  z-index: var(--z-raised);
-}
-@utility z-dropdown {
-  z-index: var(--z-dropdown);
-}
 @utility z-header {
   z-index: var(--z-header);
-}
-@utility z-overlay {
-  z-index: var(--z-overlay);
-}
-@utility z-modal {
-  z-index: var(--z-modal);
-}
-@utility z-toast {
-  z-index: var(--z-toast);
 }
 @utility z-skip-link {
   z-index: var(--z-skip-link);
@@ -202,6 +172,13 @@
   margin-inline: var(--panel-inset);
   border-radius: var(--panel-radius);
   overflow: clip;
+}
+
+/* Two panels in a row keep a gap, so their rounded edges never fuse. */
+@layer utilities {
+  .panel + .panel {
+    margin-top: var(--panel-inset);
+  }
 }
 
 /* Accent word in a two-tone headline: serif italic, solid colour. */
@@ -263,6 +240,40 @@
   ::selection {
     background-color: rgb(0 225 234 / 0.3);
     color: var(--color-ink);
+  }
+
+  /* Form inputs ensure dark readable text on light fields, and white on dark surfaces */
+  input,
+  textarea,
+  select {
+    color: var(--color-ink);
+    caret-color: var(--color-cyan-ink);
+  }
+
+  .surface-abyss input,
+  .surface-abyss textarea,
+  .surface-abyss select,
+  .surface-navy input,
+  .surface-navy textarea,
+  .surface-navy select {
+    color: #ffffff;
+    caret-color: var(--color-cyan);
+  }
+
+  input.bg-white,
+  textarea.bg-white,
+  .bg-white input,
+  .bg-white textarea,
+  .bg-surface input,
+  .bg-surface textarea {
+    color: #0b1220 !important;
+    caret-color: #00737b !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-muted);
+    opacity: 0.8;
   }
 
   :focus-visible {

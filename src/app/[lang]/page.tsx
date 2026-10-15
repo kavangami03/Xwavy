@@ -1,11 +1,10 @@
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { localeHref, portalHref } from "@/lib/href";
-import { Access } from "@/sections/home/Access";
 import { Consent } from "@/sections/home/Consent";
 import { Faq } from "@/sections/home/Faq";
 import { FinalCta } from "@/sections/home/FinalCta";
 import { Hero } from "@/sections/home/Hero";
-import { PricingBand } from "@/sections/home/PricingBand";
+import { Plans } from "@/sections/home/Plans";
 import { Process } from "@/sections/home/Process";
 import { Roles } from "@/sections/home/Roles";
 import { Trust } from "@/sections/home/Trust";
@@ -34,10 +33,9 @@ export default async function HomePage() {
         investorHref={localeHref(locale, "/for-investors")}
       />
       <Process t={home.process} alts={home.images} />
-      <Consent t={home.consent} alt={home.images.together} />
-      <Access t={home.access} card={home.hero.mockup} alt={home.images.unlock} pricingHref={pricingHref} />
-      <Trust t={home.trust} alt={home.images.team} />
-      <PricingBand t={home.pricing} pricingHref={pricingHref} />
+      <Consent t={home.consent} />
+      <Plans pricing={home.pricing} access={home.access} photoAlt={home.images.together} pricingHref={pricingHref} />
+      <Trust t={home.trust} />
       <Faq t={home.faq} />
       <FinalCta
         t={home.finalCta}

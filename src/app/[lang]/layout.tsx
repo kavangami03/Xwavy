@@ -95,13 +95,6 @@ export async function generateMetadata(): Promise<Metadata> {
       description: dict.meta.description,
     },
     twitter: { card: "summary", title: dict.meta.title, description: dict.meta.description },
-    icons: {
-      icon: [
-        { url: "/favicon.ico", sizes: "any" },
-        { url: "/icon.png", type: "image/png", sizes: "512x512" },
-      ],
-      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    },
   };
 }
 
@@ -117,11 +110,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const dict = await getDictionary();
 
   return (
-    <html lang={locale} dir={localeMeta[locale].dir} className={fontVariables} suppressHydrationWarning>
-      <head>
-        {/* Marks JS as available before first paint (see [data-intro] in globals.css). */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
+    <html lang={locale} dir={localeMeta[locale].dir} className={`${fontVariables} js notranslate`} translate="no" suppressHydrationWarning>
       <body>
         <a
           href="#main"

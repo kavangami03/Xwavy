@@ -17,7 +17,7 @@ export const DURATION = {
   fast: 0.15,
   base: 0.25,
   slow: 0.45,
-  reveal: 0.8,
+  reveal: 0.9,
 } as const;
 
 export const EASE = {
@@ -28,8 +28,8 @@ export const EASE = {
 } as const;
 
 export const REVEAL = {
-  y: 24,
-  stagger: 0.08,
-  /** ScrollTrigger start: element top reaches 85% of the viewport height. */
-  start: "top 85%",
+  y: 44,
+  stagger: 0.1,
+  /** ScrollTrigger start: element top reaches 88% of the viewport height. */
+  start: "top 88%",
 } as const;

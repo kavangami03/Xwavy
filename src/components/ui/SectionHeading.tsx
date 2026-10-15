@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Reveal } from "@/components/animation/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/cn";
 
@@ -51,7 +52,7 @@ export function SectionHeading({
   const centered = align === "center";
 
   return (
-    <div className={cn("flex max-w-3xl flex-col gap-5", centered && "mx-auto items-center text-center", className)}>
+    <Reveal stagger className={cn("flex max-w-3xl flex-col gap-4", centered && "mx-auto items-center text-center", className)}>
       {eyebrow ? (
         <Eyebrow number={number} tone={tone}>
           {eyebrow}
@@ -67,6 +68,6 @@ export function SectionHeading({
         ) : null}
       </Heading>
       {description ? <p className={cn("max-w-prose text-lead", colors.description)}>{description}</p> : null}
-    </div>
+    </Reveal>
   );
 }

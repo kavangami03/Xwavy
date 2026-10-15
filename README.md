@@ -5,7 +5,8 @@ marketplace where innovators post ideas free and investors subscribe to see the
 full picture and request introductions (double opt-in).
 
 **Scope: website only.** The portal (sign-up, dashboards, admin, payments) is a
-separate product. This site links into it through `PORTAL_URL` (see below).
+separate product. This site links into it through `portalLinks` in
+`src/config/site.ts`.
 
 Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, GSAP +
 ScrollTrigger + SplitText, Lenis and Framer Motion. Arabic and English with
@@ -23,21 +24,34 @@ full RTL.
 
 ## Environment
 
-| Variable     | Purpose                                                                    |
-| ------------ | -------------------------------------------------------------------------- |
-| `SITE_URL`   | Production origin; enables absolute canonical/hreflang URLs (`metadataBase`). |
-| `PORTAL_URL` | Portal origin, e.g. `https://app.xwavy.com`. Sign in / sign up / browse ideas link there. Unset = local paths (404 until the portal exists). |
+| Variable   | Purpose                                                                       |
+| ---------- | ----------------------------------------------------------------------------- |
+| `SITE_URL` | Production origin; enables absolute canonical/hreflang URLs (`metadataBase`). |
+
+Portal addresses (sign in, sign up, idea directory) are set in
+`src/config/site.ts`. They point at the current xwavy.com until the new
+portal's addresses are confirmed.
+
+## Pages
+
+`/en/...` and `/ar/...` for each of: home, how-it-works, for-innovators,
+for-investors, pricing, about, contact, ideas, legal and `legal/[slug]`
+(terms, privacy, cookies, acceptable-use, no-advice-disclaimer). Short legal
+URLs (`/en/terms` …) and the old sign-in/sign-up paths are redirects in
+`next.config.ts`.
 
 ## Languages
 
 - Every page lives under `src/app/[lang]/` and is served at `/en/...` and `/ar/...`.
 - `src/proxy.ts` redirects un-prefixed URLs: saved choice (cookie) → Saudi
   visitors to Arabic (hosting geo header) → browser language → English.
-- Copy lives in `src/i18n/dictionaries/en.ts` (source of truth) and `ar.ts`.
-  `ar.ts` is typed against English, so a missing key fails the type check.
-  **The Arabic is a draft** pending Wavy Solutions' approval.
-- Server components read the locale with `getLocale()` / `getDictionary()`
-  (`next/root-params`); no prop drilling needed below the page.
+- Shared copy (header, footer, home) lives in `src/i18n/dictionaries/en.ts`
+  and `ar.ts`. Each inner page has its own copy file in `src/i18n/pages/`
+  exporting `{ en, ar }`, read with `pageCopy(copy)`.
+- Arabic is always typed against English (`Dictionary` / `typeof en`), so a
+  missing key fails the type check. **The Arabic and the legal texts are
+  drafts** pending Wavy Solutions' approval and legal review.
+- Keep "Xwavy" and "Wavy Solutions" in Latin script in Arabic copy.
 - Use logical utilities (`ps-`, `pe-`, `ms-`, `inset-s-`, `border-s`, `text-start`)
   and add `rtl:-scale-x-100` to directional icons.
 
@@ -45,55 +59,67 @@ full RTL.
 
 ```
 src/
-  app/[lang]/        root layout (fonts, metadata, providers, header/footer), pages
+  app/[lang]/        root layout (fonts, metadata, providers, header/footer) and pages
   app/globals.css    design tokens and base styles
+  app/*.png|ico      favicon, app icon and Apple touch icon (Next file conventions)
   proxy.ts           locale redirect
-  i18n/              locale config, dictionaries (en, ar), getDictionary
+  i18n/              locale config, dictionaries (en, ar), per-page copy (pages/)
   components/
-    animation/       SmoothScrollProvider (Lenis), MotionProvider, Reveal, IntroAnimation
+    animation/       SmoothScrollProvider (Lenis), MotionProvider, Reveal
     layout/          Container (1920px cap), Section, SiteFooter
     navigation/      SiteHeader, MobileMenu, LanguageSwitcher
-    mockups/         product UI fragments drawn in HTML (decorative)
+    sections/        shared page sections: PageHero, CardGrid, StepRow,
+                     SplitFeature, CompareTable, DetailTable, Statement,
+                     FaqSection, CtaPanel
     ui/              Button, Eyebrow, SectionHeading
-  sections/home/     homepage sections
+  sections/          page-specific sections (home, pricing, contact, legal)
   config/site.ts     name, email, logo, portal links
-  lib/               gsap (single import point), motion constants, href helpers, cn
-public/videos/      hero loop (WebM + MP4, muted, seamless 9.5s) and its poster
+  lib/               gsap (single import point), motion constants, href and
+                     metadata helpers, cn
+public/
+  brand/             logo
+  images/people/     all photography (male Emirati cast)
 docs/
-  client/                  Scope of Work (text) and clarifications letter
-  old-site-dummy-content/  text of the old xwavy.com; confirmed dummy, do not reuse
+  client/            Scope of Work (original .docx and text) and clarifications letter
+  image-prompts.md   prompts used to generate the photography
 ```
 
-## Design system ("Deep Current")
+## Design system
 
 - **Colours (solid only, no gradients):** abyss/navy dark surfaces, wave cyan
-  (matches the logo), capital gold (investor actions), electric blue. Use
-  `cyan-ink` / `gold-ink` for text on light backgrounds.
+  (matches the logo, innovator actions) and capital gold (investor actions).
+  Use `cyan-ink` / `gold-ink` for text on light backgrounds.
 - **Type:** Bricolage Grotesque headlines with an Instrument Serif italic
   accent word (`.accent`), Geist text, Geist Mono labels. Arabic falls through
   to Alexandria and IBM Plex Sans Arabic automatically.
-- **House style:** soft tinted page, dark sections as inset rounded panels
-  (`.panel`), eyebrows with a leading rule (`Eyebrow`), pill buttons with an
-  arrow chip (`<Button arrow>`), floating dark header.
+- **House style:** soft tinted page, sections as inset rounded panels
+  (`.panel`, with a gap between neighbours), eyebrows with a leading rule
+  (`Eyebrow`), pill buttons with an arrow chip (`<Button arrow>`), floating
+  dark header.
 - **Container:** content max 1920px with fluid 16–64px gutters.
 
 ## Animation
 
-- GSAP owns scroll choreography; Framer Motion owns local UI state (menu,
-  accordion). Never both on one property of one element.
-- Import from `@/lib/gsap`; animate in `useGSAP({ scope })`; gate motion with
-  `gsap.matchMedia()` and `MEDIA.motionOk`.
-- Load reveals: mark elements `data-intro` inside `IntroAnimation`; CSS hides
-  them before hydration (no flash) with a 2.5s safety fallback.
+Simple and calm by design: entrances only, plus a gentle photo drift.
+
+- `Reveal` (scroll-triggered, once): `stagger` for lists and grids,
+  `variant="image"` for photos (soft wipe, settle, slight drift).
+  `SectionHeading` animates itself.
+- Heroes animate on load; elements marked `data-intro` are hidden by CSS
+  before hydration (no flash) with a 2.5s safety fallback.
+- Transform, opacity and clip only. GSAP owns scroll animation; Framer Motion
+  owns local UI state (menu, accordion). Import from `@/lib/gsap`, animate in
+  `useGSAP({ scope })` and gate with `gsap.matchMedia()` + `MEDIA.motionOk`.
 - Lenis runs on the GSAP ticker; `useLenis()` to stop/start (the mobile menu does).
-- Reduced motion: no pinning, no reveals, native-feel scrolling, CSS
-  transitions neutralised.
+- Reduced motion: no animation, native-feel scrolling.
 
 ## Content rules
 
-- Copy comes from the client documents in `docs/client/`. The old site's
+- Copy comes from the client documents in `docs/client/`. The old xwavy.com
   content is dummy data (clarifications §6.1): no figures, people,
   testimonials or listings from it.
-- Do not invent statistics, prices, testimonials or category names. Plan
-  prices and the twelve categories are pending from Wavy Solutions; live
-  counters and featured ideas need real platform data.
+- Do not invent statistics, prices, testimonials, team members or category
+  names. Plan prices, quotas and the twelve categories are pending from Wavy
+  Solutions; live counters and featured ideas need real platform data.
+- Don't name the payment provider or claim certifications; figures supplied by
+  innovators are "as reported by the innovator".
