@@ -10,6 +10,7 @@ import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import accessCopy from "@/i18n/pages/access";
 import copy from "@/i18n/pages/pricing";
+import imagesCopy from "@/i18n/pages/images";
 import { portalHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 import { PlanCards } from "@/sections/pricing/PlanCards";
@@ -30,6 +31,7 @@ export default async function PricingPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
   const access = await pageCopy(accessCopy);
+  const alt = await pageCopy(imagesCopy);
   const signUp = portalHref(locale, "signUpInnovator");
   const browse = portalHref(locale, "browseIdeas");
 
@@ -46,7 +48,7 @@ export default async function PricingPage() {
           { label: t.hero.secondary, href: browse, variant: "accent" },
         ]}
         points={t.hero.points}
-        image={{ src: "/images/people/together.webp", alt: t.hero.imageAlt, position: "object-[46%_center]" }}
+        image={{ src: "/images/site/pr-hero.webp", alt: alt.prHero }}
       />
 
       <PlanCards t={t.plans} hrefs={[signUp, browse, browse]} />
@@ -69,10 +71,11 @@ export default async function PricingPage() {
         titleAccent={t.billing.titleAccent}
         columns={4}
         tone="surface"
+        image={{ src: "/images/site/pr-billing.webp", alt: alt.prBilling }}
         cards={t.billing.cards.map((card, i) => ({ ...card, Icon: BILLING_ICONS[i] }))}
       />
 
-      <Statement eyebrow={t.band.eyebrow} parts={t.band.parts} tone="dark" />
+      <Statement eyebrow={t.band.eyebrow} parts={t.band.parts} tone="dark" background="/images/site/pr-band-bg.webp" />
 
       <FaqSection id="pr-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
 

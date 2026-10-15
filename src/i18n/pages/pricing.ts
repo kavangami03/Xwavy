@@ -20,7 +20,6 @@ const en = {
     primary: "Post your idea, free",
     secondary: "Browse ideas",
     points: ["No listing fees", "No commission", "Cancel any time"],
-    imageAlt: "The founder and the investor talking across a table after their introduction",
   },
   plans: {
     eyebrow: "Plans",
@@ -162,7 +161,6 @@ const ar: typeof en = {
     primary: "انشر فكرتك مجانًا",
     secondary: "تصفّح الأفكار",
     points: ["بلا رسوم إدراج", "بلا عمولات", "ألغِ في أي وقت"],
-    imageAlt: "المؤسس والمستثمر يتحدثان حول طاولة بعد التعارف",
   },
   plans: {
     eyebrow: "الباقات",

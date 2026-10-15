@@ -8,6 +8,8 @@ import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
+import { pageCopy } from "@/i18n/page-copy";
+import imagesCopy from "@/i18n/pages/images";
 import { cn } from "@/lib/cn";
 import { localeHref, portalHref } from "@/lib/href";
 
@@ -21,7 +23,8 @@ const YEAR = 2026;
  * one large action tile per side of the marketplace), then the brand, contact
  * and link columns, then the legal line.
  */
-export function SiteFooter({ locale, dict }: SiteFooterProps) {
+export async function SiteFooter({ locale, dict }: SiteFooterProps) {
+  const alt = await pageCopy(imagesCopy);
   const t = dict.footer;
   const cta = dict.home.finalCta;
 
@@ -55,8 +58,8 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
         <div className="grid gap-4 lg:grid-cols-12">
           <div className="relative flex min-h-80 flex-col justify-end overflow-hidden rounded-3xl bg-navy p-6 sm:p-8 lg:col-span-6 lg:row-span-2">
             <Image
-              src="/images/people/the-meeting.webp"
-              alt={dict.home.images.meeting}
+              src="/images/site/footer-closing.webp"
+              alt={alt.footer}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover object-[70%_center]"

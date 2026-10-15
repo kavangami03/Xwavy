@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Clock, Lock, RotateCcw, Ticket, X } from "lucide-react";
+import Image from "next/image";
 import { useId, useState } from "react";
 
 import { Container } from "@/components/layout/Container";
@@ -10,7 +11,7 @@ import type copy from "@/i18n/pages/how-it-works";
 import { cn } from "@/lib/cn";
 import { DURATION, EASE } from "@/lib/motion";
 
-type OutcomeSwitchProps = { t: (typeof copy)["en"]["simulator"] };
+type OutcomeSwitchProps = { t: (typeof copy)["en"]["simulator"]; photo: { src: string; alt: string } };
 
 type Outcome = "accept" | "decline" | "silence";
 
@@ -19,7 +20,7 @@ type Outcome = "accept" | "decline" | "silence";
  * does and see exactly what happens to contact details and to the investor's
  * quota. A real control (tabs), not decoration.
  */
-export function OutcomeSwitch({ t }: OutcomeSwitchProps) {
+export function OutcomeSwitch({ t, photo }: OutcomeSwitchProps) {
   const [outcome, setOutcome] = useState<Outcome>("accept");
   const tabsId = useId();
 
@@ -39,6 +40,9 @@ export function OutcomeSwitch({ t }: OutcomeSwitchProps) {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="flex flex-col gap-6 lg:col-span-5">
             <SectionHeading id="hiw-optin" eyebrow={t.eyebrow} title={t.titleLead} accent={t.titleAccent} description={t.body} tone="dark" />
+            <div className="relative hidden aspect-4/3 overflow-hidden rounded-3xl bg-navy lg:block">
+              <Image src={photo.src} alt={photo.alt} fill sizes="35vw" className="object-cover" />
+            </div>
           </div>
 
           <div className="flex flex-col gap-5 lg:col-span-7">

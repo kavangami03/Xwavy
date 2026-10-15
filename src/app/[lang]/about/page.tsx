@@ -8,6 +8,7 @@ import { Statement } from "@/components/sections/Statement";
 import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import copy from "@/i18n/pages/about";
+import imagesCopy from "@/i18n/pages/images";
 import { portalHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -22,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
+  const alt = await pageCopy(imagesCopy);
   const signUp = portalHref(locale, "signUpInnovator");
   const browse = portalHref(locale, "browseIdeas");
 
@@ -37,10 +39,10 @@ export default async function AboutPage() {
           { label: t.hero.primary, href: signUp, variant: "primary" },
           { label: t.hero.secondary, href: browse, variant: "accent" },
         ]}
-        image={{ src: "/images/people/about-majlis.webp", alt: t.hero.imageAlt, position: "object-[62%_center]" }}
+        image={{ src: "/images/site/ab-hero.webp", alt: alt.abHero }}
       />
 
-      <Statement eyebrow={t.story.eyebrow} parts={t.story.parts} />
+      <Statement eyebrow={t.story.eyebrow} parts={t.story.parts} background="/images/site/ab-story-bg.webp" />
 
       <SplitFeature
         id="ab-mission"
@@ -53,7 +55,7 @@ export default async function AboutPage() {
           { title: t.mission.innovatorsTitle, items: t.mission.innovators },
           { title: t.mission.investorsTitle, items: t.mission.investors, tone: "hidden" },
         ]}
-        image={{ src: "/images/people/team-night.webp", alt: t.mission.imageAlt }}
+        image={{ src: "/images/site/ab-mission.webp", alt: alt.abMission }}
       />
 
       <CardGrid
@@ -65,7 +67,7 @@ export default async function AboutPage() {
         cards={t.principles.cards.map((card, i) => ({ ...card, Icon: PRINCIPLE_ICONS[i] }))}
       />
 
-      <Statement eyebrow={t.operator.eyebrow} parts={t.operator.parts} footnote={t.operator.footnote} tone="dark" />
+      <Statement eyebrow={t.operator.eyebrow} parts={t.operator.parts} footnote={t.operator.footnote} tone="dark" background="/images/site/ab-operator-bg.webp" />
 
     </>
   );

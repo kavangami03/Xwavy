@@ -7,7 +7,7 @@ type ContainerElement = "div" | "section" | "header" | "footer" | "nav" | "main"
 type ContainerProps<T extends ContainerElement> = {
   as?: T;
   /**
-   * `site` (default) caps content at 1920px. `prose` caps it at a readable
+   * `site` (default) caps content at 1520px, and at 90% of the width from 1600px. `prose` caps it at a readable
    * line length for long-form text such as legal pages.
    */
   width?: "site" | "prose";

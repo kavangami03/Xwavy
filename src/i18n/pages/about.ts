@@ -18,7 +18,6 @@ const en = {
     body: "Innovators and investors still find each other through luck and warm introductions. Xwavy gives both sides one place to meet, on terms both of them agree to.",
     primary: "Post your idea, free",
     secondary: "Browse ideas",
-    imageAlt: "A host pouring Arabic coffee for a guest in a modern majlis-style lounge at dusk",
   },
   story: {
     eyebrow: "Our story",
@@ -37,7 +36,6 @@ const en = {
     innovators: ["Free posting and basic stats", "A person reviewing every idea", "Control over who reaches them"],
     investorsTitle: "Investors get",
     investors: ["The full picture on every idea", "Advanced filters and export", "Warm, consented introductions"],
-    imageAlt: "Four colleagues reviewing ideas together on their laptops at night",
   },
   principles: {
     eyebrow: "What we stand for",
@@ -83,7 +81,6 @@ const ar: typeof en = {
     body: "ما زال المبتكرون والمستثمرون يلتقون بالصدفة أو عبر المعارف المشتركة. وتمنح Xwavy الطرفين مكانًا واحدًا للقاء، وبشروط يتفق عليها كلاهما.",
     primary: "انشر فكرتك مجانًا",
     secondary: "تصفّح الأفكار",
-    imageAlt: "مضيف يصب القهوة العربية لضيفه في مجلس عصري عند الغسق",
   },
   story: {
     eyebrow: "قصتنا",
@@ -102,7 +99,6 @@ const ar: typeof en = {
     innovators: ["نشر مجاني وإحصاءات أساسية", "شخص من فريقنا يراجع كل فكرة", "التحكم في من يصل إليهم"],
     investorsTitle: "ما يحصل عليه المستثمرون",
     investors: ["الصورة الكاملة لكل فكرة", "فلاتر متقدمة وتصدير", "تعارف مباشر بموافقة الطرفين"],
-    imageAlt: "أربعة زملاء يراجعون الأفكار معًا على حواسيبهم ليلًا",
   },
   principles: {
     eyebrow: "ما نلتزم به",

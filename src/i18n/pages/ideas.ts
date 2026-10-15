@@ -20,7 +20,6 @@ const en = {
     primary: "Open the directory",
     secondary: "How it works",
     points: ["Reviewed by a person before publishing", "Filter by sector, stage, region and keyword", "Contact details never public"],
-    imageAlt: "The investor browsing a grid of ideas on his tablet",
   },
   layers: {
     eyebrow: "What you’ll see",
@@ -88,7 +87,6 @@ const ar: typeof en = {
     primary: "افتح الدليل",
     secondary: "كيف تعمل المنصة",
     points: ["يراجعها شخص من فريقنا قبل النشر", "التصفية حسب القطاع والمرحلة والمنطقة والكلمات المفتاحية", "بيانات التواصل ليست عامة أبدًا"],
-    imageAlt: "المستثمر يتصفح مجموعة من الأفكار على جهازه اللوحي",
   },
   layers: {
     eyebrow: "ما ستراه",

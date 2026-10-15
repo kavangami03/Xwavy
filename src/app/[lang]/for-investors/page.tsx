@@ -11,14 +11,15 @@ import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import accessCopy from "@/i18n/pages/access";
 import copy from "@/i18n/pages/for-investors";
+import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 
 const STEP_PHOTOS = [
-  "/images/people/step-3-discover.webp",
-  "/images/people/investor-window.webp",
-  "/images/people/investor-unlock.webp",
-  "/images/people/step-4-request.webp",
+  "/images/site/fv-step-browse.webp",
+  "/images/site/fv-step-mandate.webp",
+  "/images/site/fv-step-subscribe.webp",
+  "/images/site/fv-step-request.webp",
 ] as const;
 const STEP_ICONS = [Search, FileText, LockOpen, Send] as const;
 const RULE_ICONS = [Ticket, RotateCcw, Ban, BadgeCheck] as const;
@@ -37,6 +38,8 @@ export default async function ForInvestorsPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
   const access = await pageCopy(accessCopy);
+  const alt = await pageCopy(imagesCopy);
+  const stepAlts = [alt.fvBrowse, alt.fvMandate, alt.fvSubscribe, alt.fvRequest];
   const browse = portalHref(locale, "browseIdeas");
   const pricing = localeHref(locale, "/pricing");
 
@@ -53,7 +56,7 @@ export default async function ForInvestorsPage() {
           { label: t.hero.secondary, href: pricing, variant: "outline-inverse" },
         ]}
         points={t.hero.points}
-        image={{ src: "/images/people/investor-portrait.webp", alt: t.hero.imageAlt, position: "object-[50%_20%]" }}
+        image={{ src: "/images/site/fv-hero.webp", alt: alt.fvHero, position: "object-[50%_30%]" }}
       />
 
       <StepStory
@@ -64,7 +67,7 @@ export default async function ForInvestorsPage() {
         labels={{ step: t.steps.stepLabel, of: t.steps.of, play: t.steps.play, pause: t.steps.pause }}
         steps={t.steps.items.map((step, i) => ({
           ...step,
-          image: { src: STEP_PHOTOS[i] ?? STEP_PHOTOS[0], alt: step.imageAlt },
+          image: { src: STEP_PHOTOS[i] ?? STEP_PHOTOS[0], alt: stepAlts[i] ?? "" },
           icon: (() => {
             const Icon = STEP_ICONS[i] ?? Search;
             return <Icon aria-hidden className="size-5" />;
@@ -80,6 +83,7 @@ export default async function ForInvestorsPage() {
         description={t.compare.description}
         labels={access}
         rows={access.rows}
+        texture="/images/site/fv-compare-texture.webp"
         action={{ label: t.compare.cta, href: pricing }}
       />
 
@@ -104,7 +108,7 @@ export default async function ForInvestorsPage() {
           { title: t.cancel.keepTitle, items: t.cancel.keep },
           { title: t.cancel.lockTitle, items: t.cancel.lock, tone: "hidden" },
         ]}
-        image={{ src: "/images/people/together.webp", alt: t.cancel.imageAlt, position: "object-[46%_center]" }}
+        image={{ src: "/images/site/fv-cancel.webp", alt: alt.fvCancel }}
       />
 
       <FaqSection id="fv-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} tone="white" />

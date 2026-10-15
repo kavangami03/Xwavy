@@ -6,11 +6,13 @@ import { Reveal } from "@/components/animation/Reveal";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { Dictionary } from "@/i18n/get-dictionary";
+import type imagesCopy from "@/i18n/pages/images";
+
 import { cn } from "@/lib/cn";
 
 type RolesProps = {
   t: Dictionary["home"]["roles"];
-  alts: Dictionary["home"]["images"];
+  alts: (typeof imagesCopy)["en"];
   innovatorHref: string;
   investorHref: string;
 };
@@ -23,7 +25,7 @@ export function Roles({ t, alts, innovatorHref, investorHref }: RolesProps) {
       data: t.innovators,
       href: innovatorHref,
       Icon: Lightbulb,
-      image: { src: "/images/people/contact-desk.webp", alt: alts.step1, position: "object-[30%_center]" },
+      image: { src: "/images/site/home-roles-innovator.webp", alt: alts.homeRolesInnovator, position: "object-[60%_center]" },
       dark: false,
     },
     {
@@ -31,7 +33,7 @@ export function Roles({ t, alts, innovatorHref, investorHref }: RolesProps) {
       data: t.investors,
       href: investorHref,
       Icon: TrendingUp,
-      image: { src: "/images/people/investor-window.webp", alt: alts.investorDesk, position: "object-[35%_center]" },
+      image: { src: "/images/people/investor-window.webp", alt: alts.homeRolesInvestor, position: "object-[35%_center]" },
       dark: true,
     },
   ] as const;

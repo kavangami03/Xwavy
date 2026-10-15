@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 
 import { Container } from "@/components/layout/Container";
@@ -13,6 +14,8 @@ type StatementProps = {
   parts: readonly { text: string; accent?: boolean }[];
   footnote?: string;
   tone?: "light" | "dark";
+  /** Decorative photograph behind the statement, shown dimmed. */
+  background?: string;
 };
 
 /**
@@ -20,7 +23,7 @@ type StatementProps = {
  * in reading order (opacity only, scrubbed), with an oversized quote mark and
  * a hairline that draws beside it. Reduced motion shows it fully lit.
  */
-export function Statement({ eyebrow, parts, footnote, tone = "light" }: StatementProps) {
+export function Statement({ eyebrow, parts, footnote, tone = "light", background }: StatementProps) {
   const root = useRef<HTMLElement>(null);
   const dark = tone === "dark";
 
@@ -62,8 +65,11 @@ export function Statement({ eyebrow, parts, footnote, tone = "light" }: Statemen
   );
 
   return (
-    <section ref={root} className={cn("panel py-section", dark ? "surface-abyss" : "bg-white")}>
-      <Container>
+    <section ref={root} className={cn("panel relative py-section", dark ? "surface-abyss" : "bg-white")}>
+      {background ? (
+        <Image src={background} alt="" aria-hidden fill sizes="100vw" className={cn("object-cover", dark ? "opacity-25" : "opacity-20")} />
+      ) : null}
+      <Container className="relative">
         <div className="relative grid gap-8 lg:grid-cols-[auto_1fr] lg:gap-14">
           <div className="flex items-start gap-5 lg:flex-col lg:items-center">
             <span aria-hidden className={cn("font-serif text-[6rem] leading-[0.7] italic", dark ? "text-cyan" : "text-cyan-ink")}>

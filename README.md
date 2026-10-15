@@ -66,7 +66,7 @@ src/
   i18n/              locale config, dictionaries (en, ar), per-page copy (pages/)
   components/
     animation/       SmoothScrollProvider (Lenis), MotionProvider, Reveal
-    layout/          Container (1920px cap), Section, SiteFooter
+    layout/          Container (1520px cap, 90% from 1600px), Section, SiteFooter
     navigation/      SiteHeader, MobileMenu, LanguageSwitcher
     sections/        shared page sections: PageHero, CardGrid, StepRow,
                      SplitFeature, CompareTable, DetailTable, Statement,
@@ -81,7 +81,7 @@ public/
   images/people/     all photography (male Emirati cast)
 docs/
   client/            Scope of Work (original .docx and text) and clarifications letter
-  image-prompts.md   prompts used to generate the photography
+  image-brief.md     prompts and placement for every photograph (v2)
 ```
 
 ## Design system
@@ -96,7 +96,7 @@ docs/
   (`.panel`, with a gap between neighbours), eyebrows with a leading rule
   (`Eyebrow`), pill buttons with an arrow chip (`<Button arrow>`), floating
   dark header.
-- **Container:** content max 1920px with fluid 16–64px gutters.
+- **Container:** content max 1520px (90% of the width from 1600px) with fluid 16–64px gutters.
 
 ## Animation
 

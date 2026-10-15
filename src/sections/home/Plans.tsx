@@ -49,7 +49,7 @@ export function Plans({ pricing, access, photoAlt, pricingHref }: PlansProps) {
             ))}
           </ul>
           <Reveal variant="image" className="relative min-h-48 flex-1 overflow-hidden rounded-xl bg-navy">
-            <Image src="/images/people/together.webp" alt={photoAlt} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" />
+            <Image src="/images/site/home-plans.webp" alt={photoAlt} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" />
           </Reveal>
         </article>
 

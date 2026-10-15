@@ -1,9 +1,11 @@
 import { Check, Lock, Minus } from "lucide-react";
+import Image from "next/image";
 
 import { Reveal } from "@/components/animation/Reveal";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { cn } from "@/lib/cn";
 
 type CompareTableProps = {
   id: string;
@@ -15,16 +17,23 @@ type CompareTableProps = {
   rows: readonly { label: string; free: boolean }[];
   action?: { label: string; href: string };
   tone?: "white" | "surface";
+  /** Decorative texture behind the top of the section, shown faintly. */
+  texture?: string;
 };
 
 /**
  * The free-against-paid comparison as one table: a row per feature, a Free
  * column and a highlighted Subscriber column. Rows rise in one after another.
  */
-export function CompareTable({ id, eyebrow, titleLead, titleAccent, description, labels, rows, action, tone = "surface" }: CompareTableProps) {
+export function CompareTable({ id, eyebrow, titleLead, titleAccent, description, labels, rows, action, tone = "surface", texture }: CompareTableProps) {
   return (
-    <Section tone={tone} className={tone === "white" ? "panel" : undefined} aria-labelledby={id}>
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <Section tone={tone} className={cn("relative overflow-hidden", tone === "white" && "panel")} aria-labelledby={id}>
+      {texture ? (
+        <span aria-hidden className="absolute inset-x-0 top-0 h-[28rem]">
+          <Image src={texture} alt="" fill sizes="100vw" className="object-cover opacity-30" />
+        </span>
+      ) : null}
+      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} />
         {action ? (
           <Button href={action.href} variant="accent" arrow className="w-fit shrink-0">
@@ -33,7 +42,7 @@ export function CompareTable({ id, eyebrow, titleLead, titleAccent, description,
         ) : null}
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-2xl border border-line bg-white">
+      <div className="relative mt-10 overflow-hidden rounded-2xl border border-line bg-white">
         <table className="w-full border-collapse text-start">
           <thead className="bg-abyss text-white">
             <tr>

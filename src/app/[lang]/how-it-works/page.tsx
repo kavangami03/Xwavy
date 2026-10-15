@@ -5,6 +5,7 @@ import { Statement } from "@/components/sections/Statement";
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import copy from "@/i18n/pages/how-it-works";
+import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 import { HowHero } from "@/sections/how-it-works/HowHero";
@@ -27,18 +28,20 @@ export default async function HowItWorksPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
   const { home } = await getDictionary();
+  const alt = await pageCopy(imagesCopy);
 
   return (
     <>
       <HowHero
         t={t.hero}
         steps={home.process.steps.map((step) => step.name)}
+        imageAlt={alt.hiwHero}
         primaryHref={portalHref(locale, "signUpInnovator")}
         secondaryHref={localeHref(locale, "/for-investors")}
       />
 
-      <PathTimelines t={t.tracks} alts={{ innovator: home.images.innovatorPortrait, investor: home.images.investorPortrait }} />
-      <OutcomeSwitch t={t.simulator} />
+      <PathTimelines t={t.tracks} alts={{ innovator: alt.hiwPathInnovator, investor: alt.hiwPathInvestor }} />
+      <OutcomeSwitch t={t.simulator} photo={{ src: "/images/site/hiw-outcome-detail.webp", alt: alt.hiwOutcome }} />
       <LifecycleFlow t={t.lifecycle} />
       <LayerViewer t={t.layers} />
 

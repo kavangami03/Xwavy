@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, ShieldAlert } from "lucide-react";
+import Image from "next/image";
 import { useId, useRef, useState, type FormEvent } from "react";
 
 import { Container } from "@/components/layout/Container";
@@ -9,7 +10,7 @@ import type copy from "@/i18n/pages/contact";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { EASE, MEDIA } from "@/lib/motion";
 
-type ContactHeroProps = { t: (typeof copy)["en"]; email: string };
+type ContactHeroProps = { t: (typeof copy)["en"]; email: string; photo: { src: string; alt: string } };
 
 const field =
   "w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink transition-colors placeholder:text-muted hover:border-field focus:border-cyan-ink focus:bg-white focus:outline-2 focus:outline-cyan/40";
@@ -20,7 +21,7 @@ const field =
  * the topic routes by subject line: submitting opens the visitor's email app
  * with everything filled in. Nothing is sent from the website itself.
  */
-export function ContactHero({ t, email }: ContactHeroProps) {
+export function ContactHero({ t, email, photo }: ContactHeroProps) {
   const root = useRef<HTMLElement>(null);
   const id = useId();
   const [topic, setTopic] = useState(t.form.topics[0] ?? "");
@@ -76,6 +77,10 @@ export function ContactHero({ t, email }: ContactHeroProps) {
               <span className="block text-h4 text-white">{email}</span>
             </span>
           </a>
+
+          <div data-hero-fade className="relative hidden aspect-3/2 overflow-hidden rounded-2xl bg-navy lg:block">
+            <Image src={photo.src} alt={photo.alt} fill sizes="35vw" className="object-cover" />
+          </div>
 
           <p data-hero-fade className="flex items-start gap-2.5 text-sm text-mist">
             <ShieldAlert aria-hidden className="mt-0.5 size-4 shrink-0 text-gold" />

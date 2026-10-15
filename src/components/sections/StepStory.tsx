@@ -41,13 +41,12 @@ const STEP_SECONDS = 6;
 /**
  * A step-by-step story: the steps as a list on one side, a large photograph
  * with a live status card on the other. While the section is in view the
- * steps advance on their own, with a progress bar on the active step; hover,
- * focus or the pause button holds it (WCAG 2.2.2). Choosing a step jumps to it.
- * Reduced motion: no auto-advance, no progress bar; the steps still switch.
+ * steps advance on their own; hover, focus or the pause button holds them
+ * (WCAG 2.2.2). Choosing a step jumps to it. Reduced motion: no auto-advance;
+ * the steps still switch.
  */
 export function StepStory({ id, sectionId, eyebrow, titleLead, titleAccent, description, steps, labels, tone = "white" }: StepStoryProps) {
   const root = useRef<HTMLDivElement>(null);
-  const bars = useRef<(HTMLSpanElement | null)[]>([]);
   const tween = useRef<gsap.core.Tween | null>(null);
   const tabsId = useId();
 
@@ -73,16 +72,10 @@ export function StepStory({ id, sectionId, eyebrow, titleLead, titleAccent, desc
     return () => observer.disconnect();
   }, []);
 
-  // One progress tween per active step; it advances the story when it ends.
+  // One timer per active step; it advances the story when it ends.
   useEffect(() => {
-    bars.current.forEach((bar, i) => bar && i !== active && gsap.set(bar, { scaleX: 0 }));
-    const bar = bars.current[active];
-    if (!bar || !motionOk) return;
-    tween.current = gsap.fromTo(
-      bar,
-      { scaleX: 0 },
-      { scaleX: 1, duration: STEP_SECONDS, ease: "none", paused: true, onComplete: () => setActive((i) => (i + 1) % steps.length) },
-    );
+    if (!motionOk) return;
+    tween.current = gsap.to({}, { duration: STEP_SECONDS, paused: true, onComplete: () => setActive((i) => (i + 1) % steps.length) });
     return () => {
       tween.current?.kill();
       tween.current = null;
@@ -227,15 +220,6 @@ export function StepStory({ id, sectionId, eyebrow, titleLead, titleAccent, desc
                         <span className="block pt-2 text-[0.9375rem] text-body">{step.body}</span>
                       </span>
                     </span>
-                  </span>
-                  {/* Progress of the active step (auto-play only). */}
-                  <span aria-hidden className="absolute inset-x-0 -top-px h-0.5 overflow-hidden">
-                    <span
-                      ref={(el) => {
-                        bars.current[i] = el;
-                      }}
-                      className="block h-full origin-left scale-x-0 bg-cyan-ink rtl:origin-right"
-                    />
                   </span>
                 </button>
               );

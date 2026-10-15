@@ -14,6 +14,7 @@ type HowHeroProps = {
   t: (typeof copy)["en"]["hero"];
   /** The five platform step names (post, review, discover, request, connect). */
   steps: readonly string[];
+  imageAlt: string;
   primaryHref: string;
   secondaryHref: string;
 };
@@ -26,7 +27,7 @@ const ICONS = [PenLine, BadgeCheck, Search, Send, Handshake] as const;
  * the photo. On load the headline rises, the photo opens, and the five steps
  * light up one after another along the line.
  */
-export function HowHero({ t, steps, primaryHref, secondaryHref }: HowHeroProps) {
+export function HowHero({ t, steps, imageAlt, primaryHref, secondaryHref }: HowHeroProps) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -84,7 +85,7 @@ export function HowHero({ t, steps, primaryHref, secondaryHref }: HowHeroProps) 
         {/* The photograph with the journey along its foot. */}
         <div data-intro data-hero-media className="relative mt-12 overflow-hidden rounded-3xl bg-navy lg:mt-16">
           <div className="relative aspect-4/3 sm:aspect-video lg:aspect-[21/9]">
-            <Image src="/images/people/together.webp" alt={t.imageAlt} fill priority sizes="100vw" className="object-cover object-[50%_40%]" />
+            <Image src="/images/site/hiw-hero-wide.webp" alt={imageAlt} fill priority sizes="100vw" className="object-cover object-[50%_40%]" />
           </div>
 
           <div className="relative bg-abyss p-4 sm:p-5 lg:absolute lg:inset-x-6 lg:bottom-6 lg:rounded-2xl lg:bg-abyss/85 lg:backdrop-blur-md">

@@ -18,7 +18,6 @@ const en = {
     primary: "Post your idea, free",
     secondary: "How it works",
     points: ["Free, always", "Contact sealed until you accept", "Decline without a reason"],
-    imageAlt: "A founder at his desk in the evening, laptop open, city lights behind him",
   },
   composer: {
     eyebrow: "Add your idea",
@@ -103,7 +102,6 @@ const en = {
     hiddenTitle: "What stays hidden until you accept",
     hidden: ["Their email and phone", "Their links and calendar", "Your contact details, from them"],
     promise: "Accept and decline carry equal weight. No countdown, no penalty, no reason needed.",
-    imageAlt: "The founder smiling at an accepted request on his phone",
   },
   dashboard: {
     eyebrow: "Your dashboard",
@@ -149,7 +147,6 @@ const ar: typeof en = {
     primary: "انشر فكرتك مجانًا",
     secondary: "كيف تعمل المنصة",
     points: ["مجاني دائمًا", "بيانات تواصلك مختومة حتى تقبل", "ارفض دون ذكر السبب"],
-    imageAlt: "مؤسس على مكتبه مساءً، والحاسوب مفتوح وأضواء المدينة خلفه",
   },
   composer: {
     eyebrow: "أضف فكرتك",
@@ -234,7 +231,6 @@ const ar: typeof en = {
     hiddenTitle: "ما يبقى مخفيًا حتى تقبل",
     hidden: ["بريده الإلكتروني وهاتفه", "روابطه وتقويمه", "بيانات تواصلك، فلا تصل إليه"],
     promise: "للقبول والرفض الوزن نفسه. لا عدّ تنازلي، ولا عواقب، ولا حاجة إلى ذكر السبب.",
-    imageAlt: "المؤسس يبتسم لطلب مقبول على هاتفه",
   },
   dashboard: {
     eyebrow: "لوحة التحكم",

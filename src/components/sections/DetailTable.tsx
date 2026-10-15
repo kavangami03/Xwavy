@@ -1,4 +1,5 @@
 import { Eye, Lock } from "lucide-react";
+import Image from "next/image";
 
 import { Reveal } from "@/components/animation/Reveal";
 import { Section } from "@/components/layout/Section";
@@ -16,13 +17,15 @@ type DetailTableProps = {
   paidLabel: string;
   groups: readonly { name: string; fields: readonly { label: string; layer: "public" | "paid" }[] }[];
   tone?: "white" | "surface";
+  /** Photograph beside the heading. */
+  image?: { src: string; alt: string };
 };
 
 /**
  * A plain table of what goes into an idea and who can see each detail.
  * Rows are grouped by form step; on phones each group becomes a short list.
  */
-export function DetailTable({ id, eyebrow, titleLead, titleAccent, description, headers, publicLabel, paidLabel, groups, tone = "surface" }: DetailTableProps) {
+export function DetailTable({ id, eyebrow, titleLead, titleAccent, description, headers, publicLabel, paidLabel, groups, tone = "surface", image }: DetailTableProps) {
   const badge = (layer: "public" | "paid") => {
     const paid = layer === "paid";
     return (
@@ -40,7 +43,16 @@ export function DetailTable({ id, eyebrow, titleLead, titleAccent, description, 
 
   return (
     <Section tone={tone} className={tone === "white" ? "panel" : undefined} aria-labelledby={id}>
-      <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} />
+      {image ? (
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-14">
+          <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} className="lg:col-span-7" />
+          <Reveal variant="image" className="relative aspect-16/10 overflow-hidden rounded-3xl bg-navy lg:col-span-5">
+            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+          </Reveal>
+        </div>
+      ) : (
+        <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} />
+      )}
 
       <Reveal className="mt-10 overflow-hidden rounded-2xl border border-line bg-white">
         <table className="w-full border-collapse text-start">

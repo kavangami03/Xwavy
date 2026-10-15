@@ -1,4 +1,6 @@
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
+import { pageCopy } from "@/i18n/page-copy";
+import imagesCopy from "@/i18n/pages/images";
 import { localeHref } from "@/lib/href";
 import { Consent } from "@/sections/home/Consent";
 import { Faq } from "@/sections/home/Faq";
@@ -20,6 +22,7 @@ export default async function HomePage() {
   const locale = await getLocale();
   const dict = await getDictionary();
   const { home } = dict;
+  const alt = await pageCopy(imagesCopy);
   const pricingHref = localeHref(locale, "/pricing");
 
   return (
@@ -27,13 +30,13 @@ export default async function HomePage() {
       <Hero locale={locale} dict={dict} />
       <Roles
         t={home.roles}
-        alts={home.images}
+        alts={alt}
         innovatorHref={localeHref(locale, "/for-innovators")}
         investorHref={localeHref(locale, "/for-investors")}
       />
-      <Process t={home.process} alts={home.images} />
+      <Process t={home.process} alts={alt} />
       <Consent t={home.consent} />
-      <Plans pricing={home.pricing} access={home.access} photoAlt={home.images.together} pricingHref={pricingHref} />
+      <Plans pricing={home.pricing} access={home.access} photoAlt={alt.homePlans} pricingHref={pricingHref} />
       <Trust t={home.trust} />
       <Faq t={home.faq} />
     </>

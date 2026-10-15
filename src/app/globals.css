@@ -106,7 +106,7 @@
   --spacing-header: 4.5rem; /* 72px fixed navigation */
 
   /* --- Containers ------------------------------------------------------- */
-  --container-site: 120rem; /* 1920px: every section's content limit */
+  --container-site: 95rem; /* 1520px: every section's content limit (90% from 1600px, below) */
   /* Reading width: use Tailwind's built-in max-w-prose (65ch). */
 
   /* --- Radii ------------------------------------------------------------
@@ -172,6 +172,13 @@
   margin-inline: var(--panel-inset);
   border-radius: var(--panel-radius);
   overflow: clip;
+}
+
+/* Wide screens: from 1600px the content grows with the window, at 90% of it. */
+@media (min-width: 1600px) {
+  :root {
+    --container-site: 90%;
+  }
 }
 
 /* Two panels in a row keep a gap, so their rounded edges never fuse. */

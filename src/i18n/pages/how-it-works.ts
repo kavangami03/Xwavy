@@ -18,7 +18,6 @@ const en = {
     body: "Innovators post free and stay in control. Investors browse free and subscribe to ask. Contact details move only when both sides say yes, and Xwavy never touches the money.",
     primary: "Post your idea, free",
     secondary: "I invest",
-    imageAlt: "The founder and the investor talking across a table after their introduction",
   },
   tracks: {
     eyebrow: "Two paths, one meeting point",
@@ -160,7 +159,6 @@ const ar: typeof en = {
     body: "ينشر المبتكرون مجانًا ويبقون أصحاب القرار. ويتصفح المستثمرون مجانًا ويشتركون لطلب التعارف. ولا تنتقل بيانات التواصل إلا عندما يوافق الطرفان، ولا تتعامل Xwavy مع الأموال إطلاقًا.",
     primary: "انشر فكرتك مجانًا",
     secondary: "أنا مستثمر",
-    imageAlt: "المؤسس والمستثمر يتحدثان حول طاولة بعد التعارف",
   },
   tracks: {
     eyebrow: "مساران ونقطة لقاء واحدة",

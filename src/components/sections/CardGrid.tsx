@@ -1,4 +1,5 @@
 import { ArrowRight, Check, type LucideIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -19,6 +20,8 @@ export type GridCard = {
   link?: { label: string; href: string };
   /** One card can be dark to mark the paid or private tier. */
   dark?: boolean;
+  /** Decorative photograph behind a dark card, shown dimmed. */
+  background?: string;
 };
 
 type CardGridProps = {
@@ -37,6 +40,8 @@ type CardGridProps = {
   /** Show a running number on each card. */
   numbered?: boolean;
   tone?: "white" | "surface";
+  /** Photograph beside the heading. */
+  image?: { src: string; alt: string; position?: string };
   /** Optional content under the grid: a note, a button. */
   children?: ReactNode;
 };
@@ -63,16 +68,26 @@ export function CardGrid({
   layout = "grid",
   numbered = true,
   tone = "white",
+  image,
   children,
 }: CardGridProps) {
   const bento = layout === "bento";
 
   return (
     <Section tone={tone} className={tone === "white" ? "panel" : undefined} aria-labelledby={id}>
-      <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} />
+      {image ? (
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-14">
+          <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} className="lg:col-span-6" />
+          <Reveal variant="image" className="relative aspect-16/10 overflow-hidden rounded-3xl bg-navy lg:col-span-6">
+            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className={cn("object-cover", image.position)} />
+          </Reveal>
+        </div>
+      ) : (
+        <SectionHeading id={id} eyebrow={eyebrow} title={titleLead} accent={titleAccent} description={description} />
+      )}
 
       <Reveal stagger className={cn("mt-10 grid gap-4 lg:gap-5", bento ? "sm:grid-cols-2 lg:grid-cols-4" : columnClasses[columns])}>
-        {cards.map(({ kicker, title, body, points, steps, Icon, link, dark: darkCard }, i) => {
+        {cards.map(({ kicker, title, body, points, steps, Icon, link, dark: darkCard, background }, i) => {
           const featured = bento && i === 0;
           const dark = darkCard ?? featured;
           const wide = bento && (i === 0 || i === cards.length - 1);
@@ -80,13 +95,19 @@ export function CardGrid({
             <article
               key={title}
               className={cn(
-                "group/card relative flex flex-col gap-4 overflow-hidden rounded-2xl p-7 transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-1 hover:shadow-card",
+                "group/card relative flex flex-col gap-4 overflow-hidden rounded-2xl p-7 [&>:not([data-bg])]:relative transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-1 hover:shadow-card",
                 wide && "lg:col-span-2",
                 featured && "sm:col-span-2 lg:col-span-2 lg:min-h-64 lg:justify-between",
                 dark ? "surface-abyss" : tone === "white" ? "bg-surface" : "border border-line bg-white",
               )}
             >
+              {background ? (
+                <span data-bg aria-hidden className="absolute inset-0">
+                  <Image src={background} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover opacity-35 transition-transform duration-700 ease-brand group-hover/card:scale-105" />
+                </span>
+              ) : null}
               <span
+                data-bg
                 aria-hidden
                 className={cn(
                   "absolute inset-x-0 top-0 h-1 origin-left scale-x-0 transition-transform duration-500 ease-brand group-hover/card:scale-x-100 rtl:origin-right",

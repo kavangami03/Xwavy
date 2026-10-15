@@ -109,21 +109,6 @@ const en = {
   },
 
   home: {
-    /** Alt text for the story photographs (public/images/people). */
-    images: {
-      innovatorPortrait: "A founder at his desk in the evening, laptop open, city lights behind him",
-      investorPortrait: "An investor in a white kandura and ghutra standing by his office window at dusk, tablet in hand",
-      investorDesk: "An investor in a white kandura and ghutra at his desk by the window, pen in hand",
-      step1: "The founder filling in a step-by-step form on his laptop at night",
-      step2: "A reviewer at his desk reading a submission on screen, pen in hand",
-      step3: "The investor browsing a grid of ideas on his tablet",
-      step4: "The investor about to send an introduction request from his tablet",
-      step5: "The founder smiling at an accepted request on his phone",
-      together: "The founder and the investor talking across a table after their introduction",
-      unlock: "A tablet showing an idea in full detail: figures, team and documents",
-      team: "Three colleagues reviewing an idea together around a table",
-      meeting: "The founder and the investor in conversation on a terrace at golden hour",
-    },
     hero: {
       eyebrow: "The innovator and investor marketplace",
       /** Rendered as one headline; "after" is the serif accent. */

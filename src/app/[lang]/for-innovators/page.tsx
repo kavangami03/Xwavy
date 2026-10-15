@@ -9,6 +9,7 @@ import { SplitFeature } from "@/components/sections/SplitFeature";
 import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import copy from "@/i18n/pages/for-innovators";
+import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -27,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ForInnovatorsPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
+  const alt = await pageCopy(imagesCopy);
   const signUp = portalHref(locale, "signUpInnovator");
   const { composer, review, decision, dashboard } = t;
 
@@ -43,7 +45,7 @@ export default async function ForInnovatorsPage() {
           { label: t.hero.secondary, href: localeHref(locale, "/how-it-works"), variant: "outline-inverse" },
         ]}
         points={t.hero.points}
-        image={{ src: "/images/people/innovator-portrait.webp", alt: t.hero.imageAlt, position: "object-[60%_center]" }}
+        image={{ src: "/images/site/fi-hero.webp", alt: alt.fiHero, position: "object-[55%_center]" }}
       />
 
       <DetailTable
@@ -52,6 +54,7 @@ export default async function ForInnovatorsPage() {
         titleLead={composer.titleLead}
         titleAccent={composer.titleAccent}
         description={composer.body}
+        image={{ src: "/images/site/fi-composer.webp", alt: alt.fiComposer }}
         headers={{ group: composer.stepLabel, detail: composer.detailLabel, access: composer.accessLabel }}
         publicLabel={composer.publicLabel}
         paidLabel={composer.paidLabel}
@@ -64,6 +67,7 @@ export default async function ForInnovatorsPage() {
         titleLead={review.titleLead}
         titleAccent={review.titleAccent}
         description={review.description}
+        image={{ src: "/images/site/fi-review.webp", alt: alt.fiReview }}
         cards={review.cards.map((card, i) => ({ ...card, Icon: REVIEW_ICONS[i] }))}
       />
 
@@ -79,7 +83,7 @@ export default async function ForInnovatorsPage() {
           { title: decision.hiddenTitle, items: decision.hidden, tone: "hidden" },
         ]}
         note={decision.promise}
-        image={{ src: "/images/people/step-5-connect.webp", alt: decision.imageAlt }}
+        image={{ src: "/images/site/fi-decision.webp", alt: alt.fiDecision }}
       />
 
       <CardGrid
@@ -88,7 +92,7 @@ export default async function ForInnovatorsPage() {
         titleLead={dashboard.titleLead}
         titleAccent={dashboard.titleAccent}
         layout="bento"
-        cards={dashboard.items.map((item, i) => ({ ...item, Icon: DASHBOARD_ICONS[i] }))}
+        cards={dashboard.items.map((item, i) => ({ ...item, Icon: DASHBOARD_ICONS[i], background: i === 0 ? "/images/site/fi-dashboard.webp" : undefined }))}
       />
 
       <FaqSection id="fi-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />

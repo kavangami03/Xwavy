@@ -112,12 +112,12 @@ export function HeroSplit({ t, roles, alts, innovatorHref, investorHref }: HeroS
           <div className="grid grid-cols-2 gap-3 sm:gap-5">
             <figure data-portrait="innovator" className="relative mt-10 aspect-3/4 overflow-hidden rounded-3xl bg-navy sm:mt-16">
               <Image
-                src="/images/people/innovator-portrait.webp"
+                src="/images/site/home-hero-founder.webp"
                 alt={alts.innovator}
                 fill
                 priority
                 sizes="(min-width: 1024px) 24vw, 50vw"
-                className="object-cover object-[38%_center]"
+                className="object-cover object-[50%_25%]"
               />
               <figcaption className="absolute inset-s-3 bottom-3 inline-flex items-center gap-1.5 rounded-full bg-cyan px-3 py-1.5 font-mono text-[0.6875rem] text-abyss uppercase sm:inset-s-4 sm:bottom-4">
                 <Lightbulb aria-hidden className="size-3.5" />
@@ -126,7 +126,7 @@ export function HeroSplit({ t, roles, alts, innovatorHref, investorHref }: HeroS
             </figure>
             <figure data-portrait="investor" className="relative mb-10 aspect-3/4 overflow-hidden rounded-3xl bg-navy sm:mb-16">
               <Image
-                src="/images/people/investor-portrait.webp"
+                src="/images/site/home-hero-investor.webp"
                 alt={alts.investor}
                 fill
                 priority
