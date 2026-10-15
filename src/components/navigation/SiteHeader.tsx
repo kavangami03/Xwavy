@@ -81,14 +81,19 @@ export function SiteHeader({ locale, dict }: SiteHeaderProps) {
               items={items}
               locale={locale}
               labels={{
+                menu: dict.common.menu,
                 open: dict.common.openMenu,
                 close: dict.common.closeMenu,
                 signIn: dict.common.signIn,
                 postIdea: dict.common.postIdea,
                 language: dict.common.language,
+                browseIdeas: dict.common.nav.browseIdeas,
+                contact: dict.footer.contactLabel,
               }}
               signInHref={portalHref(locale, "signIn")}
               postIdeaHref={portalHref(locale, "signUpInnovator")}
+              browseHref={portalHref(locale, "browseIdeas")}
+              email={siteConfig.email}
             />
           </div>
         </div>

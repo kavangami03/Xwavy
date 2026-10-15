@@ -31,6 +31,7 @@ const ar: Dictionary = {
     },
     signIn: "تسجيل الدخول",
     postIdea: "انشر فكرتك",
+    menu: "القائمة",
     openMenu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     language: "اللغة",

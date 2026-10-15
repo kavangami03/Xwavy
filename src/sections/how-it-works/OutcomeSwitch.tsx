@@ -47,7 +47,7 @@ export function OutcomeSwitch({ t, photo }: OutcomeSwitchProps) {
 
           <div className="flex flex-col gap-5 lg:col-span-7">
             <p className="font-mono text-eyebrow text-mist uppercase">{t.choose}</p>
-            <div role="tablist" aria-label={t.choose} className="grid grid-cols-3 gap-1.5 rounded-2xl border border-white/10 bg-navy p-1.5">
+            <div role="tablist" aria-label={t.choose} className="grid grid-cols-1 gap-1.5 rounded-2xl border border-white/10 bg-navy p-1.5 sm:grid-cols-3">
               {options.map(({ key, label, Icon, on }) => {
                 const selected = outcome === key;
                 return (
@@ -60,7 +60,7 @@ export function OutcomeSwitch({ t, photo }: OutcomeSwitchProps) {
                     aria-controls={`${tabsId}-panel`}
                     onClick={() => setOutcome(key)}
                     className={cn(
-                      "relative flex min-h-12 items-center justify-center gap-2 rounded-xl px-2 text-sm font-medium transition-colors",
+                      "relative flex min-h-12 items-center justify-start gap-3 rounded-xl px-4 text-sm font-medium whitespace-nowrap transition-colors sm:justify-center sm:gap-2 sm:px-2",
                       selected ? "text-abyss" : "text-mist hover:text-white",
                     )}
                   >

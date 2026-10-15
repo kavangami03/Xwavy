@@ -63,6 +63,7 @@ const en = {
     },
     signIn: "Sign in",
     postIdea: "Post your idea",
+    menu: "Menu",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     language: "Language",
