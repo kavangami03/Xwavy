@@ -67,13 +67,6 @@ const en = {
     parts: [{ text: "Xwavy is " }, { text: "powered by Wavy Solutions.", accent: true }],
     footnote: "Built for Arabic and English from day one. Questions about Xwavy? Write to info@xwavy.com.",
   },
-  cta: {
-    titleLead: "Be part of",
-    titleAccent: "the first conversations.",
-    innovator: { label: "Have an idea?", body: "Post it free and stay in control of who reaches you.", cta: "Post your idea" },
-    investor: { label: "Looking for deal flow?", body: "Browse free. Subscribe when an idea is worth a conversation.", cta: "Browse ideas" },
-    imageAlt: "The founder and the investor in conversation on a terrace at golden hour",
-  },
 };
 
 /** Arabic: draft, pending Wavy Solutions' approval (clarifications §1.2). Replaced by translation pass. */
@@ -138,13 +131,6 @@ const ar: typeof en = {
     eyebrow: "من نحن",
     parts: [{ text: "تعمل Xwavy " }, { text: "بدعم من Wavy Solutions.", accent: true }],
     footnote: "صُممت باللغتين العربية والإنجليزية منذ اليوم الأول. لديك سؤال عن Xwavy؟ راسلنا على info@xwavy.com.",
-  },
-  cta: {
-    titleLead: "كن جزءًا من",
-    titleAccent: "المحادثات الأولى.",
-    innovator: { label: "لديك فكرة؟", body: "انشرها مجانًا وتحكّم في من يصل إليك.", cta: "انشر فكرتك" },
-    investor: { label: "تبحث عن فرص استثمارية؟", body: "تصفّح مجانًا، واشترك عندما تجد فكرة تستحق المحادثة.", cta: "تصفّح الأفكار" },
-    imageAlt: "المؤسس والمستثمر يتحادثان على شرفة وقت الغروب",
   },
 };
 

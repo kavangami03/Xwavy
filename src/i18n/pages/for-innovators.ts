@@ -132,13 +132,6 @@ const en = {
       { q: "What happens after I accept?", a: "You and the investor receive each other’s contact details at the same moment. The conversation continues off the platform; Xwavy isn’t a party to any deal." },
     ],
   },
-  cta: {
-    titleLead: "Your idea deserves",
-    titleAccent: "the right room.",
-    innovator: { label: "Ready to post?", body: "It’s free, and you stay in control of who reaches you.", cta: "Post your idea" },
-    investor: { label: "Want the full picture first?", body: "See how the whole platform works, step by step.", cta: "How it works" },
-    imageAlt: "The founder and the investor in conversation on a terrace at golden hour",
-  },
 };
 
 /** Arabic: draft, pending Wavy Solutions' approval (clarifications §1.2). Replaced by translation pass. */
@@ -269,13 +262,6 @@ const ar: typeof en = {
       { q: "هل يمكنني النشر بالعربية؟", a: "نعم. انشر بالعربية أو الإنجليزية، باللغة التي تفضلها. والمنصة كاملة متاحة باللغتين." },
       { q: "ماذا يحدث بعد أن أقبل؟", a: "تصلك أنت والمستثمر بيانات تواصل كل منكما في اللحظة نفسها. وتستمر المحادثة خارج المنصة، ولا تكون Xwavy طرفًا في أي صفقة." },
     ],
-  },
-  cta: {
-    titleLead: "فكرتك تستحق",
-    titleAccent: "المكان المناسب.",
-    innovator: { label: "مستعد للنشر؟", body: "النشر مجاني، وتبقى صاحب القرار في من يصل إليك.", cta: "انشر فكرتك" },
-    investor: { label: "تريد الصورة الكاملة أولًا؟", body: "تعرّف على طريقة عمل المنصة كاملة، خطوة بخطوة.", cta: "كيف تعمل المنصة" },
-    imageAlt: "المؤسس والمستثمر يتحادثان على شرفة وقت الغروب",
   },
 };
 

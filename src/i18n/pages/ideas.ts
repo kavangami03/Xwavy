@@ -71,13 +71,6 @@ const en = {
     ],
     footnote: "Figures such as traction and revenue are as reported by the innovator. Xwavy reviews against policy, not investment merit.",
   },
-  cta: {
-    titleLead: "Find an idea",
-    titleAccent: "worth a conversation.",
-    browse: { label: "Browse the directory", body: "Every published idea, free to browse.", cta: "Open the directory" },
-    post: { label: "Have an idea?", body: "Post it free and stay in control of who reaches you.", cta: "Post your idea" },
-    imageAlt: "The founder and the investor in conversation on a terrace at golden hour",
-  },
 };
 
 /** Arabic: draft, pending Wavy Solutions' approval (clarifications §1.2). Replaced by translation pass. */
@@ -145,13 +138,6 @@ const ar: typeof en = {
       { text: " قبل نشرها، وفق سياسة الاستخدام المقبول المعلنة." },
     ],
     footnote: "الأرقام مثل مؤشرات النمو والإيرادات هي كما يعرضها المبتكر. وتراجع Xwavy الأفكار وفق السياسة، لا وفق جدواها الاستثمارية.",
-  },
-  cta: {
-    titleLead: "اعثر على فكرة",
-    titleAccent: "تستحق المحادثة.",
-    browse: { label: "تصفّح الدليل", body: "كل فكرة منشورة، تصفّحها مجانًا.", cta: "افتح الدليل" },
-    post: { label: "لديك فكرة؟", body: "انشرها مجانًا وتحكّم في من يصل إليك.", cta: "انشر فكرتك" },
-    imageAlt: "المؤسس والمستثمر يتحادثان على شرفة وقت الغروب",
   },
 };
 

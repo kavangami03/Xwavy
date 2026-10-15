@@ -75,6 +75,8 @@ export function Reveal({ children, className, stagger = false, variant = "up", a
           ease: EASE.gsapOut,
           delay,
           stagger: stagger ? REVEAL.stagger : 0,
+          // Hand the element back to CSS afterwards, so hover transforms work.
+          clearProps: "transform,opacity,visibility",
           scrollTrigger: { trigger: element, start: REVEAL.start, once: true },
         });
       });

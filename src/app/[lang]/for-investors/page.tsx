@@ -1,13 +1,12 @@
-import { BadgeCheck, Ban, RotateCcw, Ticket } from "lucide-react";
+import { BadgeCheck, Ban, FileText, LockOpen, RotateCcw, Search, Send, Ticket } from "lucide-react";
 import type { Metadata } from "next";
 
 import { CardGrid } from "@/components/sections/CardGrid";
 import { CompareTable } from "@/components/sections/CompareTable";
-import { CtaPanel } from "@/components/sections/CtaPanel";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitFeature } from "@/components/sections/SplitFeature";
-import { StepRow } from "@/components/sections/StepRow";
+import { StepStory } from "@/components/sections/StepStory";
 import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import accessCopy from "@/i18n/pages/access";
@@ -21,6 +20,7 @@ const STEP_PHOTOS = [
   "/images/people/investor-unlock.webp",
   "/images/people/step-4-request.webp",
 ] as const;
+const STEP_ICONS = [Search, FileText, LockOpen, Send] as const;
 const RULE_ICONS = [Ticket, RotateCcw, Ban, BadgeCheck] as const;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -56,12 +56,20 @@ export default async function ForInvestorsPage() {
         image={{ src: "/images/people/investor-portrait.webp", alt: t.hero.imageAlt, position: "object-[50%_20%]" }}
       />
 
-      <StepRow
+      <StepStory
         id="fv-steps"
         eyebrow={t.steps.eyebrow}
         titleLead={t.steps.titleLead}
         titleAccent={t.steps.titleAccent}
-        steps={t.steps.items.map((step, i) => ({ ...step, image: { src: STEP_PHOTOS[i] ?? STEP_PHOTOS[0], alt: step.imageAlt } }))}
+        labels={{ step: t.steps.stepLabel, of: t.steps.of, play: t.steps.play, pause: t.steps.pause }}
+        steps={t.steps.items.map((step, i) => ({
+          ...step,
+          image: { src: STEP_PHOTOS[i] ?? STEP_PHOTOS[0], alt: step.imageAlt },
+          icon: (() => {
+            const Icon = STEP_ICONS[i] ?? Search;
+            return <Icon aria-hidden className="size-5" />;
+          })(),
+        }))}
       />
 
       <CompareTable
@@ -101,16 +109,6 @@ export default async function ForInvestorsPage() {
 
       <FaqSection id="fv-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} tone="white" />
 
-      <CtaPanel
-        id="fv-cta"
-        titleLead={t.cta.titleLead}
-        titleAccent={t.cta.titleAccent}
-        image={{ src: "/images/people/the-meeting.webp", alt: t.cta.imageAlt, position: "object-[70%_center]" }}
-        rows={[
-          { side: "investor", label: t.cta.browse.label, body: t.cta.browse.body, cta: t.cta.browse.cta, href: browse },
-          { side: "innovator", label: t.cta.plans.label, body: t.cta.plans.body, cta: t.cta.plans.cta, href: pricing },
-        ]}
-      />
     </>
   );
 }

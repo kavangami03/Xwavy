@@ -16,8 +16,6 @@ const en = {
     titleLead: "Talk to",
     titleAccent: "the Xwavy team.",
     body: "Questions about posting an idea, investor plans, partnerships or anything else? Choose a topic so your message reaches the right people.",
-    emailCta: "Email info@xwavy.com",
-    imageAlt: "A founder writing an email on his laptop at a desk in the evening",
   },
   form: {
     eyebrow: "Send a message",
@@ -64,8 +62,6 @@ const ar: typeof en = {
     titleLead: "تحدّث مع",
     titleAccent: "فريق Xwavy.",
     body: "لديك سؤال عن نشر فكرة، أو باقات المستثمرين، أو الشراكات، أو أي أمر آخر؟ اختر الموضوع لتصل رسالتك إلى الأشخاص المعنيين.",
-    emailCta: "راسلنا على info@xwavy.com",
-    imageAlt: "مؤسس يكتب رسالة بريد إلكتروني على حاسوبه في المساء",
   },
   form: {
     eyebrow: "أرسل رسالة",

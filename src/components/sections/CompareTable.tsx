@@ -18,8 +18,8 @@ type CompareTableProps = {
 };
 
 /**
- * The free-against-paid comparison as one plain table: a row per feature,
- * a Free column and a Subscriber column. Rows rise in one after another.
+ * The free-against-paid comparison as one table: a row per feature, a Free
+ * column and a highlighted Subscriber column. Rows rise in one after another.
  */
 export function CompareTable({ id, eyebrow, titleLead, titleAccent, description, labels, rows, action, tone = "surface" }: CompareTableProps) {
   return (
@@ -43,14 +43,14 @@ export function CompareTable({ id, eyebrow, titleLead, titleAccent, description,
               <th scope="col" className="w-20 px-2 py-4 text-center font-mono text-eyebrow text-mist uppercase sm:w-36">
                 {labels.freeLabel}
               </th>
-              <th scope="col" className="w-24 px-2 py-4 text-center font-mono text-eyebrow text-gold uppercase sm:w-36">
+              <th scope="col" className="w-24 bg-gold px-2 py-4 text-center font-mono text-eyebrow text-abyss uppercase sm:w-36">
                 {labels.paidLabel}
               </th>
             </tr>
           </thead>
           <Reveal as="tbody" stagger>
             {rows.map((row) => (
-              <tr key={row.label} className="border-t border-line">
+              <tr key={row.label} className="border-t border-line transition-colors hover:bg-surface">
                 <th scope="row" className="px-4 py-3.5 text-start text-sm font-normal text-body sm:px-6 sm:text-[0.9375rem]">
                   {row.label}
                 </th>
@@ -61,7 +61,7 @@ export function CompareTable({ id, eyebrow, titleLead, titleAccent, description,
                     <Minus role="img" aria-label={labels.lockedLabel} className="mx-auto size-4 text-line" />
                   )}
                 </td>
-                <td className="px-2 py-3.5 text-center">
+                <td className="bg-gold/10 px-2 py-3.5 text-center">
                   {row.free ? (
                     <Check role="img" aria-label={labels.includedLabel} className="mx-auto size-4 text-gold-ink" />
                   ) : (

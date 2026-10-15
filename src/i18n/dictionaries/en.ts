@@ -105,6 +105,7 @@ const en = {
     contactLabel: "Questions?",
     rights: "All rights reserved.",
     poweredBy: "Powered by Wavy Solutions",
+    backToTop: "Back to top",
   },
 
   home: {
@@ -178,11 +179,21 @@ const en = {
       titleAccent: "first conversation.",
       stepLabel: "Step",
       of: "of",
+      /** Status shown on the photo for each step, in order. */
+      statuses: ["Draft saved", "Approved", "Published", "Request sent", "Connected"],
+      play: "Play steps",
+      pause: "Pause steps",
       steps: processSteps,
     },
 
     consent: {
       eyebrow: "Double opt-in",
+      investorRole: "Investor",
+      innovatorRole: "Innovator",
+      lockLabel: "Contact details",
+      sealed: "Sealed",
+      revealed: "Shared with both",
+      fields: ["Email", "Phone", "LinkedIn", "Calendar link"],
       titleLead: "Two yeses before a single",
       titleAccent: "contact detail moves.",
       body: "An investor opts in by spending a request from their monthly quota. The innovator opts in by accepting. Only then are contact details released, to both sides, at the same time.",

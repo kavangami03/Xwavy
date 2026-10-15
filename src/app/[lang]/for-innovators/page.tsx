@@ -2,7 +2,6 @@ import { Activity, CircleCheck, CircleX, Inbox, LayoutDashboard, ListChecks, Mes
 import type { Metadata } from "next";
 
 import { CardGrid } from "@/components/sections/CardGrid";
-import { CtaPanel } from "@/components/sections/CtaPanel";
 import { DetailTable } from "@/components/sections/DetailTable";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
@@ -88,21 +87,12 @@ export default async function ForInnovatorsPage() {
         eyebrow={dashboard.eyebrow}
         titleLead={dashboard.titleLead}
         titleAccent={dashboard.titleAccent}
+        layout="bento"
         cards={dashboard.items.map((item, i) => ({ ...item, Icon: DASHBOARD_ICONS[i] }))}
       />
 
       <FaqSection id="fi-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
 
-      <CtaPanel
-        id="fi-cta"
-        titleLead={t.cta.titleLead}
-        titleAccent={t.cta.titleAccent}
-        image={{ src: "/images/people/the-meeting.webp", alt: t.cta.imageAlt, position: "object-[70%_center]" }}
-        rows={[
-          { side: "innovator", label: t.cta.innovator.label, body: t.cta.innovator.body, cta: t.cta.innovator.cta, href: signUp },
-          { side: "investor", label: t.cta.investor.label, body: t.cta.investor.body, cta: t.cta.investor.cta, href: localeHref(locale, "/how-it-works") },
-        ]}
-      />
     </>
   );
 }

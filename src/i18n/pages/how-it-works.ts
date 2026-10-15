@@ -50,6 +50,7 @@ const en = {
     titleLead: "Two yeses before any",
     titleAccent: "contact detail moves.",
     body: "An investor sends a request with a short personal note. The innovator sees who is asking, but not how to reach them. Then one of three things happens.",
+    choose: "What does the innovator do?",
     accept: "Accept",
     decline: "Decline",
     silence: "No reply",
@@ -77,6 +78,7 @@ const en = {
     titleAccent: "Nothing gets lost.",
     body: "Every idea is always in exactly one of these states, and each one says who can move it on.",
     whoLabel: "Who moves it",
+    pickLabel: "Choose a state",
     states: [
       { name: "Draft", body: "Private and saved after every step. Never indexed, freely editable, and not in anyone's queue until you submit it.", who: "Innovator" },
       { name: "In review", body: "Submitted and locked while a reviewer reads it, so nothing changes underneath them.", who: "Xwavy team" },
@@ -93,6 +95,10 @@ const en = {
     eyebrow: "Who sees what",
     titleLead: "Three layers.",
     titleAccent: "One rule for each.",
+    viewLabel: "See it as",
+    viewers: ["Anyone", "A subscriber", "After both say yes"],
+    visibleLabel: "Visible",
+    lockedLabel: "Locked",
     description: "The server decides what each visitor receives. Withheld details are never sent to the browser, so they can't be uncovered.",
     cards: [
       {
@@ -137,13 +143,6 @@ const en = {
       { q: "Do investors have to be verified?", a: "No, verification is optional. Investors can submit company and identity documents for a verified badge; our team reviews them manually, which normally takes two business days. Some sensitive features may need it." },
       { q: "Which languages can I use?", a: "Arabic or English. The whole platform is available in both, and you can post in whichever you prefer." },
     ],
-  },
-  cta: {
-    titleLead: "Ready when",
-    titleAccent: "you are.",
-    innovator: { label: "Have an idea?", body: "Post it free and stay in control of who reaches you.", cta: "Post your idea" },
-    investor: { label: "Looking for deal flow?", body: "Browse free. Subscribe when an idea is worth a conversation.", cta: "See investor plans" },
-    imageAlt: "The founder and the investor in conversation on a terrace at golden hour",
   },
 };
 
@@ -193,6 +192,7 @@ const ar: typeof en = {
     titleLead: "موافقتان قبل أن تنتقل",
     titleAccent: "أي بيانات تواصل.",
     body: "يرسل المستثمر طلبًا مع رسالة شخصية قصيرة. يرى المبتكر من يطلب التعارف، دون أن يرى كيف يتواصل معه. ثم يحدث أحد ثلاثة أمور.",
+    choose: "ماذا يفعل المبتكر؟",
     accept: "قبول",
     decline: "رفض",
     silence: "لا رد",
@@ -220,6 +220,7 @@ const ar: typeof en = {
     titleAccent: "لا يضيع شيء.",
     body: "تكون كل فكرة دائمًا في حالة واحدة فقط من هذه الحالات، ولكل حالة من يملك نقلها.",
     whoLabel: "من ينقلها",
+    pickLabel: "اختر حالة",
     states: [
       { name: "مسودة", body: "خاصة وتُحفظ بعد كل خطوة. لا تظهر في محركات البحث، ويمكن تعديلها بحرية، ولا تدخل قائمة المراجعة حتى ترسلها.", who: "المبتكر" },
       { name: "قيد المراجعة", body: "أُرسلت وأُقفلت أثناء قراءة المراجِع لها، كي لا يتغير شيء أثناء المراجعة.", who: "فريق Xwavy" },
@@ -236,6 +237,10 @@ const ar: typeof en = {
     eyebrow: "من يرى ماذا",
     titleLead: "ثلاث طبقات.",
     titleAccent: "لكل منها قاعدة واحدة.",
+    viewLabel: "اعرضها كما يراها",
+    viewers: ["أي زائر", "مشترك", "بعد موافقة الطرفين"],
+    visibleLabel: "ظاهرة",
+    lockedLabel: "مقفلة",
     description: "يحدد الخادم ما يصل إلى كل زائر. والتفاصيل المحجوبة لا تُرسل إلى المتصفح أبدًا، فلا يمكن كشفها.",
     cards: [
       {
@@ -280,13 +285,6 @@ const ar: typeof en = {
       { q: "هل يجب أن يكون المستثمرون موثّقين؟", a: "لا، التوثيق اختياري. يمكن للمستثمرين تقديم مستندات الشركة والهوية للحصول على شارة التوثيق، ويراجعها فريقنا يدويًا، وتستغرق المراجعة عادةً يومَي عمل. وقد تتطلبه بعض الميزات الحساسة." },
       { q: "ما اللغات التي يمكنني استخدامها؟", a: "العربية أو الإنجليزية. المنصة كاملة متاحة باللغتين، ويمكنك النشر باللغة التي تفضلها." },
     ],
-  },
-  cta: {
-    titleLead: "نحن جاهزون",
-    titleAccent: "متى كنت جاهزًا.",
-    innovator: { label: "لديك فكرة؟", body: "انشرها مجانًا وتحكّم في من يصل إليك.", cta: "انشر فكرتك" },
-    investor: { label: "تبحث عن فرص استثمارية؟", body: "تصفّح مجانًا، واشترك عندما تجد فكرة تستحق المحادثة.", cta: "اطّلع على باقات المستثمرين" },
-    imageAlt: "المؤسس والمستثمر يتحادثان على شرفة وقت الغروب",
   },
 };
 

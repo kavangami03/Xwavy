@@ -2,7 +2,6 @@ import { Handshake, LockKeyhole, ShieldCheck, Sprout } from "lucide-react";
 import type { Metadata } from "next";
 
 import { CardGrid } from "@/components/sections/CardGrid";
-import { CtaPanel } from "@/components/sections/CtaPanel";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitFeature } from "@/components/sections/SplitFeature";
 import { Statement } from "@/components/sections/Statement";
@@ -68,16 +67,6 @@ export default async function AboutPage() {
 
       <Statement eyebrow={t.operator.eyebrow} parts={t.operator.parts} footnote={t.operator.footnote} tone="dark" />
 
-      <CtaPanel
-        id="ab-cta"
-        titleLead={t.cta.titleLead}
-        titleAccent={t.cta.titleAccent}
-        image={{ src: "/images/people/the-meeting.webp", alt: t.cta.imageAlt, position: "object-[70%_center]" }}
-        rows={[
-          { side: "innovator", label: t.cta.innovator.label, body: t.cta.innovator.body, cta: t.cta.innovator.cta, href: signUp },
-          { side: "investor", label: t.cta.investor.label, body: t.cta.investor.body, cta: t.cta.investor.cta, href: browse },
-        ]}
-      />
     </>
   );
 }

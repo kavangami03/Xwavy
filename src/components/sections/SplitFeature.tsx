@@ -1,4 +1,4 @@
-import { Check, EyeOff } from "lucide-react";
+import { Check, EyeOff, Info } from "lucide-react";
 import Image from "next/image";
 
 import { Reveal } from "@/components/animation/Reveal";
@@ -53,8 +53,9 @@ export function SplitFeature({
           {stages?.length ? (
             <Reveal as="ol" stagger className="flex flex-col gap-5">
               {stages.map((stage, i) => (
-                <li key={stage.label} className="flex gap-4">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-abyss font-mono text-sm text-white" data-numeric>
+                <li key={stage.label} className="relative flex gap-4">
+                  {i < stages.length - 1 ? <span aria-hidden className="absolute top-10 -bottom-4 inset-s-[1.125rem] w-px bg-line" /> : null}
+                  <span className="relative grid size-9 shrink-0 place-items-center rounded-full bg-abyss font-mono text-sm text-white" data-numeric>
                     {i + 1}
                   </span>
                   <div>
@@ -71,7 +72,13 @@ export function SplitFeature({
               {lists.map((list) => {
                 const hidden = list.tone === "hidden";
                 return (
-                  <div key={list.title} className={cn("rounded-2xl p-6", hidden ? "surface-abyss" : tone === "white" ? "bg-surface" : "border border-line bg-white")}>
+                  <div
+                    key={list.title}
+                    className={cn(
+                      "rounded-2xl p-6 transition-[transform,box-shadow] duration-500 ease-brand hover:-translate-y-1 hover:shadow-card",
+                      hidden ? "surface-abyss" : tone === "white" ? "bg-surface" : "border border-line bg-white",
+                    )}
+                  >
                     <h3 className={cn("font-mono text-eyebrow uppercase", hidden ? "text-gold" : "text-cyan-ink")}>{list.title}</h3>
                     <ul className="mt-4 flex flex-col gap-3">
                       {list.items.map((item) => (
@@ -91,11 +98,6 @@ export function SplitFeature({
             </Reveal>
           ) : null}
 
-          {note ? (
-            <Reveal>
-              <p className="border-s-2 border-cyan-ink ps-4 text-body">{note}</p>
-            </Reveal>
-          ) : null}
           {action ? (
             <Button href={action.href} variant={action.variant ?? "primary"} arrow className="w-fit">
               {action.label}
@@ -103,12 +105,23 @@ export function SplitFeature({
           ) : null}
         </div>
 
-        <Reveal
-          variant="image"
-          className={cn("relative aspect-4/3 overflow-hidden rounded-3xl bg-navy lg:aspect-auto lg:min-h-[26rem]", imageSide === "start" && "lg:order-1")}
-        >
-          <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className={cn("object-cover", image.position)} />
-        </Reveal>
+        {/* Photo with an offset frame behind it and the note floating on it. */}
+        <div className={cn("relative pb-6 ps-6 lg:min-h-[26rem]", imageSide === "start" && "lg:order-1")}>
+          <span aria-hidden className={cn("absolute top-6 bottom-0 inset-s-0 inset-e-6 rounded-3xl border", tone === "white" ? "border-line" : "border-field/40")} />
+          <Reveal variant="image" className="relative aspect-4/3 overflow-hidden rounded-3xl bg-navy lg:aspect-auto lg:h-full">
+            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className={cn("object-cover", image.position)} />
+          </Reveal>
+          {note ? (
+            <Reveal className="relative -mt-14 ms-4 me-4 sm:absolute sm:inset-e-4 sm:bottom-10 sm:m-0 sm:max-w-sm">
+              <p className="flex items-start gap-3 rounded-2xl bg-white p-4 text-sm text-ink shadow-elevated">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-cyan text-abyss">
+                  <Info aria-hidden className="size-4" />
+                </span>
+                {note}
+              </p>
+            </Reveal>
+          ) : null}
+        </div>
       </div>
     </Section>
   );

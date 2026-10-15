@@ -26,27 +26,35 @@ const en = {
     eyebrow: "How it works for you",
     titleLead: "From browsing to",
     titleAccent: "a warm introduction.",
+    stepLabel: "Step",
+    of: "of",
+    play: "Play steps",
+    pause: "Pause steps",
     items: [
       {
         name: "Browse",
+        status: "Browsing free",
         title: "See the real pool, free.",
         body: "Every published idea, filtered by sector, stage, region and keyword. Sign up to save ideas and keep private notes.",
         imageAlt: "The investor browsing a grid of ideas on his tablet",
       },
       {
         name: "Mandate",
+        status: "Mandate saved",
         title: "Say who you are.",
         body: "Your firm, investor type, sector and stage focus, cheque band, geography and a short thesis: exactly what an innovator sees when you ask.",
         imageAlt: "An investor in a white kandura and ghutra at his desk by the window, pen in hand",
       },
       {
         name: "Subscribe",
+        status: "Full picture unlocked",
         title: "Unlock the full picture.",
         body: "Full narrative, financials, traction, team, deck, exact raise and the innovator’s identity, plus advanced filters, sorting and export.",
         imageAlt: "A tablet showing an idea in full detail: figures, team and documents",
       },
       {
         name: "Request",
+        status: "Request sent",
         title: "Ask for an introduction.",
         body: "Send a personal note from your monthly quota. If the innovator accepts, you both receive each other’s contact details at the same moment.",
         imageAlt: "The investor about to send an introduction request from his tablet",
@@ -130,13 +138,6 @@ const en = {
       },
     ],
   },
-  cta: {
-    titleLead: "Find your next",
-    titleAccent: "conversation.",
-    browse: { label: "Start browsing", body: "Every published idea, free. Subscribe when one is worth a conversation.", cta: "Browse ideas" },
-    plans: { label: "Compare plans", body: "Monthly or annual, each with a monthly quota of introduction requests.", cta: "See pricing" },
-    imageAlt: "The founder and the investor in conversation on a terrace at golden hour",
-  },
 };
 
 /** Arabic: draft, pending Wavy Solutions' approval (clarifications §1.2). Replaced by translation pass. */
@@ -160,27 +161,35 @@ const ar: typeof en = {
     eyebrow: "كيف تعمل المنصة لك",
     titleLead: "من التصفح",
     titleAccent: "إلى تعارف يرحّب به الطرفان.",
+    stepLabel: "الخطوة",
+    of: "من",
+    play: "تشغيل الخطوات",
+    pause: "إيقاف الخطوات مؤقتًا",
     items: [
       {
         name: "التصفح",
+        status: "تصفّح مجاني",
         title: "اطّلع على الأفكار الفعلية، مجانًا.",
         body: "جميع الأفكار المنشورة، مع التصفية حسب القطاع والمرحلة والمنطقة والكلمات المفتاحية. وسجّل حسابًا لتحفظ الأفكار وتدوّن ملاحظات خاصة.",
         imageAlt: "المستثمر يتصفح مجموعة من الأفكار على جهازه اللوحي",
       },
       {
         name: "التوجه الاستثماري",
+        status: "حُفظ التوجه الاستثماري",
         title: "عرّف بنفسك.",
         body: "شركتك، ونوع المستثمر، والقطاعات والمراحل التي تركز عليها، وحجم الاستثمار، والنطاق الجغرافي، وأطروحة استثمارية قصيرة: وهذا بالضبط ما يراه المبتكر عندما تطلب التعارف.",
         imageAlt: "مستثمر بالكندورة البيضاء والغترة على مكتبه بجوار النافذة والقلم في يده",
       },
       {
         name: "الاشتراك",
+        status: "الصورة الكاملة متاحة",
         title: "افتح الصورة الكاملة.",
         body: "القصة الكاملة والبيانات المالية ومؤشرات النمو والفريق والعرض التقديمي ومبلغ التمويل الدقيق وهوية المبتكر، إلى جانب الفلاتر المتقدمة والترتيب والتصدير.",
         imageAlt: "جهاز لوحي يعرض تفاصيل فكرة كاملة: الأرقام والفريق والمستندات",
       },
       {
         name: "الطلب",
+        status: "أُرسل الطلب",
         title: "اطلب التعارف.",
         body: "أرسل رسالة شخصية ضمن حصتك الشهرية. وإذا قبل المبتكر، يحصل كل منكما على بيانات تواصل الآخر في اللحظة نفسها.",
         imageAlt: "المستثمر على وشك إرسال طلب تعارف من جهازه اللوحي",
@@ -263,13 +272,6 @@ const ar: typeof en = {
         a: "لا. تُعرّف Xwavy الناس ببعضهم فقط؛ فهي لا تحتفظ بأموال، ولا تتوسط في أوراق مالية، ولا تقدم استشارات استثمارية. والمبلغ الوحيد الذي تدفعه هو اشتراكك.",
       },
     ],
-  },
-  cta: {
-    titleLead: "اعثر على",
-    titleAccent: "محادثتك القادمة.",
-    browse: { label: "ابدأ التصفح", body: "جميع الأفكار المنشورة، مجانًا. واشترك عندما تجد فكرة تستحق المحادثة.", cta: "تصفّح الأفكار" },
-    plans: { label: "قارن الباقات", body: "شهرية أو سنوية، وتتضمن كل منها حصة شهرية من طلبات التعارف.", cta: "اطّلع على الأسعار" },
-    imageAlt: "المؤسس والمستثمر يتحادثان على شرفة وقت الغروب",
   },
 };
 

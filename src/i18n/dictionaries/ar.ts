@@ -73,6 +73,7 @@ const ar: Dictionary = {
     contactLabel: "لديك سؤال؟",
     rights: "جميع الحقوق محفوظة.",
     poweredBy: "بدعم من Wavy Solutions",
+    backToTop: "العودة إلى الأعلى",
   },
 
   home: {
@@ -139,6 +140,9 @@ const ar: Dictionary = {
       titleAccent: "إلى أول محادثة.",
       stepLabel: "الخطوة",
       of: "من",
+      statuses: ["حُفظت المسودة", "تمت الموافقة", "نُشرت الفكرة", "أُرسل الطلب", "تم التعارف"],
+      play: "تشغيل الخطوات",
+      pause: "إيقاف الخطوات مؤقتًا",
       steps: [
         {
           name: "انشر",
@@ -170,6 +174,12 @@ const ar: Dictionary = {
 
     consent: {
       eyebrow: "موافقة مزدوجة",
+      investorRole: "المستثمر",
+      innovatorRole: "المبتكر",
+      lockLabel: "بيانات التواصل",
+      sealed: "مختومة",
+      revealed: "تُكشف للطرفين",
+      fields: ["البريد الإلكتروني", "الهاتف", "LinkedIn", "رابط التقويم"],
       titleLead: "موافقتان قبل أن تنتقل",
       titleAccent: "أي بيانات تواصل.",
       body: "يُبدي المستثمر رغبته باستخدام طلب من حصته الشهرية، ويُبدي المبتكر موافقته بقبول الطلب. عندها فقط تُكشف بيانات التواصل للطرفين في الوقت نفسه.",

@@ -1,8 +1,7 @@
 import { getDictionary, getLocale } from "@/i18n/get-dictionary";
-import { localeHref, portalHref } from "@/lib/href";
+import { localeHref } from "@/lib/href";
 import { Consent } from "@/sections/home/Consent";
 import { Faq } from "@/sections/home/Faq";
-import { FinalCta } from "@/sections/home/FinalCta";
 import { Hero } from "@/sections/home/Hero";
 import { Plans } from "@/sections/home/Plans";
 import { Process } from "@/sections/home/Process";
@@ -37,12 +36,6 @@ export default async function HomePage() {
       <Plans pricing={home.pricing} access={home.access} photoAlt={home.images.together} pricingHref={pricingHref} />
       <Trust t={home.trust} />
       <Faq t={home.faq} />
-      <FinalCta
-        t={home.finalCta}
-        alt={home.images.meeting}
-        innovatorHref={portalHref(locale, "signUpInnovator")}
-        investorHref={portalHref(locale, "browseIdeas")}
-      />
     </>
   );
 }

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 
 import { CardGrid } from "@/components/sections/CardGrid";
 import { CompareTable } from "@/components/sections/CompareTable";
-import { CtaPanel } from "@/components/sections/CtaPanel";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { Statement } from "@/components/sections/Statement";
@@ -77,16 +76,6 @@ export default async function PricingPage() {
 
       <FaqSection id="pr-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
 
-      <CtaPanel
-        id="pr-cta"
-        titleLead={t.cta.titleLead}
-        titleAccent={t.cta.titleAccent}
-        image={{ src: "/images/people/the-meeting.webp", alt: t.cta.imageAlt, position: "object-[70%_center]" }}
-        rows={[
-          { side: "innovator", label: t.cta.innovator.label, body: t.cta.innovator.body, cta: t.cta.innovator.cta, href: signUp },
-          { side: "investor", label: t.cta.investor.label, body: t.cta.investor.body, cta: t.cta.investor.cta, href: browse },
-        ]}
-      />
     </>
   );
 }
