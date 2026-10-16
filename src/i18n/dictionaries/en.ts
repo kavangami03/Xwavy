@@ -67,25 +67,28 @@ const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     language: "Language",
+    /** Card beside every FAQ. No response-time promise. */
+    faqHelp: {
+      title: "Still have a question?",
+      body: "Write to us at info@xwavy.com, or choose a topic on the contact page.",
+      cta: "Contact us",
+    },
   },
 
   footer: {
-    summary:
-      "The marketplace where innovators and investors meet on equal terms. Introductions happen only when both sides say yes.",
+    /** The four main pages, as numbered links across the top of the footer. */
+    nextLabel: "Where to next",
+    next: [
+      { href: "/for-innovators", title: "For innovators", line: "Post your idea, free." },
+      { href: "/for-investors", title: "For investors", line: "Subscribe for the full picture." },
+      { href: "/how-it-works", title: "How it works", line: "Two yeses before any contact moves." },
+      { href: "/pricing", title: "Pricing", line: "Free for innovators; investors subscribe." },
+    ],
     columns: [
       {
-        title: "Platform",
+        title: "Explore",
         links: [
           { label: "Browse ideas", href: "/ideas" },
-          { label: "For innovators", href: "/for-innovators" },
-          { label: "For investors", href: "/for-investors" },
-          { label: "How it works", href: "/how-it-works" },
-          { label: "Pricing", href: "/pricing" },
-        ],
-      },
-      {
-        title: "Company",
-        links: [
           { label: "About Xwavy", href: "/about" },
           { label: "Contact", href: "/contact" },
         ],
@@ -101,6 +104,7 @@ const en = {
         ],
       },
     ],
+    contactTitle: "Get in touch",
     disclaimer:
       "Xwavy introduces people. It holds no funds, brokers no securities and gives no investment advice.",
     contactLabel: "Questions?",
@@ -176,6 +180,8 @@ const en = {
       eyebrow: "Double opt-in",
       investorRole: "Investor",
       innovatorRole: "Innovator",
+      accept: "Accept",
+      decline: "Decline",
       lockLabel: "Contact details",
       sealed: "Sealed",
       revealed: "Shared with both",
@@ -261,6 +267,7 @@ const en = {
       headingLead: "Free to post.",
       headingAccent: "Subscribe to ask.",
       title: "Innovators are always free.",
+      zeroLabel: "Fees for innovators",
       body: "No listing fees, no commission, no paywall on your side of the marketplace.",
       investorsTitle: "Investors choose a plan.",
       investorsBody: "Monthly or annual, each with a monthly quota of introduction requests. Cancel any time from your billing page.",
@@ -315,20 +322,6 @@ const en = {
       ],
     },
 
-    finalCta: {
-      titleLead: "Your next conversation",
-      titleAccent: "starts here.",
-      innovator: {
-        label: "Have an idea?",
-        body: "Publish it free and let the right investors come to you.",
-        cta: "Post your idea",
-      },
-      investor: {
-        label: "Looking for deal flow?",
-        body: "Browse published ideas free, and subscribe when one is worth a conversation.",
-        cta: "Browse ideas",
-      },
-    },
   },
 };
 

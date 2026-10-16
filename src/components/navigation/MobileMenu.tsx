@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useLenis } from "lenis/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
@@ -172,10 +173,7 @@ export function MobileMenu({ items, locale, labels, signInHref, postIdeaHref, br
                       exit={{ opacity: 0, transition: { duration: 0.1 } }}
                       className="flex items-center gap-3 font-mono text-eyebrow text-mist uppercase"
                     >
-                      <span className="flex gap-1" aria-hidden>
-                        <span className="size-2 rounded-full bg-cyan" />
-                        <span className="size-2 rounded-full bg-gold" />
-                      </span>
+                      <Image src="/brand/xwavy-mark.png" alt="" aria-hidden width={24} height={24} className="size-6 shrink-0 rounded-[0.4rem] ring-1 ring-white/15" />
                       {labels.menu}
                     </motion.p>
 

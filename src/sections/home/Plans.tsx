@@ -33,8 +33,11 @@ export function Plans({ pricing, access, photoAlt, pricingHref }: PlansProps) {
 
       <Reveal stagger className="mt-10 grid gap-5 lg:grid-cols-[2fr_3fr]">
         <article className="flex flex-col gap-5 rounded-2xl border border-line bg-white p-6 sm:p-8">
-          <p className="font-heading text-[clamp(3rem,6vw,4.5rem)] leading-none font-bold text-cyan-ink" data-numeric>
-            0
+          <p className="flex items-end gap-3">
+            <span className="font-heading text-[clamp(3.5rem,7vw,5rem)] leading-[0.85] font-bold tracking-[-0.05em] text-cyan-ink" data-numeric>
+              0
+            </span>
+            <span className="mb-1.5 max-w-[9rem] font-mono text-eyebrow leading-snug text-muted uppercase">{pricing.zeroLabel}</span>
           </p>
           <div>
             <h3 className="text-h3 text-ink">{pricing.title}</h3>

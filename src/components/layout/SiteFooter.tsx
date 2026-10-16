@@ -1,16 +1,15 @@
-import { ArrowUpRight, Lightbulb, Mail, TrendingUp } from "lucide-react";
+import { LogIn, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/Container";
 import { BackToTop } from "@/components/layout/FooterExtras";
+import { FooterNext } from "@/components/layout/FooterNext";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
+import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/get-dictionary";
-import { pageCopy } from "@/i18n/page-copy";
-import imagesCopy from "@/i18n/pages/images";
-import { cn } from "@/lib/cn";
 import { localeHref, portalHref } from "@/lib/href";
 
 type SiteFooterProps = { locale: Locale; dict: Dictionary };
@@ -18,140 +17,88 @@ type SiteFooterProps = { locale: Locale; dict: Dictionary };
 /** Copyright year. Fixed at build time; the page is prerendered. */
 const YEAR = 2026;
 
-/**
- * Site footer, shared by every page: the closing invitation (a photograph and
- * one large action tile per side of the marketplace), then the brand, contact
- * and link columns, then the legal line.
- */
-export async function SiteFooter({ locale, dict }: SiteFooterProps) {
-  const alt = await pageCopy(imagesCopy);
-  const t = dict.footer;
-  const cta = dict.home.finalCta;
+/** Link text with a cyan rule that draws in underneath on hover. */
+const underline =
+  "relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-cyan after:transition-transform after:duration-300 group-hover:after:scale-x-100 rtl:after:origin-right";
 
-  const tiles = [
-    {
-      key: "innovator",
-      href: portalHref(locale, "signUpInnovator"),
-      label: cta.innovator.label,
-      title: dict.common.postIdea,
-      body: cta.innovator.body,
-      Icon: Lightbulb,
-      tone: "bg-cyan text-abyss",
-      chip: "bg-abyss text-cyan",
-    },
-    {
-      key: "investor",
-      href: portalHref(locale, "browseIdeas"),
-      label: cta.investor.label,
-      title: dict.common.nav.browseIdeas,
-      body: cta.investor.body,
-      Icon: TrendingUp,
-      tone: "bg-gold text-abyss",
-      chip: "bg-abyss text-gold",
-    },
-  ] as const;
+/**
+ * Site footer, shared by every page, as an inset navy panel: the main pages
+ * as numbered "where to next" links across the top, then the brand with the
+ * main call to action, the Explore and Legal links and contact details, then
+ * the legal bar with language and back to top.
+ */
+export function SiteFooter({ locale, dict }: SiteFooterProps) {
+  const t = dict.footer;
+  const title = dict.home.hero.title;
+  const contacts = [
+    { href: `mailto:${siteConfig.email}`, label: siteConfig.email, Icon: Mail },
+    { href: portalHref(locale, "signIn"), label: dict.common.signIn, Icon: LogIn },
+  ];
 
   return (
-    <footer className="surface-abyss panel my-(--panel-inset)">
-      <Container className="pt-section-sm">
-        {/* The closing invitation: a photograph, and one way in for each side. */}
-        <div className="grid gap-4 lg:grid-cols-12">
-          <div className="relative flex min-h-80 flex-col justify-end overflow-hidden rounded-3xl bg-navy p-6 sm:p-8 lg:col-span-6 lg:row-span-2">
-            <Image
-              src="/images/site/footer-closing.webp"
-              alt={alt.footer}
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover object-[70%_center]"
-            />
-            <p className="relative max-w-md rounded-2xl bg-abyss p-6 text-h2 text-white">
-              {cta.titleLead} <span className="accent text-cyan">{cta.titleAccent}</span>
-            </p>
-          </div>
-          {tiles.map(({ key, href, label, title, body, Icon, tone, chip }) => (
-            <Link
-              key={key}
-              href={href}
-              className={cn(
-                "group relative flex min-h-52 flex-col justify-between gap-8 overflow-hidden rounded-3xl p-7 transition-transform duration-500 ease-brand hover:-translate-y-1 sm:p-8 lg:col-span-6",
-                tone,
-              )}
-            >
-              <span className="flex items-center justify-between gap-4">
-                <span className="inline-flex items-center gap-2 font-mono text-eyebrow uppercase">
-                  <Icon aria-hidden className="size-4" />
-                  {label}
-                </span>
-                <span
-                  className={cn(
-                    "grid size-14 shrink-0 place-items-center rounded-full transition-transform duration-500 ease-brand group-hover:scale-110 group-hover:rotate-45 rtl:-scale-x-100 rtl:group-hover:-rotate-45",
-                    chip,
-                  )}
-                >
-                  <ArrowUpRight aria-hidden className="size-6" />
-                </span>
-              </span>
-              <span>
-                <span className="block text-h2">{title}</span>
-                <span className="mt-3 block max-w-md text-[0.9375rem] opacity-80">{body}</span>
-              </span>
-            </Link>
-          ))}
-        </div>
+    <footer className="surface-navy panel my-(--panel-inset)">
+      <Container className="pt-14 pb-6 lg:pt-16">
+        <FooterNext label={t.nextLabel} items={t.next.map((item) => ({ ...item, href: localeHref(locale, item.href) }))} />
 
-        {/* Brand, contact and links. */}
-        <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="flex flex-col gap-6 lg:col-span-4">
+        <div className="mt-14 grid gap-12 border-t border-white/10 pt-12 lg:mt-16 lg:grid-cols-12 lg:gap-10 lg:pt-14">
+          {/* Brand. */}
+          <div className="flex flex-col items-start gap-5 lg:col-span-4">
             <Link href={localeHref(locale, "/")} className="w-fit rounded-md" aria-label={siteConfig.name}>
               <Image src={siteConfig.logo.src} width={siteConfig.logo.width} height={siteConfig.logo.height} alt={siteConfig.logo.alt} className="h-9 w-auto" />
             </Link>
-            <p className="max-w-sm text-mist">{t.summary}</p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="group flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 pe-5 transition-colors hover:border-cyan"
-            >
-              <span className="grid size-10 place-items-center rounded-xl bg-cyan text-abyss">
-                <Mail aria-hidden className="size-4" />
-              </span>
-              <span>
-                <span className="block text-xs text-mist">{t.contactLabel}</span>
-                <span className="block font-medium text-white">{siteConfig.email}</span>
-              </span>
-            </a>
+            <p className="max-w-sm text-h3 text-white">
+              {title.line1} {title.before} <span className="accent text-cyan">{title.after}</span>
+            </p>
+            <Button href={portalHref(locale, "signUpInnovator")} variant="primary" size="sm" arrow className="mt-1">
+              {dict.home.hero.primaryCta}
+            </Button>
           </div>
 
+          {/* Links and contact. */}
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8">
             {t.columns.map((column) => (
               <nav key={column.title} aria-label={column.title}>
-                <h2 className="border-b border-white/10 pb-4 font-mono text-eyebrow text-white uppercase">{column.title}</h2>
-                <ul className="mt-5 flex flex-col gap-3.5">
+                <h2 className="font-mono text-eyebrow text-white/50 uppercase">{column.title}</h2>
+                <ul className="mt-5 flex flex-col gap-3">
                   {column.links.map((link) => (
                     <li key={link.href}>
-                      <Link
-                        href={link.href === "/ideas" ? portalHref(locale, "browseIdeas") : localeHref(locale, link.href)}
-                        className="group inline-flex items-center gap-2 text-sm text-mist transition-colors hover:text-white"
-                      >
-                        <span aria-hidden className="h-px w-0 bg-cyan transition-[width] duration-300 group-hover:w-3" />
-                        {link.label}
+                      <Link href={localeHref(locale, link.href)} className="group inline-flex text-[0.9375rem] text-mist transition-colors hover:text-white">
+                        <span className={underline}>{link.label}</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
               </nav>
             ))}
+
+            <div className="col-span-2 sm:col-span-1">
+              <h2 className="font-mono text-eyebrow text-white/50 uppercase">{t.contactTitle}</h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {contacts.map(({ href, label, Icon }) => (
+                  <li key={href}>
+                    <a href={href} className="group inline-flex items-center gap-3 text-[0.9375rem] text-white">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white/5 text-cyan ring-1 ring-white/10 transition-colors duration-300 group-hover:bg-cyan group-hover:text-abyss">
+                        <Icon aria-hidden className="size-4 rtl:-scale-x-100" />
+                      </span>
+                      <span className={underline}>{label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* Legal line. */}
-        <div className="mt-14 flex flex-col gap-5 border-t border-white/10 py-7 text-sm text-mist lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <div className="flex flex-col gap-2">
-            <p className="max-w-2xl">{t.disclaimer}</p>
+        {/* Legal bar. */}
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-mist lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-1.5">
             <p>
               © {YEAR} {siteConfig.name}. {t.rights} {t.poweredBy}.
             </p>
+            <p className="text-xs">{t.disclaimer}</p>
           </div>
-          <div className="flex shrink-0 flex-wrap items-center gap-2">
-            <LanguageSwitcher current={locale} label={dict.common.language} />
+          <div className="flex flex-wrap items-center gap-2">
+            <LanguageSwitcher current={locale} label={dict.common.language} className="border border-white/12" />
             <BackToTop label={t.backToTop} />
           </div>
         </div>

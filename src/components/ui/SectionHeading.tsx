@@ -12,7 +12,7 @@ type SectionHeadingProps = {
   number?: string;
   /** Main part of the headline. */
   title: ReactNode;
-  /** Accent words after the title, set in serif italic (house style). */
+  /** Accent words after the title, set apart by colour (house style). */
   accent?: string;
   description?: ReactNode;
   /** Semantic level. Visual size follows the level. */

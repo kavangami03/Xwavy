@@ -7,6 +7,7 @@ import { pageCopy } from "@/i18n/page-copy";
 import copy from "@/i18n/pages/how-it-works";
 import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
+import { faqHelp } from "@/lib/faq-help";
 import { pageMetadata } from "@/lib/metadata";
 import { HowHero } from "@/sections/how-it-works/HowHero";
 import { LayerViewer } from "@/sections/how-it-works/LayerViewer";
@@ -27,7 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HowItWorksPage() {
   const locale = await getLocale();
   const t = await pageCopy(copy);
-  const { home } = await getDictionary();
+  const dict = await getDictionary();
+  const { home } = dict;
   const alt = await pageCopy(imagesCopy);
 
   return (
@@ -41,13 +43,23 @@ export default async function HowItWorksPage() {
       />
 
       <PathTimelines t={t.tracks} alts={{ innovator: alt.hiwPathInnovator, investor: alt.hiwPathInvestor }} />
-      <OutcomeSwitch t={t.simulator} photo={{ src: "/images/site/hiw-outcome-detail.webp", alt: alt.hiwOutcome }} />
+      <OutcomeSwitch
+        t={t.simulator}
+        labels={{
+          investor: home.consent.investorRole,
+          innovator: home.consent.innovatorRole,
+          contact: home.consent.lockLabel,
+          sealed: home.consent.sealed,
+          revealed: home.consent.revealed,
+        }}
+        photo={{ src: "/images/site/hiw-outcome-detail.webp", alt: alt.hiwOutcome }}
+      />
       <LifecycleFlow t={t.lifecycle} />
       <LayerViewer t={t.layers} />
 
       <Statement eyebrow={t.facilitator.eyebrow} parts={t.facilitator.parts} footnote={t.facilitator.footnote} tone="dark" />
 
-      <FaqSection id="hiw-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
+      <FaqSection id="hiw-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} help={faqHelp(locale, dict)} />
     </>
   );
 }

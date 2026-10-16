@@ -36,7 +36,6 @@ const en = {
   abMission: "Four colleagues gathered around a laptop, laughing together at night",
   ctDesk: "A smiling host at a modern travertine reception desk",
   idHero: "An investor in a white kandura browsing a wall-sized directory of ideas",
-  footer: "The founder and the investor in conversation on a rooftop terrace at golden hour",
 };
 
 const ar: typeof en = {
@@ -70,7 +69,6 @@ const ar: typeof en = {
   abMission: "أربعة زملاء حول حاسوب يضحكون معًا ليلًا",
   ctDesk: "موظف استقبال مبتسم خلف مكتب استقبال عصري من الترافرتين",
   idHero: "مستثمر بالكندورة البيضاء يتصفح دليل أفكار على شاشة جدارية كبيرة",
-  footer: "المؤسس والمستثمر يتحادثان على شرفة سطح وقت الغروب",
 };
 
 export default { en, ar } satisfies PageCopy<typeof en>;

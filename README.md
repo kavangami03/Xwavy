@@ -89,9 +89,10 @@ docs/
 - **Colours (solid only, no gradients):** abyss/navy dark surfaces, wave cyan
   (matches the logo, innovator actions) and capital gold (investor actions).
   Use `cyan-ink` / `gold-ink` for text on light backgrounds.
-- **Type:** Bricolage Grotesque headlines with an Instrument Serif italic
-  accent word (`.accent`), Geist text, Geist Mono labels. Arabic falls through
-  to Alexandria and IBM Plex Sans Arabic automatically.
+- **Type:** Kalam headings (accent words in the same face, set apart by
+  colour), Google Sans for descriptions, body and UI text, Geist Mono labels.
+  Arabic falls through to Alexandria (headings) and IBM Plex Sans Arabic
+  (text) automatically.
 - **House style:** soft tinted page, sections as inset rounded panels
   (`.panel`, with a gap between neighbours), eyebrows with a leading rule
   (`Eyebrow`), pill buttons with an arrow chip (`<Button arrow>`), floating

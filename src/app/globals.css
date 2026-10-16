@@ -46,43 +46,43 @@
   --color-muted: #5f6b84; /* secondary text (5.4:1 on white, 5:1 on surface) */
 
   /* --- Typography -------------------------------------------------------
-     Bricolage Grotesque: expressive display face with optical sizing.
-     Instrument Serif italic: the accent word in two-tone headlines.
-     Geist: crisp, neutral text and UI face. Geist Mono: figures and labels.
+     Sora: confident geometric heading face; accent words share it, set
+     apart by colour and a lighter weight. Google Sans: descriptions, body
+     and UI text. Geist Mono: figures and labels.
      Arabic glyphs fall through to Alexandria (headings) and IBM Plex Sans
      Arabic (text); browsers pick them per character, so no locale switch. */
-  --font-heading: var(--font-bricolage), var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-geist), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), var(--font-alexandria), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-google-sans), var(--font-plex-arabic), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), var(--font-plex-arabic), ui-monospace, "SFMono-Regular", monospace;
-  /* Accent words in headlines (italic). Latin only; Arabic keeps the heading face. */
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  /* Accent words and the quote mark use the heading face, set apart by colour. */
+  --font-serif: var(--font-heading);
 
   /* Fluid type: minimum at 320px, maximum from ~1280px upward. */
-  --text-display: clamp(2.375rem, 1.3rem + 4.2vw, 4.5rem); /* 38 → 72px */
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.04em;
+  --text-display: clamp(2.375rem, 1.2rem + 4.6vw, 4.75rem); /* 38 → 76px */
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.035em;
   --text-display--font-weight: 700;
 
   /* Hero headline only: one size above display. */
-  --text-hero: clamp(2.75rem, 1.6rem + 5vw, 6rem); /* 44 → 96px */
-  --text-hero--line-height: 0.98;
+  --text-hero: clamp(2.625rem, 1.3rem + 5.6vw, 6.25rem); /* 42 → 100px */
+  --text-hero--line-height: 1.02;
   --text-hero--letter-spacing: -0.045em;
   --text-hero--font-weight: 700;
 
-  --text-h2: clamp(1.875rem, 1.3rem + 2.2vw, 3rem); /* 30 → 48px */
-  --text-h2--line-height: 1.08;
-  --text-h2--letter-spacing: -0.032em;
-  --text-h2--font-weight: 650;
+  --text-h2: clamp(1.875rem, 1.2rem + 2.7vw, 3.375rem); /* 30 → 54px */
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 680;
 
   --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem); /* 20 → 26px */
-  --text-h3--line-height: 1.2;
+  --text-h3--line-height: 1.22;
   --text-h3--letter-spacing: -0.02em;
-  --text-h3--font-weight: 600;
+  --text-h3--font-weight: 640;
 
   --text-h4: 1.125rem; /* 18px */
   --text-h4--line-height: 1.35;
   --text-h4--letter-spacing: -0.01em;
-  --text-h4--font-weight: 600;
+  --text-h4--font-weight: 620;
 
   --text-stat: clamp(2.25rem, 1.8rem + 1.8vw, 3.5rem); /* 36 → 56px */
   --text-stat--line-height: 1;
@@ -166,6 +166,27 @@
   color: var(--color-mist);
 }
 
+/* Fine architectural grid for dark hero panels: hairlines, not a colour
+   blend. Sits under the content; the panel colour shows through. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+}
+
+/* Endless horizontal ticker. The track holds the list twice; moving it by
+   half its width loops seamlessly. Stopped by the reduced-motion rule below. */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@utility animate-marquee {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
 /* Inset rounded panel for dark feature sections (house style). Use on the
    section element; the content inside still uses Container. */
 @utility panel {
@@ -181,6 +202,33 @@
   }
 }
 
+/* Anything set at a heading size reads as a heading, whatever its element. */
+@layer base {
+  .text-hero,
+  .text-display,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-stat {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Everything clickable shows the pointer: Tailwind v4 leaves buttons on the
+   default arrow, and tabs, radios and summaries are clickable too. */
+@layer base {
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
+  [role="radio"],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
+  }
+}
+
 /* Two panels in a row keep a gap, so their rounded edges never fuse. */
 @layer utilities {
   .panel + .panel {
@@ -188,12 +236,12 @@
   }
 }
 
-/* Accent word in a two-tone headline: serif italic, solid colour. */
+/* Accent words: same face, lighter weight and a brand colour (set by the
+   component), so two-tone headlines read as one confident line. */
 @utility accent {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: inherit;
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.01em;
 }
 
 /* ==========================================================================
@@ -299,11 +347,6 @@
    would fake an oblique), so the accent keeps the heading face. */
 :lang(ar) :is(h1, h2, h3, h4, p, span, li, a, button, dt, dd) {
   letter-spacing: 0;
-}
-:lang(ar) .accent {
-  font-family: inherit;
-  font-style: normal;
-  font-weight: inherit;
 }
 
 /* Load reveal without a flash: elements marked [data-intro] start hidden

@@ -6,12 +6,13 @@ import { CompareTable } from "@/components/sections/CompareTable";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { Statement } from "@/components/sections/Statement";
-import { getLocale } from "@/i18n/get-dictionary";
+import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import accessCopy from "@/i18n/pages/access";
 import copy from "@/i18n/pages/pricing";
 import imagesCopy from "@/i18n/pages/images";
 import { portalHref } from "@/lib/href";
+import { faqHelp } from "@/lib/faq-help";
 import { pageMetadata } from "@/lib/metadata";
 import { PlanCards } from "@/sections/pricing/PlanCards";
 
@@ -29,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 export default async function PricingPage() {
   const locale = await getLocale();
+  const dict = await getDictionary();
   const t = await pageCopy(copy);
   const access = await pageCopy(accessCopy);
   const alt = await pageCopy(imagesCopy);
@@ -51,7 +53,7 @@ export default async function PricingPage() {
         image={{ src: "/images/site/pr-hero.webp", alt: alt.prHero }}
       />
 
-      <PlanCards t={t.plans} hrefs={[signUp, browse, browse]} />
+      <PlanCards t={t.plans} hrefs={{ innovator: signUp, investor: browse }} />
 
       <CompareTable
         id="pr-compare"
@@ -77,7 +79,7 @@ export default async function PricingPage() {
 
       <Statement eyebrow={t.band.eyebrow} parts={t.band.parts} tone="dark" background="/images/site/pr-band-bg.webp" />
 
-      <FaqSection id="pr-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
+      <FaqSection id="pr-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} help={faqHelp(locale, dict)} />
 
     </>
   );

@@ -7,12 +7,13 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitFeature } from "@/components/sections/SplitFeature";
 import { StepStory } from "@/components/sections/StepStory";
-import { getLocale } from "@/i18n/get-dictionary";
+import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import accessCopy from "@/i18n/pages/access";
 import copy from "@/i18n/pages/for-investors";
 import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
+import { faqHelp } from "@/lib/faq-help";
 import { pageMetadata } from "@/lib/metadata";
 
 const STEP_PHOTOS = [
@@ -36,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 export default async function ForInvestorsPage() {
   const locale = await getLocale();
+  const dict = await getDictionary();
   const t = await pageCopy(copy);
   const access = await pageCopy(accessCopy);
   const alt = await pageCopy(imagesCopy);
@@ -111,7 +113,7 @@ export default async function ForInvestorsPage() {
         image={{ src: "/images/site/fv-cancel.webp", alt: alt.fvCancel }}
       />
 
-      <FaqSection id="fv-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} tone="white" />
+      <FaqSection id="fv-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} tone="white" help={faqHelp(locale, dict)} />
 
     </>
   );

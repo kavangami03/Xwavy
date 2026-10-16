@@ -51,10 +51,11 @@ export function ContactHero({ t, email, photo }: ContactHeroProps) {
   }
 
   return (
-    <section ref={root} aria-labelledby="ct-title" className="surface-abyss panel mt-(--panel-inset)">
+    <section ref={root} aria-labelledby="ct-title" className="surface-abyss bg-grid panel mt-(--panel-inset)">
       <Container className="grid gap-10 pt-[calc(var(--panel-inset)+6.5rem)] pb-section-sm lg:grid-cols-12 lg:gap-14 lg:pt-[calc(var(--panel-inset)+7.5rem)]">
         <div data-intro className="flex flex-col gap-6 lg:col-span-5 lg:py-6">
-          <p data-hero-fade className="font-mono text-eyebrow text-cyan uppercase">
+          <p data-hero-fade className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/12 bg-white/5 py-1 ps-1 pe-3.5 font-mono text-eyebrow text-mist uppercase">
+            <Image src="/brand/xwavy-mark.png" alt="" aria-hidden width={24} height={24} className="size-6 shrink-0 rounded-[0.4rem] ring-1 ring-white/15" />
             {t.hero.eyebrow}
           </p>
           <h1 id="ct-title" data-hero-fade className="text-display text-white">

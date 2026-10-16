@@ -65,18 +65,15 @@ export function HeroSplit({ t, roles, alts, innovatorHref, investorHref }: HeroS
   );
 
   return (
-    <section ref={root} aria-labelledby="hero-title" className="surface-abyss panel relative mt-(--panel-inset) overflow-hidden">
+    <section ref={root} aria-labelledby="hero-title" className="surface-abyss bg-grid panel relative mt-(--panel-inset) overflow-hidden">
       <Container className="grid gap-12 pt-[calc(var(--panel-inset)+6.5rem)] pb-section-sm lg:grid-cols-12 lg:items-center lg:gap-10 lg:pt-[calc(var(--panel-inset)+7.5rem)] lg:pb-16">
         {/* The promise. */}
         <div data-intro className="flex flex-col gap-7 lg:col-span-6">
           <p
             data-hero-eyebrow
-            className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-white/5 py-1.5 ps-2 pe-4 font-mono text-eyebrow text-mist uppercase"
+            className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/12 bg-white/5 py-1 ps-1 pe-4 font-mono text-eyebrow text-mist uppercase"
           >
-            <span className="flex gap-1" aria-hidden>
-              <span className="size-2 rounded-full bg-cyan" />
-              <span className="size-2 rounded-full bg-gold" />
-            </span>
+            <Image src="/brand/xwavy-mark.png" alt="" aria-hidden width={24} height={24} className="size-6 shrink-0 rounded-[0.4rem] ring-1 ring-white/15" />
             {t.eyebrow}
           </p>
 

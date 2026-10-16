@@ -1,10 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Mail, Plus } from "lucide-react";
 import { useId, useState, type ReactNode } from "react";
 
 import { Section, type SectionTone } from "@/components/layout/Section";
+import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { cn } from "@/lib/cn";
 import { refreshScrollTrigger } from "@/lib/gsap";
@@ -18,8 +19,10 @@ type FaqSectionProps = {
   number?: string;
   titleLead: string;
   titleAccent?: string;
-  /** Optional line under the heading (e.g. a contact prompt). */
+  /** Optional line under the heading. */
   aside?: ReactNode;
+  /** "Still have a question?" card under the heading. */
+  help?: { title: string; body: string; cta: string; href: string; email: string };
   items: readonly FaqItem[];
   tone?: Extract<SectionTone, "surface" | "white">;
   className?: string;
@@ -37,6 +40,7 @@ export function FaqSection({
   titleLead,
   titleAccent,
   aside,
+  help,
   items,
   tone = "surface",
   className,
@@ -50,6 +54,25 @@ export function FaqSection({
         <div className="flex flex-col gap-6 lg:sticky lg:top-32 lg:self-start">
           <SectionHeading id={id} eyebrow={eyebrow} number={number} title={titleLead} accent={titleAccent} />
           {aside ? <div className="text-sm text-muted">{aside}</div> : null}
+          {help ? (
+            <div className="surface-abyss bg-grid mt-2 flex flex-col gap-4 rounded-3xl p-6 sm:p-7">
+              <span className="grid size-11 place-items-center rounded-2xl bg-cyan text-abyss">
+                <Mail aria-hidden className="size-5" />
+              </span>
+              <div>
+                <h3 className="text-h4 text-white">{help.title}</h3>
+                <p className="mt-1.5 text-sm text-mist">{help.body}</p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <Button href={help.href} size="sm" variant="primary" arrow>
+                  {help.cta}
+                </Button>
+                <a href={`mailto:${help.email}`} dir="ltr" className="text-sm text-mist underline-offset-4 transition-colors hover:text-white hover:underline">
+                  {help.email}
+                </a>
+              </div>
+            </div>
+          ) : null}
         </div>
 
         <ul className="border-t border-line">

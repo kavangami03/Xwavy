@@ -35,25 +35,26 @@ const ar: Dictionary = {
     openMenu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     language: "اللغة",
+    faqHelp: {
+      title: "لديك سؤال آخر؟",
+      body: "راسلنا على info@xwavy.com، أو اختر موضوعًا من صفحة التواصل.",
+      cta: "تواصل معنا",
+    },
   },
 
   footer: {
-    summary:
-      "المنصة التي يلتقي فيها المبتكرون والمستثمرون على قدم المساواة. لا يتم التعارف إلا عندما يوافق الطرفان.",
+    nextLabel: "وجهتك التالية",
+    next: [
+      { href: "/for-innovators", title: "للمبتكرين", line: "انشر فكرتك مجانًا." },
+      { href: "/for-investors", title: "للمستثمرين", line: "اشترك لتطّلع على الصورة الكاملة." },
+      { href: "/how-it-works", title: "كيف تعمل المنصة", line: "موافقتان قبل أن تنتقل أي بيانات تواصل." },
+      { href: "/pricing", title: "الأسعار", line: "مجانية للمبتكرين، وبالاشتراك للمستثمرين." },
+    ],
     columns: [
       {
-        title: "المنصة",
+        title: "استكشف",
         links: [
           { label: "تصفّح الأفكار", href: "/ideas" },
-          { label: "للمبتكرين", href: "/for-innovators" },
-          { label: "للمستثمرين", href: "/for-investors" },
-          { label: "كيف تعمل المنصة", href: "/how-it-works" },
-          { label: "الأسعار", href: "/pricing" },
-        ],
-      },
-      {
-        title: "الشركة",
-        links: [
           { label: "عن Xwavy", href: "/about" },
           { label: "تواصل معنا", href: "/contact" },
         ],
@@ -69,6 +70,7 @@ const ar: Dictionary = {
         ],
       },
     ],
+    contactTitle: "للتواصل",
     disclaimer:
       "Xwavy منصة للتعارف فقط؛ لا تحتفظ بأي أموال، ولا تتوسط في الأوراق المالية، ولا تقدم أي مشورة استثمارية.",
     contactLabel: "لديك سؤال؟",
@@ -163,6 +165,8 @@ const ar: Dictionary = {
       eyebrow: "موافقة مزدوجة",
       investorRole: "المستثمر",
       innovatorRole: "المبتكر",
+      accept: "قبول",
+      decline: "رفض",
       lockLabel: "بيانات التواصل",
       sealed: "مختومة",
       revealed: "تُكشف للطرفين",
@@ -248,6 +252,7 @@ const ar: Dictionary = {
       headingLead: "النشر مجاني.",
       headingAccent: "والاشتراك لطلب التعارف.",
       title: "المبتكرون لا يدفعون شيئًا، دائمًا.",
+      zeroLabel: "رسوم على المبتكرين",
       body: "لا رسوم إدراج، ولا عمولات، ولا أي مدفوعات في جانبك من المنصة.",
       investorsTitle: "المستثمرون يختارون باقة.",
       investorsBody: "شهرية أو سنوية، وتتضمن كل منها حصة شهرية من طلبات التعارف. ويمكنك الإلغاء في أي وقت من صفحة الفوترة.",
@@ -301,20 +306,6 @@ const ar: Dictionary = {
       ],
     },
 
-    finalCta: {
-      titleLead: "محادثتك القادمة",
-      titleAccent: "تبدأ من هنا.",
-      innovator: {
-        label: "لديك فكرة؟",
-        body: "انشرها مجانًا ودع المستثمرين المناسبين يصلون إليك.",
-        cta: "انشر فكرتك",
-      },
-      investor: {
-        label: "تبحث عن فرص استثمارية؟",
-        body: "تصفّح الأفكار المنشورة مجانًا، واشترك عندما تجد فكرة تستحق محادثة.",
-        cta: "تصفّح الأفكار",
-      },
-    },
   },
 };
 

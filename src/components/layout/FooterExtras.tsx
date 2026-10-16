@@ -10,10 +10,12 @@ export function BackToTop({ label }: { label: string }) {
     <button
       type="button"
       onClick={() => (lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0 }))}
-      className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-mist transition-colors hover:border-white hover:text-white"
+      className="group inline-flex min-h-10 items-center gap-2 rounded-full border border-white/12 ps-4 pe-1.5 text-sm text-mist transition-colors hover:border-white/40 hover:text-white"
     >
       {label}
-      <ArrowUp aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5" />
+      <span className="grid size-7 place-items-center rounded-full bg-white/10 transition-colors group-hover:bg-cyan group-hover:text-abyss">
+        <ArrowUp aria-hidden className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+      </span>
     </button>
   );
 }

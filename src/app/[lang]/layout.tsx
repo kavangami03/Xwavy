@@ -1,12 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Alexandria,
-  Bricolage_Grotesque,
-  Geist,
-  Geist_Mono,
-  IBM_Plex_Sans_Arabic,
-  Instrument_Serif,
-} from "next/font/google";
+import { Alexandria, Geist_Mono, Google_Sans, IBM_Plex_Sans_Arabic, Sora } from "next/font/google";
 
 import { MotionProvider } from "@/components/animation/MotionProvider";
 import { SmoothScrollProvider } from "@/components/animation/SmoothScrollProvider";
@@ -17,27 +10,21 @@ import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 
 import "../globals.css";
 
-// Latin display face. The optical-size axis tightens letterforms at large sizes.
-const bricolage = Bricolage_Grotesque({
+// Headings: a confident geometric display face (variable weight).
+const sora = Sora({
   subsets: ["latin"],
-  axes: ["opsz"],
-  variable: "--font-bricolage",
+  variable: "--font-sora",
   display: "swap",
 });
 
-// Accent word in two-tone headlines.
-const instrumentSerif = Instrument_Serif({
+// Descriptions, body copy and UI text.
+const googleSans = Google_Sans({
   subsets: ["latin"],
-  weight: "400",
-  style: "italic",
-  variable: "--font-instrument-serif",
+  variable: "--font-google-sans",
   display: "swap",
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
+  // Next has no metric overrides for this family yet; fall back to the system UI face.
+  adjustFontFallback: false,
+  fallback: ["ui-sans-serif", "system-ui", "Arial", "sans-serif"],
 });
 
 // Labels and figures only, so it is not preloaded.
@@ -65,7 +52,7 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   preload: false,
 });
 
-const fontVariables = [bricolage, instrumentSerif, geist, geistMono, alexandria, plexArabic]
+const fontVariables = [sora, googleSans, geistMono, alexandria, plexArabic]
   .map((font) => font.variable)
   .join(" ");
 

@@ -2,16 +2,17 @@ import { Activity, CircleCheck, CircleX, Inbox, LayoutDashboard, ListChecks, Mes
 import type { Metadata } from "next";
 
 import { CardGrid } from "@/components/sections/CardGrid";
-import { DetailTable } from "@/components/sections/DetailTable";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitFeature } from "@/components/sections/SplitFeature";
-import { getLocale } from "@/i18n/get-dictionary";
+import { getDictionary, getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import copy from "@/i18n/pages/for-innovators";
 import imagesCopy from "@/i18n/pages/images";
 import { localeHref, portalHref } from "@/lib/href";
+import { faqHelp } from "@/lib/faq-help";
 import { pageMetadata } from "@/lib/metadata";
+import { ComposerSteps } from "@/sections/for-innovators/ComposerSteps";
 
 const REVIEW_ICONS = [CircleCheck, PencilLine, CircleX] as const;
 const DASHBOARD_ICONS = [LayoutDashboard, ListChecks, Activity, MessagesSquare, Inbox, UsersRound] as const;
@@ -27,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
  */
 export default async function ForInnovatorsPage() {
   const locale = await getLocale();
+  const dict = await getDictionary();
   const t = await pageCopy(copy);
   const alt = await pageCopy(imagesCopy);
   const signUp = portalHref(locale, "signUpInnovator");
@@ -48,18 +50,7 @@ export default async function ForInnovatorsPage() {
         image={{ src: "/images/site/fi-hero.webp", alt: alt.fiHero, position: "object-[55%_center]" }}
       />
 
-      <DetailTable
-        id="fi-composer"
-        eyebrow={composer.eyebrow}
-        titleLead={composer.titleLead}
-        titleAccent={composer.titleAccent}
-        description={composer.body}
-        image={{ src: "/images/site/fi-composer.webp", alt: alt.fiComposer }}
-        headers={{ group: composer.stepLabel, detail: composer.detailLabel, access: composer.accessLabel }}
-        publicLabel={composer.publicLabel}
-        paidLabel={composer.paidLabel}
-        groups={composer.steps.map((step) => ({ name: step.name, fields: step.fields.map((f) => ({ label: f.label, layer: f.layer as "public" | "paid" })) }))}
-      />
+      <ComposerSteps t={composer} image={{ src: "/images/site/fi-composer.webp", alt: alt.fiComposer }} />
 
       <CardGrid
         id="fi-review"
@@ -95,7 +86,7 @@ export default async function ForInnovatorsPage() {
         cards={dashboard.items.map((item, i) => ({ ...item, Icon: DASHBOARD_ICONS[i], background: i === 0 ? "/images/site/fi-dashboard.webp" : undefined }))}
       />
 
-      <FaqSection id="fi-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} />
+      <FaqSection id="fi-faq" eyebrow={t.faq.eyebrow} titleLead={t.faq.titleLead} titleAccent={t.faq.titleAccent} items={t.faq.items} help={faqHelp(locale, dict)} />
 
     </>
   );

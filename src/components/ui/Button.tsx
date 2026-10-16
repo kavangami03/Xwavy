@@ -30,9 +30,9 @@ export type ButtonProps = NativeButtonProps | LinkButtonProps;
 
 const variants: Record<ButtonVariant, { button: string; chip: string }> = {
   // Wave cyan with abyss text (12.2:1). The main call to action, any surface.
-  primary: { button: "bg-cyan text-abyss hover:bg-cyan/85", chip: "bg-abyss text-cyan" },
+  primary: { button: "bg-cyan text-abyss hover:shadow-[0_14px_32px_-14px_var(--color-cyan)]", chip: "bg-abyss text-cyan" },
   // Capital gold with abyss text (11.3:1). Investor-facing actions.
-  accent: { button: "bg-gold text-abyss hover:bg-gold/85", chip: "bg-abyss text-gold" },
+  accent: { button: "bg-gold text-abyss hover:shadow-[0_14px_32px_-14px_var(--color-gold)]", chip: "bg-abyss text-gold" },
   // Abyss fill for light surfaces.
   secondary: { button: "bg-abyss text-white hover:bg-navy-raised", chip: "bg-white text-abyss" },
   // Bordered, for light surfaces.
@@ -56,7 +56,7 @@ const sizes: Record<ButtonSize, { button: string; withArrow: string; chip: strin
 function buttonClasses({ variant = "primary", size = "md", arrow, className }: Omit<SharedProps, "children">) {
   return cn(
     "group/button inline-flex items-center justify-center gap-3 rounded-full font-medium tracking-[-0.01em] whitespace-nowrap",
-    "transition-[background-color,border-color,color,transform] duration-200 ease-brand",
+    "transition-[background-color,border-color,color,transform,box-shadow] duration-300 ease-brand hover:-translate-y-0.5",
     "active:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-busy:cursor-progress",
     variants[variant].button,
     sizes[size].button,
@@ -72,14 +72,11 @@ function Content({ variant = "primary", size = "md", arrow, children }: Omit<Sha
       {arrow ? (
         <span
           aria-hidden
-          className={cn(
-            "grid shrink-0 place-items-center rounded-full transition-transform duration-300 ease-brand",
-            "group-hover/button:translate-x-0.5 rtl:group-hover/button:-translate-x-0.5",
-            variants[variant].chip,
-            sizes[size].chip,
-          )}
+          className={cn("relative grid shrink-0 place-items-center overflow-hidden rounded-full", variants[variant].chip, sizes[size].chip)}
         >
-          <ArrowRight className="size-4 rtl:-scale-x-100" />
+          {/* The arrow slides out and a twin slides in from behind. */}
+          <ArrowRight className="size-4 transition-transform duration-300 ease-brand group-hover/button:translate-x-[180%] rtl:-scale-x-100 rtl:group-hover/button:-translate-x-[180%]" />
+          <ArrowRight className="absolute size-4 -translate-x-[180%] transition-transform duration-300 ease-brand group-hover/button:translate-x-0 rtl:translate-x-[180%] rtl:-scale-x-100 rtl:group-hover/button:translate-x-0" />
         </span>
       ) : null}
     </>

@@ -24,11 +24,11 @@ const en = {
     titleLead: "Five short steps.",
     titleAccent: "Saved after each one.",
     body: "Every detail is marked as it goes in: public, so anyone can find you, or for subscribers only. Your contact details are never on this list; they stay sealed until you accept a request.",
-    detailLabel: "Detail",
     accessLabel: "Who sees it",
     publicLabel: "Public",
     paidLabel: "Subscribers",
     stepLabel: "Step",
+    savedLabel: "Saved",
     steps: [
       {
         name: "Basics",
@@ -153,11 +153,11 @@ const ar: typeof en = {
     titleLead: "خمس خطوات قصيرة.",
     titleAccent: "تُحفظ بعد كل خطوة.",
     body: "يُحدَّد مستوى ظهور كل تفصيل لحظة إدخاله: عام ليجدك الجميع، أو للمشتركين فقط. أما بيانات تواصلك فليست ضمن هذه القائمة؛ تبقى مختومة حتى تقبل طلبًا.",
-    detailLabel: "التفصيل",
     accessLabel: "من يراه",
     publicLabel: "عام",
     paidLabel: "للمشتركين",
     stepLabel: "الخطوة",
+    savedLabel: "تم الحفظ",
     steps: [
       {
         name: "الأساسيات",

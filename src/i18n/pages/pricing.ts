@@ -27,6 +27,7 @@ const en = {
     titleAccent: "One simple subscription.",
     description: "Plan prices and the monthly request quota are announced at launch.",
     priceSoon: "Announced at launch",
+    periodLabel: "Billing period",
     cards: [
       {
         audience: "Innovators",
@@ -168,6 +169,7 @@ const ar: typeof en = {
     titleAccent: "واشتراك واحد بسيط.",
     description: "تُعلن أسعار الباقات والحصة الشهرية من الطلبات عند الإطلاق.",
     priceSoon: "يُعلن عند الإطلاق",
+    periodLabel: "مدة الفوترة",
     cards: [
       {
         audience: "المبتكرون",

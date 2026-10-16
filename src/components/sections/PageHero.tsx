@@ -61,10 +61,11 @@ export function PageHero({ id, eyebrow, titleLead, titleAccent, body, actions = 
   );
 
   return (
-    <section ref={root} aria-labelledby={id} className="surface-abyss panel relative mt-(--panel-inset)">
+    <section ref={root} aria-labelledby={id} className="surface-abyss bg-grid panel relative mt-(--panel-inset)">
       <Container className="grid gap-10 pt-[calc(var(--panel-inset)+6.5rem)] pb-section-sm lg:grid-cols-12 lg:gap-14 lg:pt-[calc(var(--panel-inset)+7.5rem)] lg:pb-14">
         <div data-intro className="flex flex-col justify-center gap-6 lg:col-span-7">
-          <p data-hero-fade className="font-mono text-eyebrow text-cyan uppercase">
+          <p data-hero-fade className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/12 bg-white/5 py-1 ps-1 pe-3.5 font-mono text-eyebrow text-mist uppercase">
+            <Image src="/brand/xwavy-mark.png" alt="" aria-hidden width={24} height={24} className="size-6 shrink-0 rounded-[0.4rem] ring-1 ring-white/15" />
             {eyebrow}
           </p>
           <h1 id={id} data-hero-fade className="max-w-[18ch] text-display text-white">

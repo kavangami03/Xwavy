@@ -21,6 +21,8 @@ const en = {
     titleLead: "Our policies,",
     titleAccent: "in plain language.",
     body: "How Xwavy works, what we expect from everyone who uses it, and how we handle your information.",
+
+    listTitle: "All policies",
   },
   draftBadge: "Draft – pending legal review",
   draftNote:
@@ -260,6 +262,7 @@ const ar: typeof en = {
     titleLead: "سياساتنا،",
     titleAccent: "بلغة واضحة.",
     body: "كيف تعمل Xwavy، وما نتوقعه من كل من يستخدمها، وكيف نتعامل مع معلوماتك.",
+    listTitle: "جميع السياسات",
   },
   draftBadge: "مسودة – قيد المراجعة القانونية",
   draftNote:

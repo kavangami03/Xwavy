@@ -1,13 +1,12 @@
-import { FileText } from "lucide-react";
 import type { Metadata } from "next";
 
-import { CardGrid } from "@/components/sections/CardGrid";
 import { getLocale } from "@/i18n/get-dictionary";
 import { pageCopy } from "@/i18n/page-copy";
 import copy, { LEGAL_SLUGS } from "@/i18n/pages/legal";
 import { localeHref } from "@/lib/href";
 import { pageMetadata } from "@/lib/metadata";
 import { LegalHeader } from "@/sections/legal/LegalHeader";
+import { LegalIndex } from "@/sections/legal/LegalIndex";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await pageCopy(copy);
@@ -23,10 +22,14 @@ export default async function LegalHubPage() {
     <>
       <LegalHeader id="lg-title" eyebrow={t.hub.eyebrow} title={t.hub.titleLead} accent={t.hub.titleAccent} body={t.hub.body} draftBadge={t.draftBadge} />
 
-      <CardGrid id="lg-docs" titleLead={t.hub.eyebrow} description={t.draftNote} tone="surface" cards={LEGAL_SLUGS.map((slug) => {
-        const doc = t.docs[slug];
-        return { title: doc.title, body: doc.summary, Icon: FileText, link: { label: t.readLabel, href: localeHref(locale, `/legal/${slug}`) } };
-      })} />
+      <LegalIndex
+        id="lg-docs"
+        title={t.hub.listTitle}
+        draftNote={t.draftNote}
+        contactNote={t.contactNote}
+        readLabel={t.readLabel}
+        docs={LEGAL_SLUGS.map((slug) => ({ title: t.docs[slug].title, summary: t.docs[slug].summary, href: localeHref(locale, `/legal/${slug}`) }))}
+      />
     </>
   );
 }

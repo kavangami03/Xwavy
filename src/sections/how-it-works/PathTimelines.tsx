@@ -109,20 +109,22 @@ export function PathTimelines({ t, alts }: PathTimelinesProps) {
                   {data.label}
                 </p>
               </div>
-              <ol className="relative flex flex-col gap-8 p-6 sm:p-8">
+              <div className="relative">
                 <span aria-hidden data-rail className={cn("absolute top-10 bottom-10 inset-s-[2.6875rem] w-0.5 origin-top rounded-full sm:inset-s-[3.1875rem]", rail)} />
-                {data.steps.map((step, i) => (
-                  <li key={step.title} data-step className="relative flex gap-5">
-                    <span className={cn("relative grid size-10 shrink-0 place-items-center rounded-full font-mono text-sm ring-4", dot)} data-numeric>
-                      {i + 1}
-                    </span>
-                    <div className="pt-1.5">
-                      <h3 className={cn("text-h4", title)}>{step.title}</h3>
-                      <p className={cn("mt-1.5 text-[0.9375rem]", text)}>{step.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+                <ol className="flex flex-col gap-8 p-6 sm:p-8">
+                  {data.steps.map((step, i) => (
+                    <li key={step.title} data-step className="relative flex gap-5">
+                      <span className={cn("relative grid size-10 shrink-0 place-items-center rounded-full font-mono text-sm ring-4", dot)} data-numeric>
+                        {i + 1}
+                      </span>
+                      <div className="pt-1.5">
+                        <h3 className={cn("text-h4", title)}>{step.title}</h3>
+                        <p className={cn("mt-1.5 text-[0.9375rem]", text)}>{step.body}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           ))}
         </div>

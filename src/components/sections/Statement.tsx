@@ -72,14 +72,14 @@ export function Statement({ eyebrow, parts, footnote, tone = "light", background
       <Container className="relative">
         <div className="relative grid gap-8 lg:grid-cols-[auto_1fr] lg:gap-14">
           <div className="flex items-start gap-5 lg:flex-col lg:items-center">
-            <span aria-hidden className={cn("font-serif text-[6rem] leading-[0.7] italic", dark ? "text-cyan" : "text-cyan-ink")}>
+            <span aria-hidden className={cn("font-heading text-[6rem] leading-[0.7] font-bold", dark ? "text-cyan" : "text-cyan-ink")}>
               “
             </span>
             <span aria-hidden data-statement-rule className={cn("hidden w-px flex-1 origin-top lg:block", dark ? "bg-white/15" : "bg-line")} />
           </div>
           <div className="flex max-w-5xl flex-col gap-7">
             {eyebrow ? <Eyebrow tone={dark ? "dark" : "light"}>{eyebrow}</Eyebrow> : null}
-            <p data-statement className={cn("text-[clamp(1.75rem,1.1rem+2.6vw,3.5rem)] leading-[1.12] font-semibold tracking-tight text-balance", dark ? "text-white" : "text-ink")}>
+            <p data-statement className={cn("text-[clamp(1.625rem,1.05rem+2.4vw,3.25rem)] font-heading leading-[1.2] font-semibold tracking-[-0.025em] text-balance", dark ? "text-white" : "text-ink")}>
               {parts.map((part, i) =>
                 part.accent ? (
                   <span key={i} className={cn("accent", dark ? "text-cyan" : "text-cyan-ink")}>

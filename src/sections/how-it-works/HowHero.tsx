@@ -53,17 +53,14 @@ export function HowHero({ t, steps, imageAlt, primaryHref, secondaryHref }: HowH
   );
 
   return (
-    <section ref={root} aria-labelledby="hiw-hero" className="surface-abyss panel mt-(--panel-inset)">
+    <section ref={root} aria-labelledby="hiw-hero" className="surface-abyss bg-grid panel mt-(--panel-inset)">
       <Container className="pt-[calc(var(--panel-inset)+6.5rem)] pb-(--panel-inset) lg:pt-[calc(var(--panel-inset)+7.5rem)]">
         <div data-intro className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center">
           <p
             data-hero-eyebrow
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 py-1.5 ps-2 pe-4 font-mono text-eyebrow text-mist uppercase"
+            className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/5 py-1 ps-1 pe-4 font-mono text-eyebrow text-mist uppercase"
           >
-            <span className="flex gap-1" aria-hidden>
-              <span className="size-2 rounded-full bg-cyan" />
-              <span className="size-2 rounded-full bg-gold" />
-            </span>
+            <Image src="/brand/xwavy-mark.png" alt="" aria-hidden width={24} height={24} className="size-6 shrink-0 rounded-[0.4rem] ring-1 ring-white/15" />
             {t.eyebrow}
           </p>
           <h1 id="hiw-hero" data-hero-title className="text-hero text-white">
@@ -89,20 +86,22 @@ export function HowHero({ t, steps, imageAlt, primaryHref, secondaryHref }: HowH
           </div>
 
           <div className="relative bg-abyss p-4 sm:p-5 lg:absolute lg:inset-x-6 lg:bottom-6 lg:rounded-2xl lg:bg-abyss/85 lg:backdrop-blur-md">
-            <ol className="relative grid grid-cols-5 gap-1">
+            <div className="relative">
               <span aria-hidden data-journey-line className="absolute inset-x-[10%] top-5 h-px origin-left bg-white/20 rtl:origin-right" />
-              {steps.map((name, i) => {
-                const Icon = ICONS[i] ?? PenLine;
-                return (
-                  <li key={name} data-journey-step className="relative flex flex-col items-center gap-2 text-center">
-                    <span data-journey-dot className="grid size-10 place-items-center rounded-full bg-cyan text-abyss">
-                      <Icon aria-hidden className="size-4" />
-                    </span>
-                    <span className="font-mono text-[0.625rem] text-mist uppercase sm:text-eyebrow">{name}</span>
-                  </li>
-                );
-              })}
-            </ol>
+              <ol className="grid grid-cols-5 gap-1">
+                {steps.map((name, i) => {
+                  const Icon = ICONS[i] ?? PenLine;
+                  return (
+                    <li key={name} data-journey-step className="relative flex flex-col items-center gap-2 text-center">
+                      <span data-journey-dot className="grid size-10 place-items-center rounded-full bg-cyan text-abyss">
+                        <Icon aria-hidden className="size-4" />
+                      </span>
+                      <span className="font-mono text-[0.625rem] text-mist uppercase sm:text-eyebrow">{name}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
           </div>
         </div>
       </Container>

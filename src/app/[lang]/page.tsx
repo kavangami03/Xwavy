@@ -7,6 +7,7 @@ import { Faq } from "@/sections/home/Faq";
 import { Hero } from "@/sections/home/Hero";
 import { Plans } from "@/sections/home/Plans";
 import { Process } from "@/sections/home/Process";
+import { PromiseTicker } from "@/sections/home/PromiseTicker";
 import { Roles } from "@/sections/home/Roles";
 import { Trust } from "@/sections/home/Trust";
 
@@ -28,6 +29,10 @@ export default async function HomePage() {
   return (
     <>
       <Hero locale={locale} dict={dict} />
+      <PromiseTicker
+        label={home.hero.eyebrow}
+        items={[...home.pricing.facts, home.trust.items[0]?.title ?? "", home.trust.items[4]?.title ?? ""].filter(Boolean)}
+      />
       <Roles
         t={home.roles}
         alts={alt}
@@ -38,7 +43,7 @@ export default async function HomePage() {
       <Consent t={home.consent} />
       <Plans pricing={home.pricing} access={home.access} photoAlt={alt.homePlans} pricingHref={pricingHref} />
       <Trust t={home.trust} />
-      <Faq t={home.faq} />
+      <Faq locale={locale} dict={dict} />
     </>
   );
 }
